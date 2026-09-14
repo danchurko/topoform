@@ -11,6 +11,13 @@
       "id": "browser-boundary",
       "label": "User device and browser",
       "kind": "group",
+      "appearance": {
+        "fill": "#EFF6FF",
+        "stroke": "#2563EB",
+        "textColor": "#1E3A8A",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "The user-agent boundary where redirects and consent screens are visible.",
       "evidence": {
         "status": "declared",
@@ -22,6 +29,13 @@
       "label": "End user",
       "kind": "actor",
       "icon": "person",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#FEF3C7",
+        "stroke": "#D97706",
+        "textColor": "#78350F",
+        "strokeWidth": 2
+      },
       "parent": "browser-boundary",
       "description": "The person requesting access to the client application.",
       "evidence": {
@@ -34,6 +48,13 @@
       "label": "Browser user agent",
       "kind": "client",
       "icon": "globe",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#DBEAFE",
+        "stroke": "#1D4ED8",
+        "textColor": "#1E3A8A",
+        "strokeWidth": 2
+      },
       "parent": "browser-boundary",
       "description": "Carries front-channel redirects and the authorization code.",
       "evidence": {
@@ -45,6 +66,13 @@
       "id": "client-boundary",
       "label": "Relying-party application",
       "kind": "group",
+      "appearance": {
+        "fill": "#F3E8FF",
+        "stroke": "#9333EA",
+        "textColor": "#581C87",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "The OAuth client that requests tokens and calls the protected API.",
       "evidence": {
         "status": "declared",
@@ -56,6 +84,13 @@
       "label": "Web client application",
       "kind": "client",
       "icon": "service",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#F5F3FF",
+        "stroke": "#7C3AED",
+        "textColor": "#4C1D95",
+        "strokeWidth": 1.5
+      },
       "parent": "client-boundary",
       "description": "Uses a configured client identifier and PKCE; no client secret or token value is included.",
       "evidence": {
@@ -68,6 +103,13 @@
       "label": "Redirect callback",
       "kind": "endpoint",
       "icon": "network",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FCE7F3",
+        "stroke": "#DB2777",
+        "textColor": "#831843",
+        "strokeWidth": 2
+      },
       "parent": "client-boundary",
       "description": "Receives the authorization code and returns it to the back channel.",
       "evidence": {
@@ -79,6 +121,13 @@
       "id": "identity-boundary",
       "label": "Authorization server trust boundary",
       "kind": "group",
+      "appearance": {
+        "fill": "#CCFBF1",
+        "stroke": "#0F766E",
+        "textColor": "#134E4A",
+        "strokeWidth": 3,
+        "groupLabel": "top"
+      },
       "description": "Authenticates the user, grants authorization and signs tokens.",
       "evidence": {
         "status": "declared",
@@ -90,6 +139,13 @@
       "label": "Authorization server",
       "kind": "service",
       "icon": "lock",
+      "appearance": {
+        "shape": "round-rectangle",
+        "fill": "#E0F2FE",
+        "stroke": "#0284C7",
+        "textColor": "#0C4A6E",
+        "strokeWidth": 2
+      },
       "parent": "identity-boundary",
       "description": "Authenticates the user, records consent and issues an authorization code.",
       "evidence": {
@@ -102,6 +158,13 @@
       "label": "Identity and consent store",
       "kind": "store",
       "icon": "database",
+      "appearance": {
+        "shape": "square",
+        "fill": "#F0FDFA",
+        "stroke": "#0D9488",
+        "textColor": "#134E4A",
+        "strokeWidth": 2
+      },
       "parent": "identity-boundary",
       "description": "Stores illustrative user and consent state behind the authorization server.",
       "evidence": {
@@ -114,6 +177,13 @@
       "label": "Token endpoint",
       "kind": "endpoint",
       "icon": "lock",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ECFEFF",
+        "stroke": "#0891B2",
+        "textColor": "#164E63",
+        "strokeWidth": 1.5
+      },
       "parent": "identity-boundary",
       "description": "Exchanges a code or refresh token for signed token responses.",
       "evidence": {
@@ -122,11 +192,37 @@
       }
     },
     {
+      "id": "key-material-boundary",
+      "label": "Signing keys and discovery",
+      "kind": "group",
+      "icon": "folder",
+      "parent": "identity-boundary",
+      "appearance": {
+        "fill": "#F0FDFA",
+        "stroke": "#14B8A6",
+        "textColor": "#115E59",
+        "strokeWidth": 2,
+        "groupLabel": "inside"
+      },
+      "description": "A nested identity-server area for public key discovery.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative nested OIDC key-discovery boundary; no key material is embedded."
+      }
+    },
+    {
       "id": "jwks-endpoint",
       "label": "JWKS signing-key endpoint",
       "kind": "endpoint",
       "icon": "document",
-      "parent": "identity-boundary",
+      "parent": "key-material-boundary",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#F0FDFA",
+        "stroke": "#0F766E",
+        "textColor": "#134E4A",
+        "strokeWidth": 2
+      },
       "description": "Publishes public signing keys used to validate token signatures.",
       "evidence": {
         "status": "declared",
@@ -137,6 +233,13 @@
       "id": "resource-boundary",
       "label": "Protected API trust boundary",
       "kind": "group",
+      "appearance": {
+        "fill": "#FEF3C7",
+        "stroke": "#B45309",
+        "textColor": "#78350F",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "Validates bearer tokens before serving protected resource data.",
       "evidence": {
         "status": "declared",
@@ -148,6 +251,13 @@
       "label": "Resource server API",
       "kind": "service",
       "icon": "service",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#FFF7ED",
+        "stroke": "#C2410C",
+        "textColor": "#7C2D12",
+        "strokeWidth": 1.5
+      },
       "parent": "resource-boundary",
       "description": "Protects an API and accepts access tokens with the required scope.",
       "evidence": {
@@ -160,6 +270,13 @@
       "label": "Token validation policy",
       "kind": "decision",
       "icon": "decision",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FEE2E2",
+        "stroke": "#DC2626",
+        "textColor": "#7F1D1D",
+        "strokeWidth": 2
+      },
       "parent": "resource-boundary",
       "description": "Checks signature, issuer, audience, expiry and scope before access.",
       "evidence": {
@@ -172,6 +289,13 @@
       "label": "Protected resource data",
       "kind": "store",
       "icon": "database",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#F8FAFC",
+        "stroke": "#475569",
+        "textColor": "#1E293B",
+        "strokeWidth": 2
+      },
       "parent": "resource-boundary",
       "description": "Generic application data returned only after authorization checks.",
       "evidence": {
@@ -435,7 +559,7 @@
     }
   ],
   "layout": {
-    "direction": "RIGHT",
+    "direction": "UP",
     "spacing": 65,
     "layerSpacing": 105
   }

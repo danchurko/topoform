@@ -35,7 +35,7 @@ $('edge-count').textContent=String(model.edges.length);
 $('direction').value=model.layout?.direction || 'RIGHT';
 for(const v of model.views || []) { const opt=el('option',v.label);opt.value=v.id;$('view').append(opt); }
 for(const kind of [...new Set(model.edges.map(e=>e.kind||'flow'))].sort()){const opt=el('option',kind);opt.value=kind;$('edge-kind').append(opt);}
-for(const [kind,color] of colors){const item=el('span');const sw=el('i',undefined,'swatch');sw.style.background=color;item.append(sw,document.createTextNode(kind));$('legend').append(item);}
+for(const [kind,color] of colors){const item=el('span');const sw=el('i',undefined,'swatch');sw.style.background=model.nodes.find(n=>(n.kind||'element')===kind)?.appearance?.stroke||color;item.append(sw,document.createTextNode(kind));$('legend').append(item);}
 if(model.nodes.some(n=>n.kind==='group'))$('legend').append(el('span','Dashed box = containment'));
 $('legend').append(el('span','Arrow = authored direction','hint'));
 
@@ -46,29 +46,41 @@ function lines(text,width){
   const result=[];
   for(const para of text.split('\n')){
     let line='';
-    for(const char of para){if(measure.measureText(line+char).width>width && line){result.push(line);line='';}line+=char;}
+    for(const word of para.split(/\s+/)){
+      const candidate=line?`${line} ${word}`:word;if(measure.measureText(candidate).width<=width){line=candidate;continue;}
+      if(line){result.push(line);line='';}
+      if(measure.measureText(word).width<=width){line=word;continue;}
+      for(const char of word){if(measure.measureText(line+char).width>width&&line){result.push(line);line='';}line+=char;}
+    }
     result.push(line);
   }
   return result;
 }
 const nodes=model.nodes.map(n=>{
-  const width=n.kind==='group'?180:188;
-  const displayLabel=lines(n.label,160).join('\n');
-  const height=Math.max(86,displayLabel.split('\n').length*19+(n.icon?46:26));
-  return {data:{id:n.id,label:n.label,displayLabel,kind:n.kind||'element',...(n.parent?{parent:n.parent}:{}),width,height,icon:icons[n.icon]||null,color:colors.get(n.kind||'element')||'#7c8899'}};
+  const group=n.kind==='group',appearance=n.appearance||{},shape={'oval':'ellipse','parallelogram':'rhomboid'}[appearance.shape]||appearance.shape||'round-rectangle';
+  const labelWidth=appearance.shape==='diamond'?88:['oval','parallelogram'].includes(appearance.shape)?132:appearance.shape==='square'?112:160,displayLabel=lines(n.label,labelWidth).join('\n');
+  const contentHeight=displayLabel.split('\n').length*19+(n.icon?46:26);
+  let width=group?180:188,height=Math.max(86,contentHeight);
+  if(appearance.shape==='square')width=height=Math.max(132,height);
+  if(appearance.shape==='diamond')width=height=Math.max(176,Math.ceil(labelWidth+contentHeight+24));
+  if(appearance.shape==='oval'){width=Math.max(220,width);height=Math.max(132,Math.ceil(contentHeight*1.45));}
+  if(appearance.shape==='parallelogram'){width=Math.max(240,width);height=Math.max(110,Math.ceil(contentHeight*1.25));}
+  const groupLabelWidth=Math.min(300,measure.measureText(n.label).width);
+  return {data:{id:n.id,label:n.label,displayLabel,kind:n.kind||'element',...(n.parent?{parent:n.parent}:{}),width,height,labelWidth,shape,icon:icons[n.icon]||null,fill:appearance.fill||'#ffffff',stroke:appearance.stroke||colors.get(n.kind||'element')||'#7c8899',strokeWidth:appearance.strokeWidth||1.7,textColor:appearance.textColor||'#203047',groupLabel:appearance.groupLabel||'top',groupPadding:appearance.groupLabel==='inside'?46:30,groupTextX:appearance.groupLabel==='inside'?(n.icon?42:14)+groupLabelWidth:0}};
 });
-const routeTurns=['32%','41%','50%','59%','68%'];
-const routeLabelOffsets=[-28,-14,0,14,28];
-const edges=model.edges.map((e,i)=>({data:{id:e.id,source:e.source,target:e.target,label:e.label||'',kind:e.kind||'flow',directed:e.directed!==false,routeTurn:routeTurns[i%routeTurns.length],routeLabelOffset:routeLabelOffsets[i%routeLabelOffsets.length]}}));
+const edges=model.edges.map(e=>({data:{id:e.id,source:e.source,target:e.target,label:e.label||'',kind:e.kind||'flow',directed:e.directed!==false,routeTurn:'50%',routeLabelX:0,routeLabelY:0,sourceEndpoint:'outside-to-node',targetEndpoint:'outside-to-node'}}));
 const cy=api.cy=cytoscape({
   container:$('cy'),elements:{nodes,edges},layout:{name:'preset'},
   minZoom:0.03,maxZoom:3.5,pixelRatio:Math.min(window.devicePixelRatio||1,2),
   autoungrabify:true,boxSelectionEnabled:false,
   style:[
-    {selector:'node',style:{'shape':'round-rectangle','width':'data(width)','height':'data(height)','background-color':'#ffffff','border-width':1.7,'border-color':'data(color)','label':'data(displayLabel)','font-family':'system-ui','font-size':14,'font-weight':600,'color':'#203047','text-valign':'center','text-halign':'center','text-wrap':'wrap','text-max-width':164,'text-justification':'center','text-margin-y':0,'padding':0,'overlay-opacity':0}},
+    {selector:'node',style:{'shape':'data(shape)','width':'data(width)','height':'data(height)','background-color':'data(fill)','border-width':'data(strokeWidth)','border-color':'data(stroke)','label':'data(displayLabel)','font-family':'system-ui','font-size':14,'font-weight':600,'color':'data(textColor)','text-valign':'center','text-halign':'center','text-wrap':'wrap','text-max-width':'data(labelWidth)','text-justification':'center','text-margin-y':0,'padding':0,'overlay-opacity':0}},
     {selector:'node[icon]',style:{'background-image':n=>n.data('icon')||'none','background-fit':'none','background-width':23,'background-height':23,'background-position-x':'50%','background-position-y':'13px','text-margin-y':16}},
-    {selector:'node:parent',style:{'shape':'round-rectangle','background-color':'#e8edf7','background-opacity':0.28,'border-color':'#a9b7cc','border-width':1.2,'border-style':'dashed','padding':30,'label':'data(label)','font-size':12,'font-weight':600,'color':'#526783','text-valign':'top','text-halign':'center','text-margin-y':-9,'compound-sizing-wrt-labels':'include','background-image':'none','text-wrap':'wrap','text-max-width':300}},
-    {selector:'edge',style:{'curve-style':'round-taxi','taxi-direction':'auto','taxi-turn':'data(routeTurn)','taxi-turn-min-distance':32,'line-color':'#96a5bb','target-arrow-color':'#96a5bb','target-arrow-shape':e=>e.data('directed')?'triangle':'none','width':1.6,'arrow-scale':0.85,'label':'data(label)','font-family':'system-ui','font-size':11,'color':'#526277','text-background-color':'#fcfcfd','text-background-opacity':0.95,'text-background-padding':4,'text-background-shape':'roundrectangle','text-wrap':'wrap','text-max-width':Math.max(44,Math.min(120,(model.layout?.layerSpacing||120)-20)),'text-rotation':'none','text-margin-y':'data(routeLabelOffset)','loop-direction':'-45deg','loop-sweep':'55deg','overlay-opacity':0}},
+    {selector:'node[shape="diamond"][icon]',style:{'background-position-y':'28px','text-margin-y':20}},
+    {selector:'node:parent',style:{'shape':'round-rectangle','background-color':'data(fill)','background-opacity':0.22,'border-color':'data(stroke)','border-width':'data(strokeWidth)','border-style':'dashed','padding':'data(groupPadding)','label':'data(label)','font-size':12,'font-weight':600,'color':'data(textColor)','text-valign':'top','text-halign':'center','text-margin-x':0,'text-margin-y':-9,'compound-sizing-wrt-labels':'include','background-image':'none','text-wrap':'wrap','text-max-width':300}},
+    {selector:'node:parent[groupLabel="inside"]',style:{'text-halign':'left','text-valign':'top','text-margin-x':'data(groupTextX)','text-margin-y':15}},
+    {selector:'node:parent[groupLabel="inside"][icon]',style:{'background-image':n=>n.data('icon')||'none','background-fit':'none','background-width':20,'background-height':20,'background-position-x':'16px','background-position-y':'14px'}},
+    {selector:'edge',style:{'curve-style':'round-taxi','taxi-direction':'auto','taxi-turn':'data(routeTurn)','taxi-turn-min-distance':32,'source-endpoint':'data(sourceEndpoint)','target-endpoint':'data(targetEndpoint)','line-color':'#96a5bb','target-arrow-color':'#96a5bb','target-arrow-shape':e=>e.data('directed')?'triangle':'none','width':1.6,'arrow-scale':0.85,'label':'data(label)','font-family':'system-ui','font-size':11,'color':'#526277','text-background-color':'#fcfcfd','text-background-opacity':0.95,'text-background-padding':4,'text-background-shape':'roundrectangle','text-wrap':'wrap','text-max-width':Math.max(44,Math.min(120,(model.layout?.layerSpacing||120)-20)),'text-rotation':'none','text-margin-x':'data(routeLabelX)','text-margin-y':'data(routeLabelY)','loop-direction':'-45deg','loop-sweep':'55deg','overlay-opacity':0}},
     {selector:'edge:loop',style:{'curve-style':'bezier','control-point-step-size':150,'loop-direction':'0deg','loop-sweep':'65deg'}},
     {selector:'edge[kind="event"], edge[kind="async"]',style:{'line-style':'dashed'}},
     {selector:'.dim',style:{'opacity':0.17}},
@@ -137,6 +149,45 @@ function inspect(id,mode){
   }
 }
 function fit(){if(cy.nodes(':visible').length)cy.fit(cy.elements(':visible'),48);}
+async function route(elements){
+  const visible=elements.edges(':visible'),ports=new Map(),records=[];
+  const side=(a,b)=>{const dx=b.x-a.x,dy=b.y-a.y;if(Math.abs(dx)>=Math.abs(dy))return dx>=0?'right':'left';return dy>=0?'bottom':'top';};
+  const endpoint=(node,s,p)=>{
+    const offset=p-50,shape=node.data('shape');let x=0,y=0;
+    if(['left','right'].includes(s)){
+      y=offset;if(shape==='rhomboid')x=(s==='right'?37.5:-37.5)+y/4;else{const edge=shape==='ellipse'?50*Math.sqrt(1-(y/50)**2):shape==='diamond'?50-Math.abs(y):50;x=s==='right'?edge:-edge;}
+    }else{
+      x=offset;const edge=shape==='ellipse'?50*Math.sqrt(1-(x/50)**2):shape==='diamond'?50-Math.abs(x):50;y=s==='bottom'?edge:-edge;
+    }
+    return `${x}% ${y}%`;
+  };
+  visible.forEach(edge=>{
+    if(edge.source().id()===edge.target().id()){edge.data({sourceEndpoint:'outside-to-node',targetEndpoint:'outside-to-node',routeTurn:'50%',routeLabelX:0,routeLabelY:-28});return;}
+    const source=edge.source().position(),target=edge.target().position(),sourceSide=side(source,target),targetSide=side(target,source),record={edge,source,target,sourceSide,targetSide};records.push(record);
+    for(const [node,which,s,peer] of [[edge.source(),'source',sourceSide,target],[edge.target(),'target',targetSide,source]]){const key=`${node.id()}:${s}`;if(!ports.has(key))ports.set(key,[]);ports.get(key).push({record,which,peer});}
+  });
+  for(const entries of ports.values()){
+    const vertical=['left','right'].includes(entries[0].record[entries[0].which+'Side']);entries.sort((a,b)=>(vertical?a.peer.y-b.peer.y:a.peer.x-b.peer.x)||a.record.edge.id().localeCompare(b.record.edge.id()));
+    entries.forEach((entry,i)=>{entry.record[entry.which+'Port']=entries.length===1?50:25+50*i/(entries.length-1);});
+  }
+  const pairs=new Map();for(const record of records){const key=[record.edge.source().id(),record.edge.target().id()].sort().join('\u0000');if(!pairs.has(key))pairs.set(key,[]);pairs.get(key).push(record);}
+  for(const group of pairs.values())group.sort((a,b)=>a.edge.id().localeCompare(b.edge.id())).forEach((record,i)=>{record.lane=i-(group.length-1)/2;});
+  cy.batch(()=>records.forEach(r=>{const horizontal=Math.abs(r.target.x-r.source.x)>=Math.abs(r.target.y-r.source.y);r.baseLabelX=horizontal?0:r.lane*84;r.baseLabelY=horizontal?r.lane*56:0;r.edge.data({sourceEndpoint:endpoint(r.edge.source(),r.sourceSide,r.sourcePort),targetEndpoint:endpoint(r.edge.target(),r.targetSide,r.targetPort),routeTurn:'50%',routeLabelX:r.baseLabelX,routeLabelY:r.baseLabelY});}));
+  cy.style().update();
+  await new Promise(resolve=>requestAnimationFrame(resolve));
+  const occupied=cy.nodes(':visible').filter(n=>!n.isParent()).map(n=>n.boundingBox({includeLabels:true,includeOverlays:false}));
+  for(const group of cy.nodes(':visible').filter(n=>n.isParent())){group.boundingBox({includeLabels:true,includeOverlays:false});occupied.push(group._private.labelBounds.main);}
+  const placed=[],choices=[];
+  const overlap=(a,b)=>Math.max(0,Math.min(a.x2,b.x2)-Math.max(a.x1,b.x1))*Math.max(0,Math.min(a.y2,b.y2)-Math.max(a.y1,b.y1));
+  for(const r of records.sort((a,b)=>a.edge.id().localeCompare(b.edge.id()))){
+    if(!r.edge.data('label'))continue;const horizontal=Math.abs(r.target.x-r.source.x)>=Math.abs(r.target.y-r.source.y);
+    const candidates=[],primary=[0,-18,18,-36,36,-54,54,-72,72,-90,90,-108,108],secondary=[0,-24,24,-48,48,-72,72];for(const p of primary)for(const s of secondary)candidates.push(horizontal?[s,p]:[p,s]);
+    const s=r.edge._private.rscratch,z=r.edge._private.rstyle;let best=null;for(const [x,y] of candidates){const box={x1:s.labelX+r.baseLabelX+x-z.labelWidth/2,y1:s.labelY+r.baseLabelY+y-z.labelHeight/2,x2:s.labelX+r.baseLabelX+x+z.labelWidth/2,y2:s.labelY+r.baseLabelY+y+z.labelHeight/2},collisions=[...occupied,...placed].reduce((sum,b)=>sum+overlap(box,b),0),score=collisions*1000+Math.abs(x)+Math.abs(y);if(!best||score<best.score)best={x:r.baseLabelX+x,y:r.baseLabelY+y,box,score};if(!collisions)break;}
+    choices.push([r.edge,best]);placed.push(best.box);
+  }
+  cy.batch(()=>choices.forEach(([edge,best])=>edge.data({routeLabelX:best.x,routeLabelY:best.y})));
+  cy.style().update();
+}
 async function arrange(elements){
   const spacing=model.layout?.spacing||65,layerSpacing=model.layout?.layerSpacing||120;
   const elk={'elk.algorithm':'layered','elk.direction':$('direction').value,'elk.hierarchyHandling':'INCLUDE_CHILDREN','elk.edgeRouting':'ORTHOGONAL','elk.spacing.nodeNode':spacing,'elk.spacing.edgeNode':Math.max(32,spacing/2),'elk.spacing.edgeEdge':24,'elk.layered.spacing.nodeNodeBetweenLayers':layerSpacing,'elk.layered.spacing.edgeNodeBetweenLayers':Math.max(36,layerSpacing/3),'elk.layered.spacing.edgeEdgeBetweenLayers':24,'elk.padding':'[top=40,left=40,bottom=40,right=40]','elk.randomSeed':17};
@@ -144,7 +195,7 @@ async function arrange(elements){
     const timer=setTimeout(()=>reject(new Error('Layout exceeded 15 seconds. Split the diagram or use an explicitly configured worker integration.')),15000);
     const success=()=>{clearTimeout(timer);pendingFailure=null;resolve();};
     pendingFailure=e=>{clearTimeout(timer);reject(e);};
-    elements.layout({name:'elk',fit:false,animate:false,nodeDimensionsIncludeLabels:false,nodeLayoutOptions:node=>node.isParent()?{...elk,'elk.padding':'[top=50,left=36,bottom=36,right=36]'}:{},elk,stop:success}).run();
+    elements.layout({name:'elk',fit:false,animate:false,nodeDimensionsIncludeLabels:false,nodeLayoutOptions:node=>node.isParent()?{...elk,'elk.padding':node.data('groupLabel')==='inside'?'[top=76,left=42,bottom=42,right=42]':'[top=50,left=36,bottom=36,right=36]'}:{},elk,stop:success}).run();
   });
 }
 async function layout(){
@@ -156,6 +207,7 @@ async function layout(){
     const visible=cy.elements(':visible');
     if(visible.nodes().length){
       await arrange(visible);
+      await route(visible);
       const bad=cy.nodes().filter(n=>!Number.isFinite(n.position('x'))||!Number.isFinite(n.position('y')));
       if(bad.length)throw new Error('Non-finite node coordinates.');
     }
@@ -168,12 +220,13 @@ async function exportPNG(all=false){
   if(busy||failed)throw new Error('The diagram must be ready before export.');
   const states=cy.elements().map(e=>({id:e.id(),classes:e.classes()}));
   const positions=new Map(cy.nodes().filter(n=>!n.isParent()).map(n=>[n.id(),{x:n.position('x'),y:n.position('y')}]));
+  const routes=new Map(cy.edges().map(e=>[e.id(),Object.fromEntries(['sourceEndpoint','targetEndpoint','routeTurn','routeLabelX','routeLabelY'].map(k=>[k,e.data(k)]))]));
   const viewport={zoom:cy.zoom(),pan:cy.pan()};
   busy=true;api.state='export';document.querySelectorAll('.toolbar button,.toolbar select,#png-view,#png-all').forEach(b=>b.disabled=true);
   cy.elements().removeClass('dim highlight');if(all)cy.elements().removeClass('hidden');
   try{
     if(!cy.nodes(':visible').length)throw new Error('This view has no elements to export.');
-    if(all)await arrange(cy.elements());
+    if(all){await arrange(cy.elements());await route(cy.elements());}
     cy.fit(cy.elements(':visible'),48);
     const uri=cy.png({full:false,bg:'#fcfcfd',maxWidth:1752,maxHeight:1040});
     const img=new Image();img.src=uri;await img.decode();
@@ -189,7 +242,7 @@ async function exportPNG(all=false){
     ctx.fillText(label,24,canvas.height-18,canvas.width-48);
     return await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('PNG encoding failed.')),'image/png'));
   }finally{
-    cy.batch(()=>{cy.nodes().filter(n=>!n.isParent()).positions(n=>positions.get(n.id()));states.forEach(s=>cy.getElementById(s.id).classes(s.classes));});
+    cy.batch(()=>{cy.nodes().filter(n=>!n.isParent()).positions(n=>positions.get(n.id()));cy.edges().forEach(e=>e.data(routes.get(e.id())));states.forEach(s=>cy.getElementById(s.id).classes(s.classes));});
     cy.viewport(viewport);pendingFailure=null;busy=false;if(!failed){api.state='ready';document.querySelectorAll('.toolbar button,.toolbar select,#png-view,#png-all').forEach(b=>b.disabled=false);setStatus(`${cy.nodes(':visible').filter(n=>!n.isParent()).length} visible elements · ${cy.edges(':visible').length} relationships`);}
   }
 }

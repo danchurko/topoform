@@ -45,15 +45,15 @@ This is based on the v2.3.0 implementation, not the combined feature lists of bo
 | Cross-hierarchy edges | Layered with `INCLUDE_CHILDREN` | Tested |
 | Cycles, parallel edges, self-loops | Graph + layout + renderer | Tested; inspect routing visually |
 | Alternative ELK algorithms | ELK's available algorithms | Documented, not exposed/tested in UI |
-| ELK ports and port constraints | Direct ELK JSON supports them | Adapter does not forward node ports |
+| ELK ports and port constraints | Direct ELK JSON supports them | Adapter does not forward node ports; viewer derives surface endpoints |
 | ELK orthogonal edge sections | ELK can calculate them | Adapter does not apply them to Cytoscape |
-| ELK edge-label placement | Direct ELK label geometry | Adapter does not forward labels |
+| ELK edge-label placement | Direct ELK label geometry | Adapter does not forward labels; viewer offsets labels after layout |
 | PNG/JPEG | Cytoscape core exports | PNG with title/credits included |
 | SVG | Additional export integration | Not included |
 | Collapse/expand, minimap | Extensions or custom projection | Not included |
 | User editing and persistence | Custom application layer | Not included |
 
-`makeEdge()` copies IDs and endpoints, not labels or port attachments. `applyLayout()` applies leaf positions and ancestor offsets, not returned edge sections. Do not advertise `elk.edgeRouting = ORTHOGONAL` as a way to reroute this viewer's lines. They remain Cytoscape bezier edges. Taxi/segment styles would still be Cytoscape routes, not ELK obstacle-aware routes.
+`makeEdge()` copies IDs and endpoints, not labels or port attachments. `applyLayout()` applies leaf positions and ancestor offsets, not returned edge sections. After layout, the viewer assigns geometry-derived Cytoscape surface endpoints, separates parallel/reverse lanes, and chooses label offsets that avoid the tested node and label bounds. Do not advertise `elk.edgeRouting = ORTHOGONAL` as a way to reroute this viewer's lines. They remain Cytoscape bezier edges. Taxi/segment styles would still be Cytoscape routes, not ELK obstacle-aware routes.
 
 If exact routes are a hard requirement, either build and test a direct-ELK geometry adapter that maps node centers, nested offsets, ports and every edge section into a compatible renderer, or choose a renderer built for that geometry. Do not sneak this large change into a styling patch. Keep source IDs/topology stable.
 

@@ -11,6 +11,13 @@
       "id": "source-boundary",
       "label": "Source systems",
       "kind": "group",
+      "appearance": {
+        "fill": "#EFF6FF",
+        "stroke": "#2563EB",
+        "textColor": "#1E3A8A",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "Illustrative source categories whose lineage is retained during ingestion.",
       "evidence": {
         "status": "declared",
@@ -22,6 +29,13 @@
       "label": "Product documentation",
       "kind": "source",
       "icon": "document",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#DBEAFE",
+        "stroke": "#1D4ED8",
+        "textColor": "#1E3A8A",
+        "strokeWidth": 1.5
+      },
       "parent": "source-boundary",
       "description": "Versioned documents used as an example knowledge source.",
       "evidence": {
@@ -34,6 +48,13 @@
       "label": "Support tickets",
       "kind": "source",
       "icon": "folder",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#E0F2FE",
+        "stroke": "#0284C7",
+        "textColor": "#0C4A6E",
+        "strokeWidth": 2
+      },
       "parent": "source-boundary",
       "description": "Resolved support material used as an example source.",
       "evidence": {
@@ -46,6 +67,13 @@
       "label": "Policy repository",
       "kind": "source",
       "icon": "store",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#F3E8FF",
+        "stroke": "#9333EA",
+        "textColor": "#581C87",
+        "strokeWidth": 2
+      },
       "parent": "source-boundary",
       "description": "Controlled policy material used as an example source.",
       "evidence": {
@@ -57,6 +85,13 @@
       "id": "ingestion-boundary",
       "label": "Ingestion and preparation",
       "kind": "group",
+      "appearance": {
+        "fill": "#CCFBF1",
+        "stroke": "#0F766E",
+        "textColor": "#134E4A",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "Asynchronous preparation stages that preserve source lineage and metadata.",
       "evidence": {
         "status": "inferred",
@@ -68,6 +103,13 @@
       "label": "Source connector",
       "kind": "process",
       "icon": "network",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#ECFEFF",
+        "stroke": "#0891B2",
+        "textColor": "#164E63",
+        "strokeWidth": 2
+      },
       "parent": "ingestion-boundary",
       "description": "Collects source records and records their origin.",
       "evidence": {
@@ -80,6 +122,13 @@
       "label": "Parse and normalise",
       "kind": "process",
       "icon": "gear",
+      "appearance": {
+        "shape": "round-rectangle",
+        "fill": "#F0FDFA",
+        "stroke": "#0D9488",
+        "textColor": "#134E4A",
+        "strokeWidth": 2
+      },
       "parent": "ingestion-boundary",
       "description": "Extracts text and normalises document structure.",
       "evidence": {
@@ -92,6 +141,13 @@
       "label": "Chunk with lineage",
       "kind": "process",
       "icon": "task",
+      "appearance": {
+        "shape": "square",
+        "fill": "#DCFCE7",
+        "stroke": "#16A34A",
+        "textColor": "#14532D",
+        "strokeWidth": 1.5
+      },
       "parent": "ingestion-boundary",
       "description": "Splits text into retrievable chunks while retaining source references.",
       "evidence": {
@@ -104,6 +160,13 @@
       "label": "Extract metadata",
       "kind": "process",
       "icon": "document",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#F0FDFA",
+        "stroke": "#0F766E",
+        "textColor": "#134E4A",
+        "strokeWidth": 1.5
+      },
       "parent": "ingestion-boundary",
       "description": "Adds document, access and freshness metadata to each chunk.",
       "evidence": {
@@ -116,6 +179,13 @@
       "label": "Embedding worker",
       "kind": "process",
       "icon": "lab",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#F0FDFA",
+        "stroke": "#059669",
+        "textColor": "#064E3B",
+        "strokeWidth": 2
+      },
       "parent": "ingestion-boundary",
       "description": "Computes vector representations for prepared chunks.",
       "evidence": {
@@ -128,6 +198,13 @@
       "label": "Source-aware corpus store",
       "kind": "store",
       "icon": "database",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#F1F5F9",
+        "stroke": "#475569",
+        "textColor": "#1E293B",
+        "strokeWidth": 2
+      },
       "parent": "ingestion-boundary",
       "description": "Stores chunk text and lineage metadata for citation and refresh.",
       "evidence": {
@@ -139,6 +216,13 @@
       "id": "retrieval-boundary",
       "label": "Retrieval and generation",
       "kind": "group",
+      "appearance": {
+        "fill": "#F3E8FF",
+        "stroke": "#9333EA",
+        "textColor": "#581C87",
+        "strokeWidth": 3,
+        "groupLabel": "top"
+      },
       "description": "Answers a question using indexed context and explicit evidence references.",
       "evidence": {
         "status": "declared",
@@ -150,6 +234,13 @@
       "label": "Knowledge user",
       "kind": "actor",
       "icon": "person",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#FEF3C7",
+        "stroke": "#D97706",
+        "textColor": "#78350F",
+        "strokeWidth": 2
+      },
       "parent": "retrieval-boundary",
       "description": "Asks a question and receives an answer with caveats and citations.",
       "evidence": {
@@ -162,6 +253,13 @@
       "label": "Question endpoint",
       "kind": "service",
       "icon": "service",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#F5F3FF",
+        "stroke": "#7C3AED",
+        "textColor": "#4C1D95",
+        "strokeWidth": 1.5
+      },
       "parent": "retrieval-boundary",
       "description": "Accepts a question and applies the retrieval policy.",
       "evidence": {
@@ -174,6 +272,13 @@
       "label": "Retriever and ranker",
       "kind": "process",
       "icon": "network",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FCE7F3",
+        "stroke": "#DB2777",
+        "textColor": "#831843",
+        "strokeWidth": 2
+      },
       "parent": "retrieval-boundary",
       "description": "Finds relevant chunks and returns source spans for citation.",
       "evidence": {
@@ -186,6 +291,13 @@
       "label": "Vector index",
       "kind": "store",
       "icon": "database",
+      "appearance": {
+        "shape": "square",
+        "fill": "#EDE9FE",
+        "stroke": "#6D28D9",
+        "textColor": "#4C1D95",
+        "strokeWidth": 2
+      },
       "parent": "retrieval-boundary",
       "description": "Indexes embeddings for similarity retrieval.",
       "evidence": {
@@ -198,6 +310,13 @@
       "label": "Prompt and context builder",
       "kind": "process",
       "icon": "gear",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#F5F3FF",
+        "stroke": "#8B5CF6",
+        "textColor": "#4C1D95",
+        "strokeWidth": 2
+      },
       "parent": "retrieval-boundary",
       "description": "Combines the question, ranked context and citation references.",
       "evidence": {
@@ -210,6 +329,13 @@
       "label": "Generative model",
       "kind": "model",
       "icon": "lab",
+      "appearance": {
+        "shape": "round-rectangle",
+        "fill": "#EDE9FE",
+        "stroke": "#7C3AED",
+        "textColor": "#4C1D95",
+        "strokeWidth": 2
+      },
       "parent": "retrieval-boundary",
       "description": "Drafts an answer from the supplied context; hallucination risk remains.",
       "evidence": {
@@ -222,6 +348,13 @@
       "label": "Answer with citations",
       "kind": "output",
       "icon": "document",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#FDF4FF",
+        "stroke": "#C026D3",
+        "textColor": "#701A75",
+        "strokeWidth": 1.5
+      },
       "parent": "retrieval-boundary",
       "description": "Returns a draft answer, evidence references and uncertainty cues.",
       "evidence": {
@@ -234,6 +367,13 @@
       "label": "Citation evidence bundle",
       "kind": "evidence",
       "icon": "document",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#FAE8FF",
+        "stroke": "#A21CAF",
+        "textColor": "#701A75",
+        "strokeWidth": 2
+      },
       "parent": "retrieval-boundary",
       "description": "Carries source spans and lineage references alongside the draft.",
       "evidence": {
@@ -245,6 +385,13 @@
       "id": "review-boundary",
       "label": "Human evaluation",
       "kind": "group",
+      "appearance": {
+        "fill": "#FFEDD5",
+        "stroke": "#EA580C",
+        "textColor": "#7C2D12",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "Reviews answer quality and feeds improvement work back into preparation.",
       "evidence": {
         "status": "declared",
@@ -256,6 +403,13 @@
       "label": "Subject-matter reviewer",
       "kind": "actor",
       "icon": "person",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#FEF3C7",
+        "stroke": "#D97706",
+        "textColor": "#78350F",
+        "strokeWidth": 2
+      },
       "parent": "review-boundary",
       "description": "Checks whether the answer is supported and useful.",
       "evidence": {
@@ -268,6 +422,13 @@
       "label": "Evaluate answer and evidence",
       "kind": "decision",
       "icon": "decision",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FEE2E2",
+        "stroke": "#DC2626",
+        "textColor": "#7F1D1D",
+        "strokeWidth": 2
+      },
       "parent": "review-boundary",
       "description": "Records groundedness, citation coverage and a revise decision.",
       "evidence": {
@@ -280,6 +441,13 @@
       "label": "Feedback and refresh",
       "kind": "process",
       "icon": "task",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#FFF7ED",
+        "stroke": "#C2410C",
+        "textColor": "#7C2D12",
+        "strokeWidth": 2
+      },
       "parent": "review-boundary",
       "description": "Routes review findings into controlled chunking or prompt updates.",
       "evidence": {

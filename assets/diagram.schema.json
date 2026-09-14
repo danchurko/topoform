@@ -210,12 +210,54 @@
               }
             }
           ]
+        },
+        "appearance": {
+          "$ref": "#/$defs/appearance"
         }
       },
       "required": [
         "id",
         "label"
       ],
+      "additionalProperties": false
+    },
+    "appearance": {
+      "type": "object",
+      "properties": {
+        "shape": {
+          "enum": [
+            "round-rectangle",
+            "rectangle",
+            "square",
+            "diamond",
+            "oval",
+            "parallelogram"
+          ]
+        },
+        "fill": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "stroke": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "textColor": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "strokeWidth": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "groupLabel": {
+          "enum": [
+            "top",
+            "inside"
+          ]
+        }
+      },
       "additionalProperties": false
     },
     "edge": {

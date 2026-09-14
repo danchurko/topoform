@@ -19,7 +19,10 @@ VERSION = '1.0.0'
 ID = re.compile(r'^[A-Za-z][A-Za-z0-9_.:-]{0,95}$')
 RESERVED = {'root', '__proto__', 'prototype', 'constructor', 'toString', 'toLocaleString', 'valueOf', 'hasOwnProperty', 'isPrototypeOf', 'propertyIsEnumerable', '__defineGetter__', '__defineSetter__', '__lookupGetter__', '__lookupSetter__'}
 TOP = {'schemaVersion', 'title', 'description', 'nodes', 'edges', 'views', 'layout', 'metadata'}
-NODE = {'id', 'label', 'kind', 'parent', 'icon', 'description', 'tags', 'metadata', 'links', 'evidence'}
+APPEARANCE = {'shape', 'fill', 'stroke', 'textColor', 'strokeWidth', 'groupLabel'}
+APPEARANCE_SHAPES = {'round-rectangle', 'rectangle', 'square', 'diamond', 'oval', 'parallelogram'}
+HEX_COLOR = re.compile(r'^#[0-9A-Fa-f]{6}$')
+NODE = {'id', 'label', 'kind', 'parent', 'icon', 'description', 'tags', 'metadata', 'links', 'evidence', 'appearance'}
 EDGE = {'id', 'source', 'target', 'label', 'kind', 'directed', 'description', 'tags', 'metadata', 'links', 'evidence'}
 VIEW = {'id', 'label', 'nodeIds', 'edgeKinds'}
 LAYOUT = {'direction', 'spacing', 'layerSpacing'}
@@ -102,6 +105,26 @@ def validate(model, icon_ids=None) -> dict:
                 if 'icon' in item:
                     if text(item['icon'],s+'.icon',True,100) and icon_ids is not None and item['icon'] not in icon_ids:
                         issue('ICON_UNKNOWN',s+'.icon','Unknown icon. Import a licensed local SVG or omit icon; do not silently substitute a brand.')
+                if 'appearance' in item:
+                    appearance=item['appearance']; aps=s+'.appearance'
+                    if obj(appearance,APPEARANCE,aps):
+                        if 'shape' in appearance:
+                            if not isinstance(appearance['shape'],str) or appearance['shape'] not in APPEARANCE_SHAPES:
+                                issue('APPEARANCE_SHAPE',aps+'.shape','Use round-rectangle, rectangle, square, diamond, oval or parallelogram.')
+                            elif item.get('kind')=='group':
+                                issue('APPEARANCE_SHAPE_GROUP',aps+'.shape','Groups use their compound boundary; shape is only supported on leaf nodes.')
+                        for color in ['fill','stroke','textColor']:
+                            if color in appearance and (not isinstance(appearance[color],str) or not HEX_COLOR.fullmatch(appearance[color])):
+                                issue('APPEARANCE_COLOR',aps+'.'+color,'Expected a #RRGGBB hex color.')
+                        if 'strokeWidth' in appearance:
+                            width=appearance['strokeWidth']
+                            if type(width) not in [int,float] or not math.isfinite(width) or not 1<=width<=6:
+                                issue('APPEARANCE_STROKE_WIDTH',aps+'.strokeWidth','Expected a finite number from 1 to 6.')
+                        if 'groupLabel' in appearance:
+                            if appearance['groupLabel'] not in ['top','inside']:
+                                issue('APPEARANCE_GROUP_LABEL',aps+'.groupLabel','Use top or inside.')
+                            elif item.get('kind')!='group':
+                                issue('APPEARANCE_GROUP_LABEL_NODE',aps+'.groupLabel','groupLabel is only supported on groups.')
             else:
                 ident(item.get('source'),s+'.source');ident(item.get('target'),s+'.target')
                 if 'directed' in item and not isinstance(item['directed'],bool): issue('TYPE',s+'.directed','Expected boolean.')

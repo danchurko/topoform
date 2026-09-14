@@ -11,6 +11,13 @@
       "id": "customer-boundary",
       "label": "Customer interaction",
       "kind": "group",
+      "appearance": {
+        "fill": "#EFF6FF",
+        "stroke": "#2563EB",
+        "textColor": "#1E3A8A",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "The customer-facing order entry boundary.",
       "evidence": {
         "status": "declared",
@@ -22,6 +29,13 @@
       "label": "Customer",
       "kind": "actor",
       "icon": "person",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#FEF3C7",
+        "stroke": "#D97706",
+        "textColor": "#78350F",
+        "strokeWidth": 2
+      },
       "parent": "customer-boundary",
       "description": "Requests goods and receives order and settlement updates.",
       "evidence": {
@@ -34,6 +48,13 @@
       "label": "Sales channel",
       "kind": "channel",
       "icon": "store",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#DBEAFE",
+        "stroke": "#1D4ED8",
+        "textColor": "#1E3A8A",
+        "strokeWidth": 2
+      },
       "parent": "customer-boundary",
       "description": "Captures the customer's order request.",
       "evidence": {
@@ -45,6 +66,13 @@
       "id": "sales-operations",
       "label": "Sales operations",
       "kind": "group",
+      "appearance": {
+        "fill": "#F3E8FF",
+        "stroke": "#9333EA",
+        "textColor": "#581C87",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "Owns capture, validation and the commercial decision.",
       "evidence": {
         "status": "declared",
@@ -56,6 +84,13 @@
       "label": "Capture order",
       "kind": "process",
       "icon": "document",
+      "appearance": {
+        "shape": "round-rectangle",
+        "fill": "#E0F2FE",
+        "stroke": "#0284C7",
+        "textColor": "#0C4A6E",
+        "strokeWidth": 2
+      },
       "parent": "sales-operations",
       "description": "Creates a draft order from the submitted request.",
       "evidence": {
@@ -68,6 +103,13 @@
       "label": "Validate order",
       "kind": "process",
       "icon": "check",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#ECFEFF",
+        "stroke": "#0891B2",
+        "textColor": "#164E63",
+        "strokeWidth": 1.5
+      },
       "parent": "sales-operations",
       "description": "Checks address, price and required order details.",
       "evidence": {
@@ -80,6 +122,13 @@
       "label": "Credit or payment decision",
       "kind": "decision",
       "icon": "decision",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FEE2E2",
+        "stroke": "#DC2626",
+        "textColor": "#7F1D1D",
+        "strokeWidth": 2
+      },
       "parent": "sales-operations",
       "description": "Determines whether the order can proceed to fulfilment.",
       "evidence": {
@@ -92,6 +141,13 @@
       "label": "Confirm order",
       "kind": "output",
       "icon": "package",
+      "appearance": {
+        "shape": "square",
+        "fill": "#DCFCE7",
+        "stroke": "#16A34A",
+        "textColor": "#14532D",
+        "strokeWidth": 2
+      },
       "parent": "sales-operations",
       "description": "Confirms the accepted order and expected fulfilment.",
       "evidence": {
@@ -104,6 +160,13 @@
       "label": "Cancel or reject order",
       "kind": "exception",
       "icon": "folder",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#FFF7ED",
+        "stroke": "#EA580C",
+        "textColor": "#7C2D12",
+        "strokeWidth": 1.5
+      },
       "parent": "sales-operations",
       "description": "Ends an order that fails validation or commercial approval.",
       "evidence": {
@@ -115,6 +178,13 @@
       "id": "fulfilment-operations",
       "label": "Fulfilment operations",
       "kind": "group",
+      "appearance": {
+        "fill": "#DCFCE7",
+        "stroke": "#16A34A",
+        "textColor": "#14532D",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "Owns reservation, warehouse handling and delivery handoff.",
       "evidence": {
         "status": "declared",
@@ -126,6 +196,13 @@
       "label": "Reserve inventory",
       "kind": "process",
       "icon": "database",
+      "appearance": {
+        "shape": "square",
+        "fill": "#F0FDFA",
+        "stroke": "#0F766E",
+        "textColor": "#134E4A",
+        "strokeWidth": 2
+      },
       "parent": "fulfilment-operations",
       "description": "Reserves available stock for the accepted order.",
       "evidence": {
@@ -138,6 +215,13 @@
       "label": "Pick and pack",
       "kind": "process",
       "icon": "package",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#ECFDF5",
+        "stroke": "#059669",
+        "textColor": "#064E3B",
+        "strokeWidth": 2
+      },
       "parent": "fulfilment-operations",
       "description": "Prepares reserved items for shipment.",
       "evidence": {
@@ -150,6 +234,13 @@
       "label": "Ship order",
       "kind": "process",
       "icon": "cloud",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#E0F2FE",
+        "stroke": "#0284C7",
+        "textColor": "#0C4A6E",
+        "strokeWidth": 2
+      },
       "parent": "fulfilment-operations",
       "description": "Hands the package to a delivery carrier.",
       "evidence": {
@@ -162,6 +253,13 @@
       "label": "Confirm delivery",
       "kind": "process",
       "icon": "check",
+      "appearance": {
+        "shape": "round-rectangle",
+        "fill": "#F0FDFA",
+        "stroke": "#0D9488",
+        "textColor": "#134E4A",
+        "strokeWidth": 1.5
+      },
       "parent": "fulfilment-operations",
       "description": "Records delivery confirmation or a delivery exception.",
       "evidence": {
@@ -173,6 +271,13 @@
       "id": "finance-operations",
       "label": "Finance operations",
       "kind": "group",
+      "appearance": {
+        "fill": "#FEF3C7",
+        "stroke": "#B45309",
+        "textColor": "#78350F",
+        "strokeWidth": 3,
+        "groupLabel": "top"
+      },
       "description": "Owns invoicing, settlement and financial reconciliation.",
       "evidence": {
         "status": "declared",
@@ -184,6 +289,13 @@
       "label": "Issue invoice",
       "kind": "process",
       "icon": "document",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#FFF7ED",
+        "stroke": "#C2410C",
+        "textColor": "#7C2D12",
+        "strokeWidth": 1.5
+      },
       "parent": "finance-operations",
       "description": "Creates the invoice after the fulfilment milestone.",
       "evidence": {
@@ -196,6 +308,13 @@
       "label": "Settle payment",
       "kind": "process",
       "icon": "lock",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FCE7F3",
+        "stroke": "#DB2777",
+        "textColor": "#831843",
+        "strokeWidth": 2
+      },
       "parent": "finance-operations",
       "description": "Applies payment or refund activity to the order.",
       "evidence": {
@@ -208,6 +327,13 @@
       "label": "Accounts receivable ledger",
       "kind": "store",
       "icon": "database",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#F1F5F9",
+        "stroke": "#475569",
+        "textColor": "#1E293B",
+        "strokeWidth": 2
+      },
       "parent": "finance-operations",
       "description": "Stores the illustrative receivable and settlement record.",
       "evidence": {
@@ -220,6 +346,13 @@
       "label": "Reconcile settlement",
       "kind": "process",
       "icon": "check",
+      "appearance": {
+        "shape": "round-rectangle",
+        "fill": "#ECFDF5",
+        "stroke": "#059669",
+        "textColor": "#064E3B",
+        "strokeWidth": 2
+      },
       "parent": "finance-operations",
       "description": "Matches settlement records and raises mismatches for review.",
       "evidence": {
@@ -232,6 +365,13 @@
       "label": "Settlement receipt",
       "kind": "output",
       "icon": "document",
+      "appearance": {
+        "shape": "square",
+        "fill": "#F8FAFC",
+        "stroke": "#64748B",
+        "textColor": "#334155",
+        "strokeWidth": 1.5
+      },
       "parent": "finance-operations",
       "description": "A customer-facing confirmation of settlement.",
       "evidence": {
@@ -243,6 +383,13 @@
       "id": "exceptions-boundary",
       "label": "Exception handling",
       "kind": "group",
+      "appearance": {
+        "fill": "#FCE7F3",
+        "stroke": "#BE185D",
+        "textColor": "#831843",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "Coordinates short stock, returns, refunds and reconciliation mismatches.",
       "evidence": {
         "status": "declared",
@@ -254,6 +401,13 @@
       "label": "Exception desk",
       "kind": "process",
       "icon": "team",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#FDF2F8",
+        "stroke": "#DB2777",
+        "textColor": "#831843",
+        "strokeWidth": 1.5
+      },
       "parent": "exceptions-boundary",
       "description": "Routes exceptions to the responsible team and records a decision.",
       "evidence": {
@@ -266,6 +420,13 @@
       "label": "Backorder decision",
       "kind": "decision",
       "icon": "clock",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FEF3C7",
+        "stroke": "#D97706",
+        "textColor": "#78350F",
+        "strokeWidth": 2
+      },
       "parent": "exceptions-boundary",
       "description": "Decides whether short stock can be delayed or cancelled.",
       "evidence": {
@@ -278,6 +439,13 @@
       "label": "Handle return",
       "kind": "process",
       "icon": "folder",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#F3E8FF",
+        "stroke": "#9333EA",
+        "textColor": "#581C87",
+        "strokeWidth": 2
+      },
       "parent": "exceptions-boundary",
       "description": "Assesses a returned or damaged delivery.",
       "evidence": {
@@ -290,6 +458,13 @@
       "label": "Approve refund",
       "kind": "decision",
       "icon": "decision",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FEE2E2",
+        "stroke": "#DC2626",
+        "textColor": "#7F1D1D",
+        "strokeWidth": 2
+      },
       "parent": "exceptions-boundary",
       "description": "Approves a refund after the return decision.",
       "evidence": {
@@ -577,7 +752,7 @@
     }
   ],
   "layout": {
-    "direction": "RIGHT",
+    "direction": "DOWN",
     "spacing": 68,
     "layerSpacing": 105
   }

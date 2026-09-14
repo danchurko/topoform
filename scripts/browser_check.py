@@ -53,20 +53,36 @@ AUDIT = r'''() => {
  const centerOffset={x:Math.abs((graph.x1+graph.x2)/2-cy.width()/2),y:Math.abs((graph.y1+graph.y2)/2-cy.height()/2)};
  if(leaves.length&&(centerOffset.x>8||centerOffset.y>8))errors.push(`Visible graph is not centered: ${centerOffset.x.toFixed(1)}px × ${centerOffset.y.toFixed(1)}px offset`);
  if(leaves.length&&(graph.x1<-1||graph.y1<-1||graph.x2>cy.width()+1||graph.y2>cy.height()+1))errors.push('Visible graph is clipped by the canvas bounds.');
- const routes=cy.edges(':visible').map(e=>({id:e.id(),source:e.source().id(),target:e.target().id(),style:e.pstyle('curve-style').value,points:[...(e._private.rscratch.allpts||[])]}));
+ const nodeLabels=cy.nodes(':visible').filter(n=>!n.isParent()||n.data('groupLabel')==='inside').map(n=>({id:n.id(),body:n.boundingBox({includeLabels:false,includeOverlays:false}),withLabel:n.boundingBox({includeLabels:true,includeOverlays:false}),marginX:n.pstyle('text-margin-x').pfValue,labelBounds:n._private.labelBounds.main}));
+ for(const n of nodeLabels)if(n.withLabel.x1<n.body.x1-2||n.withLabel.y1<n.body.y1-2||n.withLabel.x2>n.body.x2+2||n.withLabel.y2>n.body.y2+2)errors.push('Node label crosses its shape boundary: '+n.id);
+ const insideShape=(n,p)=>{const c=n.position(),x=(p.x-c.x)/(n.width()/2),y=(p.y-c.y)/(n.height()/2),shape=n.data('shape');if(shape==='ellipse')return x*x+y*y<=1.04;if(shape==='diamond')return Math.abs(x)+Math.abs(y)<=1.04;if(shape==='rhomboid'){const q=[[-1,-1],[.5,-1],[1,1],[-.5,1]];let sign=0;for(let i=0;i<q.length;i++){const a=q[i],b=q[(i+1)%q.length],cross=(b[0]-a[0])*(y-a[1])-(b[1]-a[1])*(x-a[0]);if(Math.abs(cross)<.04)continue;const next=Math.sign(cross);if(sign&&next!==sign)return false;sign=next;}return true;}return true;};
+ for(const n of cy.nodes(':visible').filter(n=>!n.isParent()&&['ellipse','diamond','rhomboid'].includes(n.data('shape')))){n.boundingBox({includeLabels:true,includeOverlays:false});const b=n._private.labelBounds.main,corners=[{x:b.x1,y:b.y1},{x:b.x2,y:b.y1},{x:b.x2,y:b.y2},{x:b.x1,y:b.y2}];if(corners.some(p=>!insideShape(n,p)))errors.push('Node label crosses its curved or sloped boundary: '+n.id());}
+ const segmentDistance=(p,a,b)=>{const dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy)));return Math.hypot(p.x-a.x-t*dx,p.y-a.y-t*dy);};
+ const surfaceError=(node,point)=>{const pos=node.position(),p={x:(point.x-pos.x)/(node.width()/2),y:(point.y-pos.y)/(node.height()/2)},shape=node.data('shape');if(shape==='ellipse')return Math.abs(p.x*p.x+p.y*p.y-1);if(shape==='diamond')return Math.abs(Math.abs(p.x)+Math.abs(p.y)-1);if(shape==='rhomboid'){const q=[{x:-1,y:-1},{x:.5,y:-1},{x:1,y:1},{x:-.5,y:1}];return Math.min(...q.map((a,i)=>segmentDistance(p,a,q[(i+1)%q.length])));}return Math.min(Math.abs(Math.abs(p.x)-1),Math.abs(Math.abs(p.y)-1));};
+ const routes=cy.edges(':visible').map(e=>({id:e.id(),source:e.source().id(),target:e.target().id(),style:e.pstyle('curve-style').value,labelX:e.data('routeLabelX'),labelY:e.data('routeLabelY'),sourcePoint:e.sourceEndpoint(),targetPoint:e.targetEndpoint(),points:[...(e._private.rscratch.allpts||[])]}));
  for(const route of routes){
    if(route.source!==route.target&&route.style!=='round-taxi')errors.push('Non-loop edge is not round-taxi routed: '+route.id);
    if(route.points.some(v=>!Number.isFinite(v)))errors.push('Non-finite routed edge geometry: '+route.id);
+   if(route.source!==route.target&&surfaceError(cy.getElementById(route.source),route.sourcePoint)>.12)errors.push('Source endpoint is detached from its node surface: '+route.id);
+   if(route.source!==route.target&&surfaceError(cy.getElementById(route.target),route.targetPoint)>.12)errors.push('Target endpoint is detached from its node surface: '+route.id);
  }
  for(let i=0;i<routes.length;i++)for(let j=i+1;j<routes.length;j++){
    const a=routes[i],b=routes[j],same=a.source===b.source&&a.target===b.target,reverse=a.source===b.target&&a.target===b.source;
    if((same||reverse)&&a.points.length&&JSON.stringify(a.points)===JSON.stringify(reverse?[...b.points].reverse():b.points))errors.push('Coincident parallel route: '+a.id+' / '+b.id);
+   if(a.source===b.source&&Math.hypot(a.sourcePoint.x-b.sourcePoint.x,a.sourcePoint.y-b.sourcePoint.y)<1)errors.push('Coincident source endpoint: '+a.id+' / '+b.id);
+   if(a.target===b.target&&Math.hypot(a.targetPoint.x-b.targetPoint.x,a.targetPoint.y-b.targetPoint.y)<1)errors.push('Coincident target endpoint: '+a.id+' / '+b.id);
  }
+ const edgeLabels=cy.edges(':visible').filter(e=>e.data('label')).map(e=>{const s=e._private.rscratch,r=e._private.rstyle,x=s.labelX+e.pstyle('text-margin-x').pfValue,y=s.labelY+e.pstyle('text-margin-y').pfValue;return {id:e.id(),x1:x-r.labelWidth/2,y1:y-r.labelHeight/2,x2:x+r.labelWidth/2,y2:y+r.labelHeight/2};});
+ for(let i=0;i<edgeLabels.length;i++)for(let j=i+1;j<edgeLabels.length;j++){const a=edgeLabels[i],b=edgeLabels[j];if(Math.min(a.x2,b.x2)-Math.max(a.x1,b.x1)>2&&Math.min(a.y2,b.y2)-Math.max(a.y1,b.y1)>2)errors.push('Overlapping edge labels: '+a.id+' / '+b.id);}
+ for(const label of edgeLabels)for(const node of leaves){if(Math.min(label.x2,node.bb.x2)-Math.max(label.x1,node.bb.x1)>2&&Math.min(label.y2,node.bb.y2)-Math.max(label.y1,node.bb.y1)>2)errors.push('Edge label overlaps node: '+label.id+' / '+node.id);}
+ const groupLabels=cy.nodes(':visible').filter(n=>n.isParent()).map(n=>{n.boundingBox({includeLabels:true,includeOverlays:false});return {id:n.id(),...n._private.labelBounds.main};});
+ for(const label of edgeLabels)for(const group of groupLabels){if(Math.min(label.x2,group.x2)-Math.max(label.x1,group.x1)>2&&Math.min(label.y2,group.y2)-Math.max(label.y1,group.y1)>2)errors.push('Edge label overlaps group title: '+label.id+' / '+group.id);}
+ if(cy.edges(':visible').some(e=>e.data('label')&&e.pstyle('text-background-opacity').value<0.9))errors.push('Edge labels do not interrupt lines with an opaque background.');
  const labelPixels=cy.zoom()*14;
  if(leaves.length&&labelPixels<10)warnings.push('Overview text below 10 CSS px. Use a focused view or zoom; do not call this screenshot readable.');
  const iconStyles=cy.nodes().filter(n=>n.data('icon')).map(n=>({id:n.id(),fit:n.style('background-fit'),width:n.pstyle('background-width').pfValue[0],height:n.pstyle('background-height').pfValue[0]}));
  for(const n of iconStyles)if(n.fit!=='none'||n.width>32||n.height>32)errors.push('Icon scaling regression: '+n.id);
- return {state:a.state,viewerErrors:a.errors,cytoscapeVersion:cytoscape.version,nodes:nodes.length,leaves:leaves.length,edges:cy.edges().length,visibleEdges:cy.edges(':visible').length,zoom:cy.zoom(),labelPixels,centerOffset,routes,errors,warnings,geometry:nodes,iconStyles};
+ return {state:a.state,viewerErrors:a.errors,cytoscapeVersion:cytoscape.version,nodes:nodes.length,leaves:leaves.length,edges:cy.edges().length,visibleEdges:cy.edges(':visible').length,zoom:cy.zoom(),labelPixels,centerOffset,routes,nodeLabels,edgeLabels,groupLabels,errors,warnings,geometry:nodes,iconStyles};
 }'''
 
 def run(artifact: Path, out: Path, mode='file', executable=None):

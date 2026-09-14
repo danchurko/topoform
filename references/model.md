@@ -26,7 +26,9 @@ The source is ordinary UTF-8 JSON, validated by `scripts/diagram.py`. Duplicate 
 
 Top level: required `schemaVersion: 1`, `title`, `nodes`, `edges`. Optional `description`, `views`, `layout`, `metadata`. Unknown topological/presentation fields fail rather than being ignored. Extend domain detail inside `metadata`.
 
-A node requires `id`, `label`. Optional `kind` (any nonempty meaningful string), `parent`, `icon`, `description`, `tags`, `metadata`, `links`, `evidence`. `group` is the only special kind. Ordinary nodes can represent people, states, components, machines, documents, teams, processes, stores or concepts.
+A node requires `id`, `label`. Optional `kind` (any nonempty meaningful string), `parent`, `icon`, `description`, `tags`, `metadata`, `links`, `evidence`, and validated `appearance`. `group` is the only special kind. Ordinary nodes can represent people, states, components, machines, documents, teams, processes, stores or concepts.
+
+`appearance` is an optional presentation object. Leaf nodes may use `shape` (`round-rectangle`, `rectangle`, `square`, `diamond`, `oval` or `parallelogram`), `fill`, `stroke` and `textColor` as `#RRGGBB` colors, and a finite `strokeWidth` from 1 to 6. Groups use their compound boundary and therefore cannot set `shape`. Groups may set `groupLabel` to `top` (the default) or `inside`; an inside label is drawn within the group boundary and reuses that group's `icon` when one is supplied. Non-groups cannot set `groupLabel`. Appearance changes presentation only and do not alter authored topology or evidence.
 
 An edge requires `id`, `source`, `target`. Optional `label`, `kind`, `directed` (default true), `description`, `tags`, `metadata`, `links`, `evidence`. Node and edge IDs share one namespace. Repeated endpoint pairs are permitted with different edge IDs. Self-loops produce a warning; cycles are permitted. A two-headed relationship should be modeled deliberately: one undirected association or two distinct directed relations, not a decorative second arrow.
 

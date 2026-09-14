@@ -35,6 +35,17 @@ class ModelTests(unittest.TestCase):
  def test_layout_direction(self):m=base();m['layout']={'direction':'DIAGONAL'};self.assertBad(m,'DIRECTION')
  def test_spacing_nan(self):m=base();m['layout']={'spacing':float('nan')};self.assertBad(m,'SPACING')
  def test_spacing_boolean(self):m=base();m['layout']={'spacing':True};self.assertBad(m,'SPACING')
+ def test_appearance_options(self):
+  for shape in diagram.APPEARANCE_SHAPES:
+   with self.subTest(shape=shape):m=base();m['nodes'][0]['appearance']={'shape':shape,'fill':'#E0F2FE','stroke':'#0369A1','textColor':'#0C4A6E','strokeWidth':2};self.assertTrue(diagram.validate(m)['ok'])
+ def test_appearance_rejects_bad_values(self):
+  for key,value,code in [('shape','hexagon','APPEARANCE_SHAPE'),('fill','#fff','APPEARANCE_COLOR'),('strokeWidth',7,'APPEARANCE_STROKE_WIDTH')]:
+   with self.subTest(key=key):m=base();m['nodes'][0]['appearance']={key:value};self.assertBad(m,code)
+ def test_appearance_shape_not_group(self):
+  m=base();m['nodes'][0].update(kind='group');m['nodes'][1]['parent']='a';m['nodes'][0]['appearance']={'shape':'square'};self.assertBad(m,'APPEARANCE_SHAPE_GROUP')
+ def test_appearance_group_label_only_group(self):
+  m=base();m['nodes'][0]['appearance']={'groupLabel':'inside'};self.assertBad(m,'APPEARANCE_GROUP_LABEL_NODE')
+  m=base();m['nodes'][0].update(kind='group');m['nodes'][1]['parent']='a';m['nodes'][0]['appearance']={'groupLabel':'inside'};m['edges']=[];self.assertTrue(diagram.validate(m)['ok'])
  def test_bad_kind(self):m=base();m['nodes'][0]['kind']={};self.assertBad(m,'TEXT')
  def test_bad_tags(self):m=base();m['nodes'][0]['tags']=[{}];self.assertBad(m,'TYPE')
  def test_links_reject_active_schemes(self):

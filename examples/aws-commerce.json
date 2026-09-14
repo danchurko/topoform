@@ -11,6 +11,13 @@
       "id": "edge-boundary",
       "label": "AWS edge and entry",
       "kind": "group",
+      "appearance": {
+        "fill": "#E0F2FE",
+        "stroke": "#0284C7",
+        "textColor": "#0C4A6E",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "A logical request-entry boundary for the illustrative commerce journey.",
       "evidence": {
         "status": "declared",
@@ -22,6 +29,13 @@
       "label": "Shopper",
       "kind": "actor",
       "icon": "person",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#FEF3C7",
+        "stroke": "#D97706",
+        "textColor": "#78350F",
+        "strokeWidth": 2
+      },
       "parent": "edge-boundary",
       "description": "A customer using the storefront.",
       "evidence": {
@@ -34,6 +48,13 @@
       "label": "Storefront",
       "kind": "client",
       "icon": "globe",
+      "appearance": {
+        "shape": "round-rectangle",
+        "fill": "#DBEAFE",
+        "stroke": "#2563EB",
+        "textColor": "#1E3A8A",
+        "strokeWidth": 2
+      },
       "parent": "edge-boundary",
       "description": "The customer-facing web client.",
       "evidence": {
@@ -46,6 +67,13 @@
       "label": "Amazon Route 53",
       "kind": "dns",
       "icon": "network",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#EDE9FE",
+        "stroke": "#7C3AED",
+        "textColor": "#4C1D95",
+        "strokeWidth": 1.5
+      },
       "parent": "edge-boundary",
       "description": "Illustrative DNS entry for the storefront.",
       "evidence": {
@@ -58,6 +86,13 @@
       "label": "Amazon CloudFront",
       "kind": "cdn",
       "icon": "cloud",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#CFFAFE",
+        "stroke": "#0891B2",
+        "textColor": "#164E63",
+        "strokeWidth": 2
+      },
       "parent": "edge-boundary",
       "description": "Illustrative edge delivery and caching layer.",
       "evidence": {
@@ -70,6 +105,13 @@
       "label": "Amazon API Gateway",
       "kind": "gateway",
       "icon": "network",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FCE7F3",
+        "stroke": "#DB2777",
+        "textColor": "#831843",
+        "strokeWidth": 2
+      },
       "parent": "edge-boundary",
       "description": "Illustrative API entry point for order requests.",
       "evidence": {
@@ -81,6 +123,13 @@
       "id": "commerce-boundary",
       "label": "Commerce services",
       "kind": "group",
+      "appearance": {
+        "fill": "#DCFCE7",
+        "stroke": "#16A34A",
+        "textColor": "#14532D",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "Order, inventory and event processing in the illustrative application boundary.",
       "evidence": {
         "status": "declared",
@@ -92,6 +141,13 @@
       "label": "Order service (AWS Lambda)",
       "kind": "service",
       "icon": "service",
+      "appearance": {
+        "shape": "square",
+        "fill": "#F0FDFA",
+        "stroke": "#0F766E",
+        "textColor": "#134E4A",
+        "strokeWidth": 2
+      },
       "parent": "commerce-boundary",
       "description": "Accepts an order request and emits an order event.",
       "evidence": {
@@ -104,6 +160,13 @@
       "label": "Amazon DynamoDB orders",
       "kind": "store",
       "icon": "database",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#F1F5F9",
+        "stroke": "#475569",
+        "textColor": "#1E293B",
+        "strokeWidth": 1.5
+      },
       "parent": "commerce-boundary",
       "description": "Illustrative order state store.",
       "evidence": {
@@ -116,6 +179,13 @@
       "label": "Amazon EventBridge",
       "kind": "event-bus",
       "icon": "queue",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FEF3C7",
+        "stroke": "#B45309",
+        "textColor": "#78350F",
+        "strokeWidth": 2
+      },
       "parent": "commerce-boundary",
       "description": "Distributes order events to asynchronous consumers.",
       "evidence": {
@@ -175,6 +245,13 @@
       "id": "partner-boundary",
       "label": "External partners",
       "kind": "group",
+      "appearance": {
+        "fill": "#FFEDD5",
+        "stroke": "#EA580C",
+        "textColor": "#7C2D12",
+        "strokeWidth": 3,
+        "groupLabel": "top"
+      },
       "description": "Systems outside the illustrative commerce account boundary.",
       "evidence": {
         "status": "declared",
@@ -186,6 +263,13 @@
       "label": "Payment provider",
       "kind": "external-service",
       "icon": "lock",
+      "appearance": {
+        "shape": "round-rectangle",
+        "fill": "#FCE7F3",
+        "stroke": "#BE185D",
+        "textColor": "#831843",
+        "strokeWidth": 2
+      },
       "parent": "partner-boundary",
       "description": "A generic external payment provider; no provider affiliation is implied.",
       "evidence": {
@@ -198,6 +282,13 @@
       "label": "Fulfilment partner",
       "kind": "external-service",
       "icon": "package",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#F3E8FF",
+        "stroke": "#9333EA",
+        "textColor": "#581C87",
+        "strokeWidth": 2
+      },
       "parent": "partner-boundary",
       "description": "A generic external fulfilment service.",
       "evidence": {
@@ -233,6 +324,13 @@
       "id": "operations-boundary",
       "label": "Operations and recovery",
       "kind": "group",
+      "appearance": {
+        "fill": "#E2E8F0",
+        "stroke": "#475569",
+        "textColor": "#1E293B",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "Illustrative telemetry, alerting and dead-letter handling.",
       "evidence": {
         "status": "declared",
@@ -244,6 +342,13 @@
       "label": "Amazon SQS dead-letter queue",
       "kind": "queue",
       "icon": "queue",
+      "appearance": {
+        "shape": "square",
+        "fill": "#F1F5F9",
+        "stroke": "#64748B",
+        "textColor": "#334155",
+        "strokeWidth": 1.5
+      },
       "parent": "operations-boundary",
       "description": "Holds events that cannot be delivered or processed.",
       "evidence": {
@@ -256,6 +361,13 @@
       "label": "Operator replay process",
       "kind": "process",
       "icon": "gear",
+      "appearance": {
+        "shape": "round-rectangle",
+        "fill": "#ECFDF5",
+        "stroke": "#059669",
+        "textColor": "#064E3B",
+        "strokeWidth": 2
+      },
       "parent": "operations-boundary",
       "description": "A human-reviewed replay of a quarantined event.",
       "evidence": {
@@ -280,6 +392,13 @@
       "label": "CloudWatch alarms",
       "kind": "decision",
       "icon": "decision",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FEE2E2",
+        "stroke": "#DC2626",
+        "textColor": "#7F1D1D",
+        "strokeWidth": 2
+      },
       "parent": "operations-boundary",
       "description": "Flags a processing or delivery failure for operator attention.",
       "evidence": {

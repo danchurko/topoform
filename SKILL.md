@@ -64,10 +64,13 @@ Start from the closest model in `examples/`. Follow
 explicit leaf endpoints, and short labels. Put explanations, links, ownership,
 and evidence in metadata or descriptions.
 
-Do not add `x/y`, raw CSS, HTML labels, SVG fragments, URL icons, ports, or edge
-routing flags to the model. Unknown fields fail validation rather than being
-silently ignored. An empty boundary is an ordinary node, not an empty compound
-group. A group has `kind: "group"`; its members use `parent`.
+Use the optional validated `appearance` object for supported leaf shapes, colors,
+stroke widths and group-label placement. Do not add `x/y`, raw CSS, HTML labels,
+SVG fragments, URL icons, ports, or edge routing flags to the model. Unknown
+fields fail validation rather than being silently ignored. An empty boundary is
+an ordinary node, not an empty compound group. A group has `kind: "group"`; its
+members use `parent`. Group shapes and non-group `groupLabel` values are
+rejected by the validator.
 
 ### 3. Resolve icons
 
@@ -143,7 +146,8 @@ hidden or dimmed state.
 ## Included behavior
 
 Automatic layered node placement; directed and undirected edges; compound
-nesting; pan/zoom/fit; four flow directions; named views with ancestor
+nested groups; validated node shapes and colors; top or inside group labels
+with optional group icons; pan/zoom/fit; four flow directions; named views with ancestor
 context; edge-kind filtering; keyboard-accessible search;
 neighbour/upstream/downstream inspection; metadata and safe links; all-model
 text tables; source JSON download; PNG of the current view or full model; and
@@ -156,7 +160,9 @@ positions/rendering**. The adapter is essential. Load libraries before the
 viewer. Use `name: 'elk'` and `elk.algorithm: 'layered'`.
 
 The adapter applies node positions, not ELK edge sections, ports, or label
-placement. This viewer uses Cytoscape's own bezier edges.
+placement. After layout, this viewer derives distinct Cytoscape surface
+endpoints and collision-aware label offsets as presentation state; it still
+uses Cytoscape's own bezier edges.
 `elk.edgeRouting: 'ORTHOGONAL'` would not make those edges ELK-routed. Core
 Cytoscape is Canvas, not a native SVG export engine.
 

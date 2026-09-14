@@ -68,9 +68,12 @@ placeholder screenshots.
 
 ## What you can model
 
-- nested logical boundaries with one explicit parent per node
+- nested logical boundaries with one explicit parent per node and optional
+  icon-bearing headers inside the boundary
 - directed, undirected, parallel, cyclic, and self-loop relationships
-- people, teams, services, stores, documents, processes, states, and concepts
+- validated leaf shapes and per-element/group fill, stroke, text, and border
+  styling for people, teams, services, stores, documents, processes, states,
+  and concepts
 - evidence states (`observed`, `declared`, `inferred`, and `proposed`)
 - named views, edge-kind filters, search, neighbour/upstream/downstream focus,
   and a complete text representation
@@ -187,10 +190,11 @@ Topoform does not scan a repository for secrets.
 
 Topoform is not a graphical editor, infrastructure provisioner, live discovery
 or monitoring system, authenticated dashboard, or specialist BPMN/UML/sequence
-grammar. It does not provide freehand positioning, exact port routing, native
+grammar. It does not provide freehand positioning, authored/manual exact ports, native
 SVG export, built-in collapse/expand, or live impact analysis. ELK supplies
 layered node placement through `cytoscape-elk`; this viewer renders edges with
-Cytoscape and does not apply ELK edge sections or ports. Dense models may need
+Cytoscape, derives distinct surface endpoints and label lanes after layout, and
+does not apply ELK edge sections or ports. Dense models may need
 focused views, a text representation, or separate artifacts to remain readable.
 
 ## Contributing

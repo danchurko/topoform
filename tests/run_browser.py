@@ -45,7 +45,7 @@ def run(out,mode):
      assert page.evaluate('() => JSON.stringify(__DIAGRAM__.model)')==json.dumps(m,ensure_ascii=False,separators=(',',':'))
      record.update(nodes=len(m['nodes']),edges=len(m['edges']),warnings=a['warnings'],initialLabelPixels=a['labelPixels'])
      if callback:callback(page,m)
-     if name in ['knowledge-workspace','creative-production','work-item-lifecycle','nested-cross-boundary','unicode-and-injection','sixty-node-dag']:
+     if name in ['knowledge-workspace','creative-production','work-item-lifecycle','nested-cross-boundary','appearance-routing','unicode-and-injection','sixty-node-dag']:
       page.screenshot(path=str(out/(name+'.png')),full_page=True)
     else:
      assert page.locator('#status').get_attribute('class')=='error'
@@ -59,6 +59,15 @@ def run(out,mode):
     record['durationSeconds']=round(time.monotonic()-start,4);result['cases'].append(record)
   for name,m in fixtures():exercise(name,m)
   creative=diagram.read_json(ROOT/'examples/creative-production.json');knowledge=diagram.read_json(ROOT/'examples/knowledge-workspace.json')
+  styled=model('Appearance and routing',[n('outer',kind='group',appearance={'fill':'#E0F2FE','stroke':'#0284C7','textColor':'#0C4A6E','strokeWidth':2}),n('inner',kind='group',parent='outer',icon='folder',appearance={'fill':'#F3E8FF','stroke':'#7C3AED','textColor':'#4C1D95','strokeWidth':2,'groupLabel':'inside'}),n('source',label='External customer\nauthentication\nportal',parent='inner',icon='service',appearance={'shape':'oval'}),n('decision',label='Review signing decision',parent='inner',appearance={'shape':'diamond'}),n('square',parent='inner',appearance={'shape':'square'}),n('input',parent='inner',appearance={'shape':'parallelogram'}),n('card',parent='inner',appearance={'shape':'rectangle'})],[e('source-decision','source','decision',label='Assess'),e('source-square','source','square',label='Store'),e('source-input','source','input',label='Transform'),e('decision-source','decision','source',label='Revise'),e('input-card','input','card',label='Publish')]);styled['layout']={'direction':'UP','spacing':80,'layerSpacing':140}
+  def appearance(page,m):
+   assert page.locator('#direction').input_value()=='UP'
+   actual=page.evaluate('''() => Object.fromEntries(['source','decision','square','input','card'].map(id=>[id,__DIAGRAM__.cy.getElementById(id).pstyle('shape').value]))''')
+   assert actual=={'source':'ellipse','decision':'diamond','square':'square','input':'rhomboid','card':'rectangle'},actual
+   assert page.evaluate("() => __DIAGRAM__.cy.getElementById('decision').data('displayLabel')")=='Review\nsigning\ndecision'
+   assert page.evaluate("() => __DIAGRAM__.cy.getElementById('inner').pstyle('text-halign').value")=='left'
+   assert page.evaluate("() => __DIAGRAM__.cy.getElementById('inner').pstyle('background-width').pfValue[0]")==20
+  exercise('appearance-routing',styled,appearance)
   def repeat(page,m):
    a=page.evaluate('() => __DIAGRAM__.cy.nodes().map(n=>({id:n.id(),x:n.position("x"),y:n.position("y")}))')
    assert page.evaluate('() => __DIAGRAM__.layout()') is True

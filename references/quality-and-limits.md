@@ -6,7 +6,7 @@
 
 **Browser gate:** execute the actual compiled file; wait for asynchronous readiness; verify finite node and edge geometry, parent containment, non-overlapping leaf bodies, visible edge counts, image dimensions, PNG decode, source immutability and no unexpected network requests. Save desktop/wide/mobile screenshots and exact artifact hash. A script's syntax check is not this gate.
 
-**Perceptual gate:** open the screenshot and exported PNG. Inspect font size, label clipping, crossing ambiguity, icons and hierarchy. The automated audit does not perform OCR, route-label collision detection or full accessibility testing. It must never claim these passed merely because leaf rectangles do not overlap.
+**Perceptual gate:** open the screenshot and exported PNG. Inspect font size, label clipping, crossing ambiguity, icons and hierarchy. The automated audit checks the tested label bounds and routed endpoints, but does not perform OCR, understand every crossing, or provide full accessibility testing. It must never claim visual quality merely because geometric assertions pass.
 
 `deliver.py` gates replacement on the first two, leaving the third explicitly pending. An agent should inspect the saved images before presenting the result as visually reviewed. Preserve the reviewed artifact's SHA-256 in any review note.
 
@@ -25,7 +25,7 @@
 | Canvas accessibility | Native controls, keyboard search and text table alternative | Not full keyboard traversal or a certified screen-reader graph |
 | ELK job rejects | Visible fail-closed status; disabled controls | Repair model/integration and reload |
 | ELK computation stalls | 15-second soft deadline | Not true cancellation; use worker-based integration for hard isolation |
-| Routes/labels collide | Not fully machine-detected | Visual review; split view or use a suitable route-aware renderer |
+| Routes/labels collide | Tested node/label bounds and endpoints are machine-checked; arbitrary crossings remain a visual concern | Visual review; split view or use a suitable route-aware renderer |
 | Time-scaled sequence/swimlane/BPMN | No specialist semantics | Use another appropriate diagram grammar |
 
 ## Regression coverage

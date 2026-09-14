@@ -11,6 +11,13 @@
       "id": "source-boundary",
       "label": "Change source",
       "kind": "group",
+      "appearance": {
+        "fill": "#E2E8F0",
+        "stroke": "#475569",
+        "textColor": "#1E293B",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "People and records that propose a change for delivery.",
       "evidence": {
         "status": "declared",
@@ -22,6 +29,13 @@
       "label": "Change author",
       "kind": "actor",
       "icon": "person",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#FEF3C7",
+        "stroke": "#D97706",
+        "textColor": "#78350F",
+        "strokeWidth": 2
+      },
       "parent": "source-boundary",
       "description": "Proposes and responds to a software change.",
       "evidence": {
@@ -34,6 +48,13 @@
       "label": "Source repository",
       "kind": "store",
       "icon": "folder",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#F1F5F9",
+        "stroke": "#64748B",
+        "textColor": "#334155",
+        "strokeWidth": 1.5
+      },
       "parent": "source-boundary",
       "description": "Stores the proposed source change and review history.",
       "evidence": {
@@ -46,6 +67,13 @@
       "label": "Change request and review",
       "kind": "decision",
       "icon": "decision",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FCE7F3",
+        "stroke": "#DB2777",
+        "textColor": "#831843",
+        "strokeWidth": 2
+      },
       "parent": "source-boundary",
       "description": "Records review and the decision to send a change to CI.",
       "evidence": {
@@ -57,6 +85,13 @@
       "id": "pipeline-boundary",
       "label": "Continuous integration pipeline",
       "kind": "group",
+      "appearance": {
+        "fill": "#DCFCE7",
+        "stroke": "#16A34A",
+        "textColor": "#14532D",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "Builds, checks and publishes an immutable candidate artifact.",
       "evidence": {
         "status": "declared",
@@ -68,6 +103,13 @@
       "label": "Build candidate",
       "kind": "process",
       "icon": "gear",
+      "appearance": {
+        "shape": "round-rectangle",
+        "fill": "#ECFDF5",
+        "stroke": "#059669",
+        "textColor": "#064E3B",
+        "strokeWidth": 2
+      },
       "parent": "pipeline-boundary",
       "description": "Compiles or packages the candidate from the reviewed change.",
       "evidence": {
@@ -80,6 +122,13 @@
       "label": "Automated tests and checks",
       "kind": "process",
       "icon": "check",
+      "appearance": {
+        "shape": "square",
+        "fill": "#F0FDFA",
+        "stroke": "#0F766E",
+        "textColor": "#134E4A",
+        "strokeWidth": 1.5
+      },
       "parent": "pipeline-boundary",
       "description": "Runs unit, integration and policy checks before promotion.",
       "evidence": {
@@ -92,6 +141,13 @@
       "label": "Security scan",
       "kind": "process",
       "icon": "lock",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FEE2E2",
+        "stroke": "#DC2626",
+        "textColor": "#7F1D1D",
+        "strokeWidth": 2
+      },
       "parent": "pipeline-boundary",
       "description": "Checks the candidate for known policy and dependency issues.",
       "evidence": {
@@ -104,6 +160,13 @@
       "label": "Immutable release artifacts",
       "kind": "store",
       "icon": "package",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#EFF6FF",
+        "stroke": "#2563EB",
+        "textColor": "#1E3A8A",
+        "strokeWidth": 2
+      },
       "parent": "pipeline-boundary",
       "description": "Stores versioned artifacts that can be promoted or selected for rollback.",
       "evidence": {
@@ -115,6 +178,13 @@
       "id": "delivery-boundary",
       "label": "Deployment environments",
       "kind": "group",
+      "appearance": {
+        "fill": "#EDE9FE",
+        "stroke": "#7C3AED",
+        "textColor": "#4C1D95",
+        "strokeWidth": 3,
+        "groupLabel": "top"
+      },
       "description": "Separates staged deployment from the production runtime.",
       "evidence": {
         "status": "declared",
@@ -126,6 +196,13 @@
       "label": "Production release approval",
       "kind": "decision",
       "icon": "decision",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FCE7F3",
+        "stroke": "#BE185D",
+        "textColor": "#831843",
+        "strokeWidth": 2
+      },
       "parent": "delivery-boundary",
       "description": "A human or policy gate approves promotion beyond staging.",
       "evidence": {
@@ -138,6 +215,13 @@
       "label": "Staging environment",
       "kind": "environment",
       "icon": "cloud",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#F5F3FF",
+        "stroke": "#7C3AED",
+        "textColor": "#4C1D95",
+        "strokeWidth": 2
+      },
       "parent": "delivery-boundary",
       "description": "Runs the candidate for pre-production checks.",
       "evidence": {
@@ -150,6 +234,13 @@
       "label": "Production environment",
       "kind": "environment",
       "icon": "cloud",
+      "appearance": {
+        "shape": "square",
+        "fill": "#EDE9FE",
+        "stroke": "#6D28D9",
+        "textColor": "#4C1D95",
+        "strokeWidth": 2
+      },
       "parent": "delivery-boundary",
       "description": "Runs the currently promoted version for users.",
       "evidence": {
@@ -162,6 +253,13 @@
       "label": "Rollback controller",
       "kind": "process",
       "icon": "gear",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#FAE8FF",
+        "stroke": "#A21CAF",
+        "textColor": "#701A75",
+        "strokeWidth": 1.5
+      },
       "parent": "delivery-boundary",
       "description": "Selects a known-good artifact and coordinates recovery after approval.",
       "evidence": {
@@ -173,6 +271,13 @@
       "id": "observability-boundary",
       "label": "Observability and incident response",
       "kind": "group",
+      "appearance": {
+        "fill": "#FFEDD5",
+        "stroke": "#EA580C",
+        "textColor": "#7C2D12",
+        "strokeWidth": 2,
+        "groupLabel": "top"
+      },
       "description": "Turns runtime signals into an incident and records recovery evidence.",
       "evidence": {
         "status": "declared",
@@ -184,6 +289,13 @@
       "label": "Metrics, logs and traces",
       "kind": "telemetry",
       "icon": "network",
+      "appearance": {
+        "shape": "parallelogram",
+        "fill": "#FFF7ED",
+        "stroke": "#C2410C",
+        "textColor": "#7C2D12",
+        "strokeWidth": 2
+      },
       "parent": "observability-boundary",
       "description": "Collects deployment and runtime signals from each environment.",
       "evidence": {
@@ -196,6 +308,13 @@
       "label": "Release health dashboard",
       "kind": "service",
       "icon": "lab",
+      "appearance": {
+        "shape": "round-rectangle",
+        "fill": "#FEF3C7",
+        "stroke": "#B45309",
+        "textColor": "#78350F",
+        "strokeWidth": 2
+      },
       "parent": "observability-boundary",
       "description": "Aggregates telemetry and deployment markers for operators.",
       "evidence": {
@@ -208,6 +327,13 @@
       "label": "Incident detection alert",
       "kind": "decision",
       "icon": "clock",
+      "appearance": {
+        "shape": "diamond",
+        "fill": "#FEE2E2",
+        "stroke": "#DC2626",
+        "textColor": "#7F1D1D",
+        "strokeWidth": 2
+      },
       "parent": "observability-boundary",
       "description": "Flags an SLO regression or failed deployment signal.",
       "evidence": {
@@ -220,6 +346,13 @@
       "label": "Incident lead",
       "kind": "actor",
       "icon": "person",
+      "appearance": {
+        "shape": "oval",
+        "fill": "#FFF7ED",
+        "stroke": "#EA580C",
+        "textColor": "#7C2D12",
+        "strokeWidth": 2
+      },
       "parent": "observability-boundary",
       "description": "Coordinates diagnosis, approval and recovery.",
       "evidence": {
@@ -232,6 +365,13 @@
       "label": "Incident record",
       "kind": "record",
       "icon": "document",
+      "appearance": {
+        "shape": "rectangle",
+        "fill": "#FDF2F8",
+        "stroke": "#DB2777",
+        "textColor": "#831843",
+        "strokeWidth": 1.5
+      },
       "parent": "observability-boundary",
       "description": "Captures impact, decisions and evidence for the incident.",
       "evidence": {
@@ -244,6 +384,13 @@
       "label": "Recovery verification",
       "kind": "process",
       "icon": "check",
+      "appearance": {
+        "shape": "square",
+        "fill": "#ECFDF5",
+        "stroke": "#059669",
+        "textColor": "#064E3B",
+        "strokeWidth": 2
+      },
       "parent": "observability-boundary",
       "description": "Checks health after rollback before closing the incident.",
       "evidence": {
