@@ -35,7 +35,7 @@ def run(out,mode):
     artifact=Path(tmp)/f'{name}.html';receipt=diagram.build(m,artifact,ROOT/'assets/icons',json.dumps(m).encode());assert receipt['ok'],receipt
     if replace:artifact.write_text(replace(artifact.read_text()))
     ctx=browser.new_context(viewport={'width':1440,'height':900},offline=True)
-    requests=[];ctx.route('**/*',lambda route:(requests.append(route.request.url),route.abort()))
+    requests=[];browser_check.block_external_requests(ctx,requests)
     page=ctx.new_page();pageerrors=[];page.on('pageerror',lambda ex:pageerrors.append(str(ex)))
     state=browser_check.load(page,artifact,mode);assert state==expect,page.evaluate('() => ({state:__DIAGRAM__.state,errors:__DIAGRAM__.errors})')
     if expect=='ready':

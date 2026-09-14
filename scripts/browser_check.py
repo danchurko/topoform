@@ -31,6 +31,12 @@ def load(page, artifact: Path, mode='file'):
     else: page.set_content(artifact.read_text(encoding='utf-8'), wait_until='load')
     return wait_ready(page)
 
+def block_external_requests(context, requests):
+    def handle(route):
+        if route.request.url.startswith(('data:','blob:','file:')):route.continue_()
+        else:requests.append(route.request.url);route.abort()
+    context.route('**/*',handle)
+
 AUDIT = r'''() => {
  const a=__DIAGRAM__,cy=a.cy;
  const nodes=cy.nodes().map(n=>({id:n.id(),parent:n.data('parent')||null,isParent:n.isParent(),visible:n.visible(),position:n.position(),bb:n.boundingBox({includeLabels:false,includeOverlays:false}),icon:Boolean(n.data('icon'))}));
@@ -105,7 +111,7 @@ def run(artifact: Path, out: Path, mode='file', executable=None):
             for label,width,height in [('desktop',1440,900),('wide',1920,1080),('mobile',390,844)]:
                 context=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=1,offline=True,accept_downloads=True)
                 requests=[];page_errors=[];console_errors=[]
-                context.route('**/*',lambda route:(requests.append(route.request.url),route.abort()))
+                block_external_requests(context,requests)
                 page=context.new_page();page.on('pageerror',lambda e:page_errors.append(str(e)))
                 page.on('console',lambda m:console_errors.append(m.text) if m.type=='error' else None)
                 state=load(page,artifact,mode)
