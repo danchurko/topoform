@@ -24,6 +24,8 @@ Each graph-only preview links to its editable JSON model:
   <tr><td align="center"><a href="examples/ai-retrieval.json"><img src="assets/showcases/ai-retrieval.png" alt="AI knowledge and retrieval diagram"></a></td></tr>
   <tr><th>CI/CD deployment and rollback</th></tr>
   <tr><td align="center"><a href="examples/cicd-rollback.json"><img src="assets/showcases/cicd-rollback.png" alt="CI/CD deployment and rollback diagram"></a></td></tr>
+  <tr><th>Nested creative-production boundaries</th></tr>
+  <tr><td align="center"><a href="examples/creative-production.json"><img src="assets/showcases/creative-production.png" alt="Creative production diagram with a production team nested inside a studio workspace"></a></td></tr>
 </table>
 
 The AWS view is illustrative and does not provision or discover infrastructure.
@@ -53,13 +55,14 @@ explicitly activates it.
 
 ## Showcase models
 
-The editable showcase models cover five different stories:
+The editable showcase models cover six different stories:
 
 - event-driven AWS commerce (illustrative architecture only)
 - OAuth/OIDC authentication and token lifecycle
 - order-to-cash business process
 - AI knowledge and retrieval pipeline
 - CI/CD deployment with incident rollback
+- creative production with an explicit group nested inside another group
 
 Open the [example models](examples/) to inspect the authored topology, evidence
 state, relationships, and named views. Every gallery image above is a
@@ -193,8 +196,9 @@ or monitoring system, authenticated dashboard, or specialist BPMN/UML/sequence
 grammar. It does not provide freehand positioning, authored/manual exact ports, native
 SVG export, built-in collapse/expand, or live impact analysis. ELK supplies
 layered node placement through `cytoscape-elk`; this viewer renders edges with
-Cytoscape, derives distinct surface endpoints and label lanes after layout, and
-does not apply ELK edge sections or ports. Dense models may need
+Cytoscape, derives distinct shape-aware surface ports, selects non-overlapping
+orthogonal channels, and places labels after layout. It does not apply ELK edge
+sections or ports. Dense models may need
 focused views, a text representation, or separate artifacts to remain readable.
 
 ## Contributing

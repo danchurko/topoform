@@ -80,7 +80,9 @@ class ModelTests(unittest.TestCase):
    with self.assertRaises(ValueError):diagram.icons_payload(m,p)
  def test_safe_json(self):
   value={'x':'</script><img src=x onerror=alert(1)>\u2028&__RUNTIME__'};encoded=diagram.safe_json(value);self.assertNotIn('</script>',encoded);self.assertEqual(json.loads(encoded),value)
- def test_svg_static(self):svg=diagram.sanitize_svg('<svg viewBox="0 0 24 24"><path fill="currentColor" d="M0 0h24v24z"/></svg>');self.assertIn('#334155',svg)
+ def test_svg_static(self):
+  svg=diagram.sanitize_svg('<svg width="640" height="512" viewBox="0 0 640 512"><path fill="currentColor" d="M0 0h640v512z"/></svg>')
+  self.assertIn('#334155',svg);self.assertIn('width="24"',svg);self.assertIn('height="24"',svg);self.assertIn('viewBox="0 0 640 512"',svg)
  def test_svg_active_rejected(self):
   for body in ['<script>alert(1)</script>','<image href="https://x"/>','<foreignObject/>','<path onload="x"/>','<path fill="url(#a)"/>','<use href="#a"/>']:
    with self.subTest(body=body),self.assertRaises(ValueError):diagram.sanitize_svg('<svg viewBox="0 0 24 24">'+body+'</svg>')

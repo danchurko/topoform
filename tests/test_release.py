@@ -27,6 +27,16 @@ class ReleaseTests(unittest.TestCase):
             self.assertFalse(report["ok"])
             self.assertTrue(any(error["code"] == "FORBIDDEN_PATH" for error in report["errors"]))
 
+    def test_release_validator_rejects_missing_readme_image(self):
+        with tempfile.TemporaryDirectory() as directory:
+            copy = Path(directory) / "package"
+            shutil.copytree(ROOT, copy, ignore=shutil.ignore_patterns("__pycache__", ".git"))
+            with (copy / "README.md").open("a", encoding="utf-8") as stream:
+                stream.write('\n<img src="assets/showcases/missing.png" alt="Missing">\n')
+            report = validate_package(copy)
+            self.assertFalse(report["ok"])
+            self.assertTrue(any(error["code"] == "README_ASSET" for error in report["errors"]))
+
     def test_archive_has_versioned_root_and_matching_checksum(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "dist"

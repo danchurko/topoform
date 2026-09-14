@@ -58,29 +58,28 @@ function lines(text,width){
 }
 const nodes=model.nodes.map(n=>{
   const group=n.kind==='group',appearance=n.appearance||{},shape={'oval':'ellipse','parallelogram':'rhomboid'}[appearance.shape]||appearance.shape||'round-rectangle';
-  const labelWidth=appearance.shape==='diamond'?88:['oval','parallelogram'].includes(appearance.shape)?132:appearance.shape==='square'?112:160,displayLabel=lines(n.label,labelWidth).join('\n');
-  const contentHeight=displayLabel.split('\n').length*19+(n.icon?46:26);
+  const labelWidth=appearance.shape==='diamond'?88:appearance.shape==='parallelogram'?104:appearance.shape==='oval'?120:appearance.shape==='square'?112:160,displayLabel=lines(n.label,labelWidth).join('\n');
+  const labelHeight=displayLabel.split('\n').length*19,contentHeight=labelHeight+(n.icon?30:0)+24;
   let width=group?180:188,height=Math.max(86,contentHeight);
   if(appearance.shape==='square')width=height=Math.max(132,height);
   if(appearance.shape==='diamond')width=height=Math.max(176,Math.ceil(labelWidth+contentHeight+24));
   if(appearance.shape==='oval'){width=Math.max(220,width);height=Math.max(132,Math.ceil(contentHeight*1.45));}
-  if(appearance.shape==='parallelogram'){width=Math.max(240,width);height=Math.max(110,Math.ceil(contentHeight*1.25));}
-  const groupLabelWidth=Math.min(300,measure.measureText(n.label).width);
-  return {data:{id:n.id,label:n.label,displayLabel,kind:n.kind||'element',...(n.parent?{parent:n.parent}:{}),width,height,labelWidth,shape,icon:icons[n.icon]||null,fill:appearance.fill||'#ffffff',stroke:appearance.stroke||colors.get(n.kind||'element')||'#7c8899',strokeWidth:appearance.strokeWidth||1.7,textColor:appearance.textColor||'#203047',groupLabel:appearance.groupLabel||'top',groupPadding:appearance.groupLabel==='inside'?46:30,groupTextX:appearance.groupLabel==='inside'?(n.icon?42:14)+groupLabelWidth:0}};
+  if(appearance.shape==='parallelogram'){width=Math.max(220,width);height=Math.max(140,Math.ceil(contentHeight*1.4));}
+  const groupLabelWidth=Math.min(300,measure.measureText(n.label).width),iconTop=n.icon?Math.max(10,(height-labelHeight-30)/2):0;
+  return {data:{id:n.id,label:n.label,displayLabel,kind:n.kind||'element',...(n.parent?{parent:n.parent}:{}),width,height,labelWidth,labelHeight,shape,icon:icons[n.icon]||null,iconTop,fill:appearance.fill||'#ffffff',stroke:appearance.stroke||colors.get(n.kind||'element')||'#7c8899',strokeWidth:appearance.strokeWidth||1.7,textColor:appearance.textColor||'#203047',groupLabel:appearance.groupLabel||'top',groupPadding:appearance.groupLabel==='inside'?46:30,groupTextX:appearance.groupLabel==='inside'?(n.icon?42:14)+groupLabelWidth:0}};
 });
-const edges=model.edges.map(e=>({data:{id:e.id,source:e.source,target:e.target,label:e.label||'',kind:e.kind||'flow',directed:e.directed!==false,routeTurn:'50%',routeLabelX:0,routeLabelY:0,sourceEndpoint:'outside-to-node',targetEndpoint:'outside-to-node'}}));
+const edges=model.edges.map(e=>({data:{id:e.id,source:e.source,target:e.target,label:e.label||'',kind:e.kind||'flow',directed:e.directed!==false,curveStyle:'straight',segmentWeights:'0.5',segmentDistances:'0',routeLabelX:0,routeLabelY:0,sourceEndpoint:'outside-to-node',targetEndpoint:'outside-to-node'}}));
 const cy=api.cy=cytoscape({
   container:$('cy'),elements:{nodes,edges},layout:{name:'preset'},
   minZoom:0.03,maxZoom:3.5,pixelRatio:Math.min(window.devicePixelRatio||1,2),
   autoungrabify:true,boxSelectionEnabled:false,
   style:[
     {selector:'node',style:{'shape':'data(shape)','width':'data(width)','height':'data(height)','background-color':'data(fill)','border-width':'data(strokeWidth)','border-color':'data(stroke)','label':'data(displayLabel)','font-family':'system-ui','font-size':14,'font-weight':600,'color':'data(textColor)','text-valign':'center','text-halign':'center','text-wrap':'wrap','text-max-width':'data(labelWidth)','text-justification':'center','text-margin-y':0,'padding':0,'overlay-opacity':0}},
-    {selector:'node[icon]',style:{'background-image':n=>n.data('icon')||'none','background-fit':'none','background-width':23,'background-height':23,'background-position-x':'50%','background-position-y':'13px','text-margin-y':16}},
-    {selector:'node[shape="diamond"][icon]',style:{'background-position-y':'28px','text-margin-y':20}},
+    {selector:'node[icon]',style:{'background-image':n=>n.data('icon')||'none','background-fit':'none','background-width':24,'background-height':24,'background-position-x':'50%','background-position-y':'data(iconTop)','text-margin-y':15}},
     {selector:'node:parent',style:{'shape':'round-rectangle','background-color':'data(fill)','background-opacity':0.22,'border-color':'data(stroke)','border-width':'data(strokeWidth)','border-style':'dashed','padding':'data(groupPadding)','label':'data(label)','font-size':12,'font-weight':600,'color':'data(textColor)','text-valign':'top','text-halign':'center','text-margin-x':0,'text-margin-y':-9,'compound-sizing-wrt-labels':'include','background-image':'none','text-wrap':'wrap','text-max-width':300}},
     {selector:'node:parent[groupLabel="inside"]',style:{'text-halign':'left','text-valign':'top','text-margin-x':'data(groupTextX)','text-margin-y':15}},
     {selector:'node:parent[groupLabel="inside"][icon]',style:{'background-image':n=>n.data('icon')||'none','background-fit':'none','background-width':20,'background-height':20,'background-position-x':'16px','background-position-y':'14px'}},
-    {selector:'edge',style:{'curve-style':'round-taxi','taxi-direction':'auto','taxi-turn':'data(routeTurn)','taxi-turn-min-distance':32,'source-endpoint':'data(sourceEndpoint)','target-endpoint':'data(targetEndpoint)','line-color':'#96a5bb','target-arrow-color':'#96a5bb','target-arrow-shape':e=>e.data('directed')?'triangle':'none','width':1.6,'arrow-scale':0.85,'label':'data(label)','font-family':'system-ui','font-size':11,'color':'#526277','text-background-color':'#fcfcfd','text-background-opacity':0.95,'text-background-padding':4,'text-background-shape':'roundrectangle','text-wrap':'wrap','text-max-width':Math.max(44,Math.min(120,(model.layout?.layerSpacing||120)-20)),'text-rotation':'none','text-margin-x':'data(routeLabelX)','text-margin-y':'data(routeLabelY)','loop-direction':'-45deg','loop-sweep':'55deg','overlay-opacity':0}},
+    {selector:'edge',style:{'curve-style':'data(curveStyle)','edge-distances':'node-position','segment-weights':'data(segmentWeights)','segment-distances':'data(segmentDistances)','source-endpoint':'data(sourceEndpoint)','target-endpoint':'data(targetEndpoint)','line-color':'#96a5bb','target-arrow-color':'#96a5bb','target-arrow-shape':e=>e.data('directed')?'triangle':'none','width':1.6,'arrow-scale':0.85,'label':'data(label)','font-family':'system-ui','font-size':11,'color':'#526277','text-background-color':'#fcfcfd','text-background-opacity':0.95,'text-background-padding':4,'text-background-shape':'roundrectangle','text-wrap':'wrap','text-max-width':Math.max(44,Math.min(120,(model.layout?.layerSpacing||120)-20)),'text-rotation':'none','text-margin-x':'data(routeLabelX)','text-margin-y':'data(routeLabelY)','overlay-opacity':0}},
     {selector:'edge:loop',style:{'curve-style':'bezier','control-point-step-size':150,'loop-direction':'0deg','loop-sweep':'65deg'}},
     {selector:'edge[kind="event"], edge[kind="async"]',style:{'line-style':'dashed'}},
     {selector:'.dim',style:{'opacity':0.17}},
@@ -149,54 +148,58 @@ function inspect(id,mode){
   }
 }
 function fit(){if(cy.nodes(':visible').length)cy.fit(cy.elements(':visible'),48);}
-async function route(elements){
-  const visible=elements.edges(':visible'),ports=new Map(),records=[];
-  const side=(a,b)=>{const dx=b.x-a.x,dy=b.y-a.y;if(Math.abs(dx)>=Math.abs(dy))return dx>=0?'right':'left';return dy>=0?'bottom':'top';};
-  const endpoint=(node,s,p)=>{
-    const offset=p-50,shape=node.data('shape');let x=0,y=0;
-    if(['left','right'].includes(s)){
-      y=offset;if(shape==='rhomboid')x=(s==='right'?37.5:-37.5)+y/4;else{const edge=shape==='ellipse'?50*Math.sqrt(1-(y/50)**2):shape==='diamond'?50-Math.abs(y):50;x=s==='right'?edge:-edge;}
-    }else{
-      x=offset;const edge=shape==='ellipse'?50*Math.sqrt(1-(x/50)**2):shape==='diamond'?50-Math.abs(x):50;y=s==='bottom'?edge:-edge;
-    }
-    return `${x}% ${y}%`;
-  };
-  visible.forEach(edge=>{
-    if(edge.source().id()===edge.target().id()){edge.data({sourceEndpoint:'outside-to-node',targetEndpoint:'outside-to-node',routeTurn:'50%',routeLabelX:0,routeLabelY:-28});return;}
-    const source=edge.source().position(),target=edge.target().position(),sourceSide=side(source,target),targetSide=side(target,source),record={edge,source,target,sourceSide,targetSide};records.push(record);
-    for(const [node,which,s,peer] of [[edge.source(),'source',sourceSide,target],[edge.target(),'target',targetSide,source]]){const key=`${node.id()}:${s}`;if(!ports.has(key))ports.set(key,[]);ports.get(key).push({record,which,peer});}
-  });
-  for(const entries of ports.values()){
-    const vertical=['left','right'].includes(entries[0].record[entries[0].which+'Side']);entries.sort((a,b)=>(vertical?a.peer.y-b.peer.y:a.peer.x-b.peer.x)||a.record.edge.id().localeCompare(b.record.edge.id()));
-    entries.forEach((entry,i)=>{entry.record[entry.which+'Port']=entries.length===1?50:25+50*i/(entries.length-1);});
-  }
-  const pairs=new Map();for(const record of records){const key=[record.edge.source().id(),record.edge.target().id()].sort().join('\u0000');if(!pairs.has(key))pairs.set(key,[]);pairs.get(key).push(record);}
-  for(const group of pairs.values())group.sort((a,b)=>a.edge.id().localeCompare(b.edge.id())).forEach((record,i)=>{record.lane=i-(group.length-1)/2;});
-  cy.batch(()=>records.forEach(r=>{const horizontal=Math.abs(r.target.x-r.source.x)>=Math.abs(r.target.y-r.source.y);r.baseLabelX=horizontal?0:r.lane*84;r.baseLabelY=horizontal?r.lane*56:0;r.edge.data({sourceEndpoint:endpoint(r.edge.source(),r.sourceSide,r.sourcePort),targetEndpoint:endpoint(r.edge.target(),r.targetSide,r.targetPort),routeTurn:'50%',routeLabelX:r.baseLabelX,routeLabelY:r.baseLabelY});}));
-  cy.style().update();
-  await new Promise(resolve=>requestAnimationFrame(resolve));
-  const occupied=cy.nodes(':visible').filter(n=>!n.isParent()).map(n=>n.boundingBox({includeLabels:true,includeOverlays:false}));
-  for(const group of cy.nodes(':visible').filter(n=>n.isParent())){group.boundingBox({includeLabels:true,includeOverlays:false});occupied.push(group._private.labelBounds.main);}
-  const placed=[],choices=[];
-  const overlap=(a,b)=>Math.max(0,Math.min(a.x2,b.x2)-Math.max(a.x1,b.x1))*Math.max(0,Math.min(a.y2,b.y2)-Math.max(a.y1,b.y1));
-  for(const r of records.sort((a,b)=>a.edge.id().localeCompare(b.edge.id()))){
-    if(!r.edge.data('label'))continue;const horizontal=Math.abs(r.target.x-r.source.x)>=Math.abs(r.target.y-r.source.y);
-    const candidates=[],primary=[0,-18,18,-36,36,-54,54,-72,72,-90,90,-108,108],secondary=[0,-24,24,-48,48,-72,72];for(const p of primary)for(const s of secondary)candidates.push(horizontal?[s,p]:[p,s]);
-    const s=r.edge._private.rscratch,z=r.edge._private.rstyle;let best=null;for(const [x,y] of candidates){const box={x1:s.labelX+r.baseLabelX+x-z.labelWidth/2,y1:s.labelY+r.baseLabelY+y-z.labelHeight/2,x2:s.labelX+r.baseLabelX+x+z.labelWidth/2,y2:s.labelY+r.baseLabelY+y+z.labelHeight/2},collisions=[...occupied,...placed].reduce((sum,b)=>sum+overlap(box,b),0),score=collisions*1000+Math.abs(x)+Math.abs(y);if(!best||score<best.score)best={x:r.baseLabelX+x,y:r.baseLabelY+y,box,score};if(!collisions)break;}
-    choices.push([r.edge,best]);placed.push(best.box);
-  }
-  cy.batch(()=>choices.forEach(([edge,best])=>edge.data({routeLabelX:best.x,routeLabelY:best.y})));
-  cy.style().update();
+function portPoint(node,side,t){
+  const w=node.data('width'),h=node.data('height'),shape=node.data('shape'),horizontal=side==='NORTH'||side==='SOUTH';let x=horizontal?t:0,y=horizontal?0:t;
+  if(shape==='ellipse'){if(horizontal)y=(side==='SOUTH'?1:-1)*Math.sqrt(1-x*x);else x=(side==='EAST'?1:-1)*Math.sqrt(1-y*y);}
+  else if(shape==='diamond'){if(horizontal)y=(side==='SOUTH'?1:-1)*(1-Math.abs(x));else x=(side==='EAST'?1:-1)*(1-Math.abs(y));}
+  else if(shape==='rhomboid'){if(horizontal){x=(side==='SOUTH'?1/3:-1/3)+2*t/3;y=side==='SOUTH'?1:-1;}else x=(side==='EAST'?2/3:-2/3)+y/3;}
+  else if(horizontal)y=side==='SOUTH'?1:-1;else x=side==='EAST'?1:-1;
+  return {x:w*(x+1)/2,y:h*(y+1)/2};
+}
+function segmentValues(points,source,target){
+  const dx=target.x-source.x,dy=target.y-source.y,length=Math.hypot(dx,dy),square=length*length;
+  if(!length||!points.length)return {weights:'0.5',distances:'0'};
+  const weights=[],distances=[];
+  for(const p of points){weights.push(((p.x-source.x)*dx+(p.y-source.y)*dy)/square);distances.push(((p.x-source.x)*-dy+(p.y-source.y)*dx)/length);}
+  return {weights:weights.join(' '),distances:distances.join(' ')};
+}
+function stubLength(node,side,point,assigned){
+  const clearance={EAST:node.data('width')-point.x,WEST:point.x,SOUTH:node.data('height')-point.y,NORTH:point.y}[side]+18;
+  return Math.max(assigned,clearance);
+}
+function crossesNode(a,b,node){
+  const c=node.position(),w=node.data('width')/2,h=node.data('height')/2,ax=(a.x-c.x)/w,ay=(a.y-c.y)/h,bx=(b.x-c.x)/w,by=(b.y-c.y)/h,dx=bx-ax,dy=by-ay,t=Math.max(0,Math.min(1,-(ax*dx+ay*dy)/(dx*dx+dy*dy||1))),x=ax+t*dx,y=ay+t*dy,shape=node.data('shape'),m=.98;
+  if(shape==='ellipse')return x*x+y*y<m*m;
+  if(shape==='diamond')return Math.abs(x)+Math.abs(y)<m;
+  if(shape==='rhomboid'){if(Math.abs(ay-by)<.001){if(Math.abs(ay)>=m)return false;return Math.max(Math.min(ax,bx),(-2*m+ay)/3)<Math.min(Math.max(ax,bx),(2*m+ay)/3);}const low=Math.max(-m,3*ax-2*m),high=Math.min(m,3*ax+2*m);return Math.max(Math.min(ay,by),low)<Math.min(Math.max(ay,by),high);}
+  return Math.abs(x)<m&&Math.abs(y)<m;
 }
 async function arrange(elements){
   const spacing=model.layout?.spacing||65,layerSpacing=model.layout?.layerSpacing||120;
   const elk={'elk.algorithm':'layered','elk.direction':$('direction').value,'elk.hierarchyHandling':'INCLUDE_CHILDREN','elk.edgeRouting':'ORTHOGONAL','elk.spacing.nodeNode':spacing,'elk.spacing.edgeNode':Math.max(32,spacing/2),'elk.spacing.edgeEdge':24,'elk.layered.spacing.nodeNodeBetweenLayers':layerSpacing,'elk.layered.spacing.edgeNodeBetweenLayers':Math.max(36,layerSpacing/3),'elk.layered.spacing.edgeEdgeBetweenLayers':24,'elk.padding':'[top=40,left=40,bottom=40,right=40]','elk.randomSeed':17};
-  await new Promise((resolve,reject)=>{
-    const timer=setTimeout(()=>reject(new Error('Layout exceeded 15 seconds. Split the diagram or use an explicitly configured worker integration.')),15000);
-    const success=()=>{clearTimeout(timer);pendingFailure=null;resolve();};
-    pendingFailure=e=>{clearTimeout(timer);reject(e);};
-    elements.layout({name:'elk',fit:false,animate:false,nodeDimensionsIncludeLabels:false,nodeLayoutOptions:node=>node.isParent()?{...elk,'elk.padding':node.data('groupLabel')==='inside'?'[top=76,left=42,bottom=42,right=42]':'[top=50,left=36,bottom=36,right=36]'}:{},elk,stop:success}).run();
-  });
+  await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('Layout exceeded 15 seconds. Split the diagram or use a worker-based integration.')),15000),success=()=>{clearTimeout(timer);pendingFailure=null;resolve();};pendingFailure=e=>{clearTimeout(timer);reject(e);};elements.layout({name:'elk',fit:false,animate:false,nodeDimensionsIncludeLabels:false,nodeLayoutOptions:node=>node.isParent()?{...elk,'elk.padding':node.data('groupLabel')==='inside'?'[top=76,left=42,bottom=42,right=42]':'[top=50,left=36,bottom=36,right=36]'}:{},elk,stop:success}).run();});
+}
+async function route(elements){
+  const visible=elements.edges(':visible'),records=[],ports=new Map(),occupied=[];
+  const side=(a,b)=>{const dx=b.x-a.x,dy=b.y-a.y;if(Math.abs(dx)>=Math.abs(dy))return dx>=0?'EAST':'WEST';return dy>=0?'SOUTH':'NORTH';},opposite={EAST:'WEST',WEST:'EAST',NORTH:'SOUTH',SOUTH:'NORTH'},vector={EAST:[1,0],WEST:[-1,0],NORTH:[0,-1],SOUTH:[0,1]};
+  visible.forEach(edge=>{if(edge.isLoop()){edge.data({curveStyle:'bezier',routeLabelX:0,routeLabelY:-28});return;}const source=edge.source().position(),target=edge.target().position(),sourceSide=side(source,target),targetSide=opposite[sourceSide],record={edge,source,target,sourceSide,targetSide};records.push(record);for(const [node,which,s,peer] of [[edge.source(),'source',sourceSide,target],[edge.target(),'target',targetSide,source]]){const key=`${node.id()}:${s}`;if(!ports.has(key))ports.set(key,[]);ports.get(key).push({record,which,peer});}});
+  for(const entries of ports.values()){const vertical=['EAST','WEST'].includes(entries[0].record[`${entries[0].which}Side`]);entries.sort((a,b)=>(vertical?a.peer.y-b.peer.y:a.peer.x-b.peer.x)||a.record.edge.id().localeCompare(b.record.edge.id()));entries.forEach((entry,i)=>{entry.record[`${entry.which}Port`]=entries.length===1?0:-.6+1.2*i/(entries.length-1);entry.record[`${entry.which}Stub`]=24+i*12;});}
+  const obstacles=elements.nodes(':visible').filter(n=>!n.isParent()).map(n=>{const p=n.position(),pad=12;return{id:n.id(),x1:p.x-n.data('width')/2-pad,y1:p.y-n.data('height')/2-pad,x2:p.x+n.data('width')/2+pad,y2:p.y+n.data('height')/2+pad};}),xs=obstacles.flatMap(o=>[o.x1-18,o.x2+18]),ys=obstacles.flatMap(o=>[o.y1-18,o.y2+18]);
+  const segments=path=>path.slice(1).map((p,i)=>[path[i],p]),intersects=(a,b,o)=>Math.abs(a.y-b.y)<.5?a.y>o.y1&&a.y<o.y2&&Math.max(a.x,b.x)>o.x1&&Math.min(a.x,b.x)<o.x2:a.x>o.x1&&a.x<o.x2&&Math.max(a.y,b.y)>o.y1&&Math.min(a.y,b.y)<o.y2;
+  const overlap=(a,b,c,d)=>{const ah=Math.abs(a.y-b.y)<.5,ch=Math.abs(c.y-d.y)<.5;if(ah!==ch)return 0;if(ah&&Math.abs(a.y-c.y)<1)return Math.max(0,Math.min(Math.max(a.x,b.x),Math.max(c.x,d.x))-Math.max(Math.min(a.x,b.x),Math.min(c.x,d.x)));if(!ah&&Math.abs(a.x-c.x)<1)return Math.max(0,Math.min(Math.max(a.y,b.y),Math.max(c.y,d.y))-Math.max(Math.min(a.y,b.y),Math.min(c.y,d.y)));return 0;};
+  const crossing=(a,b,c,d)=>{const ah=Math.abs(a.y-b.y)<.5,ch=Math.abs(c.y-d.y)<.5;if(ah===ch)return false;const h=ah?[a,b]:[c,d],v=ah?[c,d]:[a,b];return v[0].x>Math.min(h[0].x,h[1].x)&&v[0].x<Math.max(h[0].x,h[1].x)&&h[0].y>Math.min(v[0].y,v[1].y)&&h[0].y<Math.max(v[0].y,v[1].y);};
+  const compact=path=>{const out=[];for(const p of path){const n=out.length,vertical=n>1&&Math.abs(out[n-2].x-out[n-1].x)<.5&&Math.abs(out[n-1].x-p.x)<.5&&(out[n-1].y-out[n-2].y)*(p.y-out[n-1].y)>=0,horizontal=n>1&&Math.abs(out[n-2].y-out[n-1].y)<.5&&Math.abs(out[n-1].y-p.y)<.5&&(out[n-1].x-out[n-2].x)*(p.x-out[n-1].x)>=0;if(vertical||horizontal)out[n-1]=p;else if(!n||Math.abs(p.x-out[n-1].x)>.5||Math.abs(p.y-out[n-1].y)>.5)out.push(p);}return out;};
+  for(const [lane,r] of records.sort((a,b)=>(Math.abs(a.target.x-a.source.x)+Math.abs(a.target.y-a.source.y))-(Math.abs(b.target.x-b.source.x)+Math.abs(b.target.y-b.source.y))||a.edge.id().localeCompare(b.edge.id())).entries()){
+    const sourcePoint=portPoint(r.edge.source(),r.sourceSide,r.sourcePort),targetPoint=portPoint(r.edge.target(),r.targetSide,r.targetPort),start={x:r.source.x+sourcePoint.x-r.edge.source().data('width')/2,y:r.source.y+sourcePoint.y-r.edge.source().data('height')/2},end={x:r.target.x+targetPoint.x-r.edge.target().data('width')/2,y:r.target.y+targetPoint.y-r.edge.target().data('height')/2},sv=vector[r.sourceSide],tv=vector[r.targetSide],sourceStub=stubLength(r.edge.source(),r.sourceSide,sourcePoint,r.sourceStub),targetStub=stubLength(r.edge.target(),r.targetSide,targetPoint,r.targetStub),stub={x:start.x+sv[0]*sourceStub,y:start.y+sv[1]*sourceStub},finish={x:end.x+tv[0]*targetStub,y:end.y+tv[1]*targetStub},usedX=occupied.filter(([a,b])=>Math.abs(a.x-b.x)<.5).flatMap(([a])=>[a.x-12,a.x+12]),usedY=occupied.filter(([a,b])=>Math.abs(a.y-b.y)<.5).flatMap(([a])=>[a.y-12,a.y+12]),channelsX=[(stub.x+finish.x)/2,...xs,...usedX,Math.min(...xs)-24-lane*8,Math.max(...xs)+24+lane*8],channelsY=[(stub.y+finish.y)/2,...ys,...usedY,Math.min(...ys)-24-lane*8,Math.max(...ys)+24+lane*8],candidates=[[start,stub,{x:finish.x,y:stub.y},finish,end],[start,stub,{x:stub.x,y:finish.y},finish,end],...channelsX.map(x=>[start,stub,{x,y:stub.y},{x,y:finish.y},finish,end]),...channelsY.map(y=>[start,stub,{x:stub.x,y},{x:finish.x,y},finish,end])].map(compact),skip=new Set([r.edge.source().id(),r.edge.target().id()]);
+    const select=paths=>paths.map(path=>{const parts=segments(path);let score=parts.reduce((sum,[a,b])=>sum+Math.abs(a.x-b.x)+Math.abs(a.y-b.y),0)+(path.length-2)*28,blocked=false;for(const [a,b] of parts){blocked ||= obstacles.some(o=>skip.has(o.id)?crossesNode(a,b,cy.getElementById(o.id)):intersects(a,b,o));for(const [c,d] of occupied){blocked ||= overlap(a,b,c,d)>3;score+=crossing(a,b,c,d)?180:0;}}return{path,score,blocked};}).filter(choice=>!choice.blocked).sort((a,b)=>a.score-b.score||JSON.stringify(a.path).localeCompare(JSON.stringify(b.path)))[0];
+    let scored=select(candidates);
+    if(!scored){const detours=[];for(const x of [...new Set(channelsX)])for(const y of [...new Set(channelsY)])detours.push(compact([start,stub,{x,y:stub.y},{x,y},{x:finish.x,y},finish,end]),compact([start,stub,{x:stub.x,y},{x,y},{x,y:finish.y},finish,end]));scored=select(detours);}
+    if(!scored)throw new Error(`No collision-free orthogonal route for ${r.edge.id()}.`);const path=scored.path,bends=path.slice(1,-1),values=segmentValues(bends,r.source,r.target);occupied.push(...segments(path));r.edge.data({curveStyle:bends.length?'segments':'straight',segmentWeights:values.weights,segmentDistances:values.distances,sourceEndpoint:`${start.x-r.source.x}px ${start.y-r.source.y}px`,targetEndpoint:`${end.x-r.target.x}px ${end.y-r.target.y}px`,routeLabelX:0,routeLabelY:0});
+  }
+  cy.style().update();await new Promise(resolve=>requestAnimationFrame(resolve));
+  const placed=[],groupBoxes=elements.nodes(':visible').filter(n=>n.isParent()).map(n=>{n.boundingBox({includeLabels:true,includeOverlays:false});return n._private.labelBounds.main;}),nodeBoxes=[...obstacles.map(o=>({x1:o.x1,y1:o.y1,x2:o.x2,y2:o.y2})),...groupBoxes],area=(a,b)=>Math.max(0,Math.min(a.x2,b.x2)-Math.max(a.x1,b.x1))*Math.max(0,Math.min(a.y2,b.y2)-Math.max(a.y1,b.y1));
+  for(const r of records){if(!r.edge.data('label'))continue;const s=r.edge._private.rscratch,z=r.edge._private.rstyle;if(!Number.isFinite(s.labelX))continue;let best;const offsets=[0,-24,24,-48,48,-72,72,-96,96,-120,120];for(const x of offsets)for(const y of offsets){const box={x1:s.labelX+x-z.labelWidth/2,y1:s.labelY+y-z.labelHeight/2,x2:s.labelX+x+z.labelWidth/2,y2:s.labelY+y+z.labelHeight/2},collision=[...nodeBoxes,...placed].reduce((n,b)=>n+area(box,b),0),score=collision*1000+Math.abs(x)+Math.abs(y);if(!best||score<best.score)best={x,y,box,score};}r.edge.data({routeLabelX:best.x,routeLabelY:best.y});placed.push(best.box);}
+  cy.style().update();
 }
 async function layout(){
   if(busy||failed)return false;
@@ -220,10 +223,10 @@ async function exportPNG(all=false){
   if(busy||failed)throw new Error('The diagram must be ready before export.');
   const states=cy.elements().map(e=>({id:e.id(),classes:e.classes()}));
   const positions=new Map(cy.nodes().filter(n=>!n.isParent()).map(n=>[n.id(),{x:n.position('x'),y:n.position('y')}]));
-  const routes=new Map(cy.edges().map(e=>[e.id(),Object.fromEntries(['sourceEndpoint','targetEndpoint','routeTurn','routeLabelX','routeLabelY'].map(k=>[k,e.data(k)]))]));
+  const routes=new Map(cy.edges().map(e=>[e.id(),Object.fromEntries(['sourceEndpoint','targetEndpoint','curveStyle','segmentWeights','segmentDistances','routeLabelX','routeLabelY'].map(k=>[k,e.data(k)]))]));
   const viewport={zoom:cy.zoom(),pan:cy.pan()};
   busy=true;api.state='export';document.querySelectorAll('.toolbar button,.toolbar select,#png-view,#png-all').forEach(b=>b.disabled=true);
-  cy.elements().removeClass('dim highlight');if(all)cy.elements().removeClass('hidden');
+  cy.elements().removeClass('dim highlight');if(all){cy.elements().removeClass('hidden');cy.elements().forEach(e=>e.style('display'));}
   try{
     if(!cy.nodes(':visible').length)throw new Error('This view has no elements to export.');
     if(all){await arrange(cy.elements());await route(cy.elements());}

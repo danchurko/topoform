@@ -67,6 +67,9 @@ def run(out,mode):
    assert page.evaluate("() => __DIAGRAM__.cy.getElementById('decision').data('displayLabel')")=='Review\nsigning\ndecision'
    assert page.evaluate("() => __DIAGRAM__.cy.getElementById('inner').pstyle('text-halign').value")=='left'
    assert page.evaluate("() => __DIAGRAM__.cy.getElementById('inner').pstyle('background-width').pfValue[0]")==20
+   assert page.evaluate("() => __DIAGRAM__.cy.getElementById('source').pstyle('background-width').pfValue[0]")==24
+   assert page.evaluate("() => __DIAGRAM__.cy.getElementById('inner').parent().id()")=='outer'
+   assert page.evaluate("() => __DIAGRAM__.cy.getElementById('source').parent().id()")=='inner'
   exercise('appearance-routing',styled,appearance)
   def repeat(page,m):
    a=page.evaluate('() => __DIAGRAM__.cy.nodes().map(n=>({id:n.id(),x:n.position("x"),y:n.position("y")}))')

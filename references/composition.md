@@ -53,7 +53,9 @@ This is based on the v2.3.0 implementation, not the combined feature lists of bo
 | Collapse/expand, minimap | Extensions or custom projection | Not included |
 | User editing and persistence | Custom application layer | Not included |
 
-`makeEdge()` copies IDs and endpoints, not labels or port attachments. `applyLayout()` applies leaf positions and ancestor offsets, not returned edge sections. After layout, the viewer assigns geometry-derived Cytoscape surface endpoints, separates parallel/reverse lanes, and chooses label offsets that avoid the tested node and label bounds. Do not advertise `elk.edgeRouting = ORTHOGONAL` as a way to reroute this viewer's lines. They remain Cytoscape bezier edges. Taxi/segment styles would still be Cytoscape routes, not ELK obstacle-aware routes.
+`makeEdge()` copies IDs and endpoints, not labels or port attachments. `applyLayout()` applies leaf positions and ancestor offsets, not returned edge sections. After layout, the viewer derives shape-aware surface ports, gives every edge on a node side a distinct port and fan-out distance, and selects rectilinear Cytoscape segment routes that avoid leaf nodes and already occupied collinear channels. A bounded two-channel fallback handles routes that cannot be expressed with one shared axis. Label offsets avoid tested node, group-title, and label bounds; opaque label backgrounds interrupt the line beneath. Self-loops remain bezier edges.
+
+Do not advertise `elk.edgeRouting = ORTHOGONAL` as the source of these displayed routes. They are deterministic viewer-owned Cytoscape segments, not returned ELK sections. Exact authored ports or a formal guarantee of globally optimal edge routing would still require a direct-ELK geometry adapter or a renderer built for those constraints.
 
 If exact routes are a hard requirement, either build and test a direct-ELK geometry adapter that maps node centers, nested offsets, ports and every edge section into a compatible renderer, or choose a renderer built for that geometry. Do not sneak this large change into a styling patch. Keep source IDs/topology stable.
 

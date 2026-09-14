@@ -38,10 +38,24 @@ REQUIRED_FILES = {
     "assets/viewer.js",
     "assets/icons/manifest.json",
     "assets/vendor/manifest.json",
+    "assets/showcases/ai-retrieval.png",
+    "assets/showcases/aws-commerce.png",
+    "assets/showcases/cicd-rollback.png",
+    "assets/showcases/creative-production.png",
+    "assets/showcases/oauth-oidc.png",
+    "assets/showcases/order-to-cash.png",
     "scripts/browser_check.py",
     "scripts/acceptance.py",
     "scripts/deliver.py",
     "scripts/diagram.py",
+    "scripts/import_icon.py",
+    "scripts/release.py",
+    "scripts/vendor_from_npm.py",
+    "references/composition.md",
+    "references/icons.md",
+    "references/model.md",
+    "references/quality-and-limits.md",
+    "references/sources.md",
 }
 PUBLIC_ROOTS = {".github", "assets", "evals", "examples", "references", "scripts", "tests"}
 PUBLIC_ROOT_FILES = {
@@ -328,6 +342,14 @@ def validate_package(root: Path = ROOT, tag: str | None = None) -> dict[str, obj
             _add(errors, "HOST_PATH", relative.as_posix(), "Creation-host or local absolute path remains.")
 
     candidate_files = {p.relative_to(root).as_posix() for p in files if not _blocked(p.relative_to(root))}
+    try:
+        readme = (root / "README.md").read_text(encoding="utf-8")
+        for source in re.findall(r"<img\b[^>]*\bsrc=[\"']([^\"']+)[\"']", readme, re.IGNORECASE):
+            relative = _safe_relative(root, source)
+            if relative is None or relative.as_posix() not in candidate_files:
+                _add(errors, "README_ASSET", source, "README image must be a packaged local file.")
+    except (OSError, UnicodeError) as exc:
+        _add(errors, "README", "README.md", str(exc))
     _validate_manifest_files(root, candidate_files, errors, icons=True)
     _validate_manifest_files(root, candidate_files, errors, icons=False)
     showcase_count = _validate_models(root, candidate_files, errors)

@@ -7,11 +7,12 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SHOWCASES = ('aws-commerce','oauth-oidc','order-to-cash','ai-retrieval','cicd-rollback')
+SHOWCASES = ('aws-commerce','oauth-oidc','order-to-cash','ai-retrieval','cicd-rollback','creative-production')
 
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--out',required=True,type=Path);p.add_argument('--load',choices=['file','content'],default='file');a=p.parse_args()
  try:
+  subprocess.run([sys.executable,ROOT/'scripts/release.py','check',ROOT],check=True)
   subprocess.run([sys.executable,ROOT/'scripts/diagram.py','doctor'],check=True)
   for name in SHOWCASES:
    model=ROOT/f'examples/{name}.json';artifact=a.out/f'{name}.html';evidence=a.out/f'{name}-checks'

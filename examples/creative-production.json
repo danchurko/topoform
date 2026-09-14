@@ -17,7 +17,14 @@
     {
       "id": "studio",
       "label": "Studio workspace",
-      "kind": "group"
+      "kind": "group",
+      "appearance": {
+        "fill": "#EFF6FF",
+        "stroke": "#2563EB",
+        "textColor": "#1E3A8A",
+        "strokeWidth": 3,
+        "groupLabel": "top"
+      }
     },
     {
       "id": "intake",
@@ -31,7 +38,15 @@
       "id": "production",
       "label": "Production team",
       "kind": "group",
-      "parent": "studio"
+      "icon": "team",
+      "parent": "studio",
+      "appearance": {
+        "fill": "#F3E8FF",
+        "stroke": "#9333EA",
+        "textColor": "#581C87",
+        "strokeWidth": 2,
+        "groupLabel": "inside"
+      }
     },
     {
       "id": "editor",

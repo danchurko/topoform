@@ -160,11 +160,13 @@ positions/rendering**. The adapter is essential. Load libraries before the
 viewer. Use `name: 'elk'` and `elk.algorithm: 'layered'`.
 
 The adapter applies node positions, not ELK edge sections, ports, or label
-placement. After layout, this viewer derives distinct Cytoscape surface
-endpoints and collision-aware label offsets as presentation state; it still
-uses Cytoscape's own bezier edges.
-`elk.edgeRouting: 'ORTHOGONAL'` would not make those edges ELK-routed. Core
-Cytoscape is Canvas, not a native SVG export engine.
+placement. After layout, this viewer derives distinct shape-aware surface
+ports, selects non-overlapping orthogonal channels around leaf nodes, renders
+them with Cytoscape segments, and places opaque-backed labels away from tested
+node, group-title, and label bounds. Self-loops remain Cytoscape bezier edges.
+`elk.edgeRouting: 'ORTHOGONAL'` does not route these displayed lines because
+the adapter discards returned edge sections. Core Cytoscape is Canvas, not a
+native SVG export engine.
 
 The bundled adapter creates ELK without a real external Web Worker. The
 viewer's 15-second timeout is a failure signal, not hard cancellation or

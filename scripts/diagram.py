@@ -210,8 +210,11 @@ def sanitize_svg(text: str) -> str:
     try: nums=[float(x) for x in vb]
     except ValueError:raise ValueError('Invalid viewBox.')
     if not all(math.isfinite(v) for v in nums) or not all(0<v<=10000 for v in nums[2:]):raise ValueError('Invalid SVG dimensions.')
+    # Every embedded icon has the same intrinsic box. The viewBox retains the
+    # source aspect ratio, so wide and tall artwork is centred without being
+    # stretched or inheriting pack-specific pixel dimensions.
     root.set('xmlns','http://www.w3.org/2000/svg')
-    root.set('width',str(nums[2]));root.set('height',str(nums[3]))
+    root.set('width','24');root.set('height','24')
     return ET.tostring(root,encoding='unicode')
 
 def local_file(root: Path, relative: str) -> Path:
