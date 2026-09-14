@@ -49,11 +49,24 @@ AUDIT = r'''() => {
    if(Math.min(a.bb.x2,b.bb.x2)-Math.max(a.bb.x1,b.bb.x1)>1&&Math.min(a.bb.y2,b.bb.y2)-Math.max(a.bb.y1,b.bb.y1)>1)errors.push('Leaf overlap: '+a.id+' / '+b.id);
  }
  if(document.documentElement.scrollWidth>innerWidth+2)errors.push('Horizontal page overflow');
+ const graph=cy.elements(':visible').renderedBoundingBox({includeLabels:true,includeOverlays:false});
+ const centerOffset={x:Math.abs((graph.x1+graph.x2)/2-cy.width()/2),y:Math.abs((graph.y1+graph.y2)/2-cy.height()/2)};
+ if(leaves.length&&(centerOffset.x>8||centerOffset.y>8))errors.push(`Visible graph is not centered: ${centerOffset.x.toFixed(1)}px × ${centerOffset.y.toFixed(1)}px offset`);
+ if(leaves.length&&(graph.x1<-1||graph.y1<-1||graph.x2>cy.width()+1||graph.y2>cy.height()+1))errors.push('Visible graph is clipped by the canvas bounds.');
+ const routes=cy.edges(':visible').map(e=>({id:e.id(),source:e.source().id(),target:e.target().id(),style:e.pstyle('curve-style').value,points:[...(e._private.rscratch.allpts||[])]}));
+ for(const route of routes){
+   if(route.source!==route.target&&route.style!=='round-taxi')errors.push('Non-loop edge is not round-taxi routed: '+route.id);
+   if(route.points.some(v=>!Number.isFinite(v)))errors.push('Non-finite routed edge geometry: '+route.id);
+ }
+ for(let i=0;i<routes.length;i++)for(let j=i+1;j<routes.length;j++){
+   const a=routes[i],b=routes[j],same=a.source===b.source&&a.target===b.target,reverse=a.source===b.target&&a.target===b.source;
+   if((same||reverse)&&a.points.length&&JSON.stringify(a.points)===JSON.stringify(reverse?[...b.points].reverse():b.points))errors.push('Coincident parallel route: '+a.id+' / '+b.id);
+ }
  const labelPixels=cy.zoom()*14;
  if(leaves.length&&labelPixels<10)warnings.push('Overview text below 10 CSS px. Use a focused view or zoom; do not call this screenshot readable.');
  const iconStyles=cy.nodes().filter(n=>n.data('icon')).map(n=>({id:n.id(),fit:n.style('background-fit'),width:n.pstyle('background-width').pfValue[0],height:n.pstyle('background-height').pfValue[0]}));
  for(const n of iconStyles)if(n.fit!=='none'||n.width>32||n.height>32)errors.push('Icon scaling regression: '+n.id);
- return {state:a.state,viewerErrors:a.errors,cytoscapeVersion:cytoscape.version,nodes:nodes.length,leaves:leaves.length,edges:cy.edges().length,visibleEdges:cy.edges(':visible').length,zoom:cy.zoom(),labelPixels,errors,warnings,geometry:nodes,iconStyles};
+ return {state:a.state,viewerErrors:a.errors,cytoscapeVersion:cytoscape.version,nodes:nodes.length,leaves:leaves.length,edges:cy.edges().length,visibleEdges:cy.edges(':visible').length,zoom:cy.zoom(),labelPixels,centerOffset,routes,errors,warnings,geometry:nodes,iconStyles};
 }'''
 
 def run(artifact: Path, out: Path, mode='file', executable=None):
@@ -89,8 +102,12 @@ def run(artifact: Path, out: Path, mode='file', executable=None):
                         page.evaluate('(id) => __DIAGRAM__.focus(id,"downstream")',leaves[0])
                         after=page.evaluate('(id) => __DIAGRAM__.cy.getElementById(id).width()',leaves[0])
                         if before!=after:result['errors'].append('Highlight changed node width.')
+                        viewport=page.evaluate('() => ({zoom:__DIAGRAM__.cy.zoom(),pan:__DIAGRAM__.cy.pan()})')
                         blob=page.evaluate('''async () => {const b=await __DIAGRAM__.exportPNG(true);return await new Promise(resolve=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.readAsDataURL(b);});}''')
                         png=out/'export-all.png';png.write_bytes(base64.b64decode(blob.split(',',1)[1]));result['pngExport']=str(png.resolve())
+                        png_size=page.evaluate('''async data => {const i=new Image();i.src=data;await i.decode();return [i.width,i.height]}''',blob)
+                        if png_size[0]>1800 or png_size[1]>1200:result['errors'].append(f'PNG exceeds 1800×1200: {png_size[0]}×{png_size[1]}')
+                        if viewport!=page.evaluate('() => ({zoom:__DIAGRAM__.cy.zoom(),pan:__DIAGRAM__.cy.pan()})'):result['errors'].append('PNG export changed the viewport.')
                         page.evaluate('() => __DIAGRAM__.clearFocus()')
                     if source!=page.evaluate('() => JSON.stringify(__DIAGRAM__.model)'):result['errors'].append('Viewer mutated the source model.')
                     page.click('#text-view');page.click('[data-close="text-dialog"]')

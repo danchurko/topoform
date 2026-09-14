@@ -11,13 +11,20 @@ PNG export are part of the workflow—not promises to implement later.
 
 ## Showcase gallery
 
-Each preview links to its editable JSON model:
+Each graph-only preview links to its editable JSON model:
 
-| Preview | Preview |
-| --- | --- |
-| [![Event-driven AWS commerce](assets/showcases/aws-commerce.png)](examples/aws-commerce.json) | [![OAuth/OIDC authentication](assets/showcases/oauth-oidc.png)](examples/oauth-oidc.json) |
-| [![Order-to-cash process](assets/showcases/order-to-cash.png)](examples/order-to-cash.json) | [![AI knowledge and retrieval](assets/showcases/ai-retrieval.png)](examples/ai-retrieval.json) |
-| [![CI/CD deployment and rollback](assets/showcases/cicd-rollback.png)](examples/cicd-rollback.json) | |
+<table>
+  <tr><th>Event-driven AWS commerce</th></tr>
+  <tr><td align="center"><a href="examples/aws-commerce.json"><img src="assets/showcases/aws-commerce.png" alt="Event-driven AWS commerce diagram"></a></td></tr>
+  <tr><th>OAuth/OIDC authentication</th></tr>
+  <tr><td align="center"><a href="examples/oauth-oidc.json"><img src="assets/showcases/oauth-oidc.png" alt="OAuth/OIDC authentication diagram"></a></td></tr>
+  <tr><th>Order-to-cash process</th></tr>
+  <tr><td align="center"><a href="examples/order-to-cash.json"><img src="assets/showcases/order-to-cash.png" alt="Order-to-cash process diagram"></a></td></tr>
+  <tr><th>AI knowledge and retrieval</th></tr>
+  <tr><td align="center"><a href="examples/ai-retrieval.json"><img src="assets/showcases/ai-retrieval.png" alt="AI knowledge and retrieval diagram"></a></td></tr>
+  <tr><th>CI/CD deployment and rollback</th></tr>
+  <tr><td align="center"><a href="examples/cicd-rollback.json"><img src="assets/showcases/cicd-rollback.png" alt="CI/CD deployment and rollback diagram"></a></td></tr>
+</table>
 
 The AWS view is illustrative and does not provision or discover infrastructure.
 

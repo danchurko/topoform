@@ -66,16 +66,18 @@ def run(out,mode):
    assert max(abs(x[k]-y[k]) for x,y in zip(a,b) for k in ['x','y'])<.1,(a,b)
   exercise('repeat-layout-stability',knowledge,repeat)
   def filtered(page,m):
-   page.evaluate('() => __DIAGRAM__.setView("assets")')
+   full=page.evaluate('() => __DIAGRAM__.cy.elements(":visible").boundingBox().w')
+   page.evaluate('async () => await __DIAGRAM__.setView("assets")')
    visible=page.evaluate('() => __DIAGRAM__.cy.nodes(":visible").map(n=>n.id()).sort()')
    assert visible==['editor','library','production','studio'],visible
    assert page.evaluate('() => __DIAGRAM__.cy.edges(":visible").map(e=>e.id())')==['save']
+   assert page.evaluate('() => __DIAGRAM__.cy.elements(":visible").boundingBox().w')<full
    before=page.evaluate('() => __DIAGRAM__.cy.getElementById("editor").width()')
    page.evaluate('() => __DIAGRAM__.focus("editor","downstream")')
    assert before==page.evaluate('() => __DIAGRAM__.cy.getElementById("editor").width()')
    assert page.evaluate('() => __DIAGRAM__.layout()') is True
    assert page.evaluate('() => __DIAGRAM__.cy.edges(":visible").map(e=>e.id())')==['save']
-   page.evaluate('() => __DIAGRAM__.setView("all")')
+   page.evaluate('async () => await __DIAGRAM__.setView("all")')
    assert page.evaluate('() => __DIAGRAM__.cy.edges(":visible").length')==len(m['edges'])
   exercise('filter-ancestors-and-relayout',creative,filtered)
   def highlight(page,m):
@@ -87,14 +89,18 @@ def run(out,mode):
    assert a==['answers','knowledge','reports'],a
   exercise('upstream-downstream-semantics',knowledge,highlight)
   def export_restore(page,m):
-   page.evaluate('() => {__DIAGRAM__.setView("assets");__DIAGRAM__.focus("editor");}')
+   page.evaluate('async () => {await __DIAGRAM__.setView("assets");__DIAGRAM__.focus("editor");}')
    state=page.evaluate('() => __DIAGRAM__.cy.elements().map(e=>[e.id(),e.classes()])')
+   positions=page.evaluate('() => __DIAGRAM__.cy.nodes().filter(n=>!n.isParent()).map(n=>[n.id(),n.position()])')
+   viewport=page.evaluate('() => ({zoom:__DIAGRAM__.cy.zoom(),pan:__DIAGRAM__.cy.pan()})')
    for all_ in [False,True]:
-    assert page.evaluate('''async (all) => {const blob=await __DIAGRAM__.exportPNG(all);const url=URL.createObjectURL(blob);const img=new Image();img.src=url;await img.decode();URL.revokeObjectURL(url);return blob.type==='image/png'&&img.width>0&&img.height>0;}''',all_)
-    assert state==page.evaluate('() => __DIAGRAM__.cy.elements().map(e=>[e.id(),e.classes()])')
+    assert page.evaluate('''async (all) => {const blob=await __DIAGRAM__.exportPNG(all);const url=URL.createObjectURL(blob);const img=new Image();img.src=url;await img.decode();URL.revokeObjectURL(url);return blob.type==='image/png'&&img.width>0&&img.height>0&&img.width<=1800&&img.height<=1200;}''',all_)
+    current_state=page.evaluate('() => __DIAGRAM__.cy.elements().map(e=>[e.id(),e.classes()])');assert state==current_state,(state,current_state)
+    current_positions=page.evaluate('() => __DIAGRAM__.cy.nodes().filter(n=>!n.isParent()).map(n=>[n.id(),n.position()])');assert positions==current_positions,(positions,current_positions)
+    current_viewport=page.evaluate('() => ({zoom:__DIAGRAM__.cy.zoom(),pan:__DIAGRAM__.cy.pan()})');assert viewport==current_viewport,(viewport,current_viewport)
   exercise('png-view-all-restore',creative,export_restore)
   def search(page,m):
-   page.evaluate('() => __DIAGRAM__.setView("assets")');page.fill('#search','Client');page.press('#search','Enter')
+   page.evaluate('async () => await __DIAGRAM__.setView("assets")');page.fill('#search','Client');page.press('#search','Enter')
    assert page.evaluate('() => __DIAGRAM__.cy.getElementById("client").visible()')
    assert page.locator('#inspector h2').inner_text()=='Client'
    assert page.evaluate('() => __DIAGRAM__.cy.edges(":visible").length')==5
