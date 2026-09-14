@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Verify and publish tagged source
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Validate semantic tag and package
+        run: python scripts/release.py check --tag "$GITHUB_REF_NAME"
+      - name: Run supporting Python tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Verify runtime and asset integrity
+        run: python scripts/diagram.py doctor
+      - name: Validate every showcase model
+        shell: bash
+        run: |
+          set -euo pipefail
+          for model in examples/*.json; do
+            python scripts/diagram.py validate "$model" >/dev/null
+          done
+      - name: Install browser test runtime
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Run the clean installed-package acceptance seam
+        shell: bash
+        run: |
+          set -euo pipefail
+          install_root="$RUNNER_TEMP/topoform-release-install"
+          mkdir -p "$install_root"
+          cd "$install_root"
+          npx --yes skills add "$GITHUB_WORKSPACE" --skill topoform --copy --agent codex --yes
+          mapfile -t discovered < <(find . -type f -path '*/topoform/SKILL.md' -print)
+          test "${#discovered[@]}" -eq 1
+          installed_root="$(dirname "${discovered[0]}")"
+          python "$installed_root/scripts/acceptance.py" --out "$RUNNER_TEMP/topoform-browser"
+      - name: Build checksummed source archive
+        run: python scripts/release.py archive --version "$GITHUB_REF_NAME" --output "$RUNNER_TEMP/topoform-release"
+      - name: Attach archive and checksums
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: |
+            ${{ runner.temp }}/topoform-release/topoform-*.tar.gz
+            ${{ runner.temp }}/topoform-release/SHA256SUMS

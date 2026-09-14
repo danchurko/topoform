@@ -1,0 +1,26 @@
+{
+  "tabler": {
+    "package": "@tabler/icons@3.35.0",
+    "resolved": "https://registry.npmjs.org/@tabler/icons/-/icons-3.35.0.tgz",
+    "integrity": "sha512-yYXe+gJ56xlZFiXwV9zVoe3FWCGuZ/D7/G4ZIlDtGxSx5CGQK110wrnT29gUj52kEZoxqF7oURTk97GQxELOFQ==",
+    "license": "MIT"
+  },
+  "lucide": {
+    "package": "lucide-static@0.544.0",
+    "resolved": "https://registry.npmjs.org/lucide-static/-/lucide-static-0.544.0.tgz",
+    "integrity": "sha512-2PkMTYcjQkIzYbd5u2g7UtRaNDP7dLQT107MmYBdvnZZCO3Vj0nqH6HA5AkUS2Era8D1ITb/UxrOkfdH/qN2Ag==",
+    "license": "ISC"
+  },
+  "mdi": {
+    "package": "@mdi/svg@7.4.47",
+    "resolved": "https://registry.npmjs.org/@mdi/svg/-/svg-7.4.47.tgz",
+    "integrity": "sha512-WQ2gDll12T9WD34fdRFgQVgO8bag3gavrAgJ0frN4phlwdJARpE6gO1YvLEMJR0KKgoc+/Ea/A0Pp11I00xBvw==",
+    "license": "Apache-2.0"
+  },
+  "simple-icons": {
+    "package": "simple-icons@15.15.0",
+    "resolved": "https://registry.npmjs.org/simple-icons/-/simple-icons-15.15.0.tgz",
+    "integrity": "sha512-ohh1Uo9AjH10WN5wpPmtjnmbSLv6MjiULHS4dYA821uIsPAp0Q3XoluPnjBnQAFsztasmM6z2dezJBrQbtserg==",
+    "license": "CC0-1.0"
+  }
+}

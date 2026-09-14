@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "title": "Research data lineage",
+  "description": "An illustrative research pipeline. Dashed edges represent asynchronous events; a stored dataset is not the same thing as the process that creates it.",
+  "nodes": [
+    {
+      "id": "survey",
+      "label": "Survey responses",
+      "kind": "source",
+      "icon": "document"
+    },
+    {
+      "id": "sensors",
+      "label": "Sensor readings",
+      "kind": "source",
+      "icon": "device"
+    },
+    {
+      "id": "research",
+      "label": "Research workspace",
+      "kind": "group"
+    },
+    {
+      "id": "clean",
+      "label": "Validate & normalise",
+      "kind": "process",
+      "icon": "gear",
+      "parent": "research"
+    },
+    {
+      "id": "dataset",
+      "label": "Curated dataset",
+      "kind": "dataset",
+      "icon": "database",
+      "parent": "research"
+    },
+    {
+      "id": "analyse",
+      "label": "Statistical analysis",
+      "kind": "process",
+      "icon": "lab",
+      "parent": "research"
+    },
+    {
+      "id": "report",
+      "label": "Research report",
+      "kind": "output",
+      "icon": "document"
+    }
+  ],
+  "edges": [
+    {
+      "id": "survey-clean",
+      "source": "survey",
+      "target": "clean",
+      "kind": "data",
+      "label": "Responses"
+    },
+    {
+      "id": "sensors-clean",
+      "source": "sensors",
+      "target": "clean",
+      "kind": "event",
+      "label": "Reading events"
+    },
+    {
+      "id": "clean-data",
+      "source": "clean",
+      "target": "dataset",
+      "kind": "data",
+      "label": "Validated records"
+    },
+    {
+      "id": "data-analysis",
+      "source": "dataset",
+      "target": "analyse",
+      "kind": "data",
+      "label": "Versioned data"
+    },
+    {
+      "id": "analysis-report",
+      "source": "analyse",
+      "target": "report",
+      "kind": "data",
+      "label": "Findings"
+    }
+  ],
+  "layout": {
+    "direction": "RIGHT",
+    "spacing": 55,
+    "layerSpacing": 85
+  }
+}

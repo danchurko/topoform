@@ -1,0 +1,43 @@
+{
+  "versions": {
+    "cytoscape": "3.33.1",
+    "elkjs": "0.9.3",
+    "cytoscape-elk": "2.3.0"
+  },
+  "profile": "official-npm-distributions",
+  "provenance": {
+    "cytoscape": "Official npm cytoscape@3.33.1 dist/cytoscape.min.js from https://registry.npmjs.org/cytoscape/-/cytoscape-3.33.1.tgz (sha512-iJc4TwyANnOGR1OmWhsS9ayRS3s+XQ185FmuHObThD+5AeJCakAAbWv8KimMTt08xCCLNgneQwFp+JRJOr9qGQ==).",
+    "elkjs": "Official npm elkjs@0.9.3 lib/elk.bundled.js from https://registry.npmjs.org/elkjs/-/elkjs-0.9.3.tgz (sha512-f/ZeWvW/BCXbhGEf1Ujp29EASo/lk1FDnETgNKwJrsVvGZhUWCZyg3xLJjAsxfOmt8KjswHmI5EwCQcPMpOYhQ==).",
+    "cytoscape-elk": "Official npm cytoscape-elk@2.3.0 dist/cytoscape-elk.js from https://registry.npmjs.org/cytoscape-elk/-/cytoscape-elk-2.3.0.tgz (sha512-1h2ZmPOy5HD2+mrfF3P2ICxfnDyPCWg/xLVs7fIjTOzdQu51ydrMtm6Sb7KnhFwLBzhGIVYI2Gbns0njggBarQ==)."
+  },
+  "files": [
+    {
+      "path": "cytoscape.js",
+      "sha256": "f55947f3daa3bae53209d4b885c195c157f595c225e508a6b382598d9452d6e2"
+    },
+    {
+      "path": "elk.js",
+      "sha256": "b0745abd7f23cd91690a1587e377edbe19fd7233c783300290936720546216d4"
+    },
+    {
+      "path": "cytoscape-elk.js",
+      "sha256": "25acbb9dea9b0dc6fef0e79b697547ee56e579f0e1c22ae4353131e72c7e140a"
+    },
+    {
+      "path": "cytoscape.LICENSE.txt",
+      "sha256": "e4b62495bacaefaf330f38f226e20d1d60d658d444998ba7406a191f96a2e701"
+    },
+    {
+      "path": "elkjs.LICENSE.txt",
+      "sha256": "89591d4578fb1ebd91501312a3d25f021bd865a2e436641c1cf7b1bc7e3c1617"
+    },
+    {
+      "path": "cytoscape-elk.LICENSE.txt",
+      "sha256": "0ce4ff4d3a334ae70cf389e0e9095b6ea6ef7110b27d2728a32bb5a7f84ed064"
+    },
+    {
+      "path": "fontawesome.LICENSE.txt",
+      "sha256": "9b914eae88817d63b576eab5aafde7068c7a1abae125d7cdfb034f1da43a9afc"
+    }
+  ]
+}

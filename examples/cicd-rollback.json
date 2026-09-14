@@ -1,0 +1,535 @@
+{
+  "schemaVersion": 1,
+  "title": "Illustrative CI/CD deployment and rollback",
+  "description": "Illustrative software delivery flow from source change through staged deployment, telemetry, incident detection and rollback. It is not executable automation and is not connected to a live repository, environment or incident system.",
+  "metadata": {
+    "scope": "Customer-facing showcase",
+    "evidence": "Declared illustrative delivery model with inferred detection and proposed recovery actions."
+  },
+  "nodes": [
+    {
+      "id": "source-boundary",
+      "label": "Change source",
+      "kind": "group",
+      "description": "People and records that propose a change for delivery.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative source boundary; no live repository is connected."
+      }
+    },
+    {
+      "id": "engineer",
+      "label": "Change author",
+      "kind": "actor",
+      "icon": "person",
+      "parent": "source-boundary",
+      "description": "Proposes and responds to a software change.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative role; no user identity is represented."
+      }
+    },
+    {
+      "id": "source-repository",
+      "label": "Source repository",
+      "kind": "store",
+      "icon": "folder",
+      "parent": "source-boundary",
+      "description": "Stores the proposed source change and review history.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative repository role; no source code is included."
+      }
+    },
+    {
+      "id": "change-request",
+      "label": "Change request and review",
+      "kind": "decision",
+      "icon": "decision",
+      "parent": "source-boundary",
+      "description": "Records review and the decision to send a change to CI.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative approval boundary; no live review is observed."
+      }
+    },
+    {
+      "id": "pipeline-boundary",
+      "label": "Continuous integration pipeline",
+      "kind": "group",
+      "description": "Builds, checks and publishes an immutable candidate artifact.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative pipeline boundary; no CI runner is connected."
+      }
+    },
+    {
+      "id": "build",
+      "label": "Build candidate",
+      "kind": "process",
+      "icon": "gear",
+      "parent": "pipeline-boundary",
+      "description": "Compiles or packages the candidate from the reviewed change.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative build stage; no build artifact is produced here."
+      }
+    },
+    {
+      "id": "automated-checks",
+      "label": "Automated tests and checks",
+      "kind": "process",
+      "icon": "check",
+      "parent": "pipeline-boundary",
+      "description": "Runs unit, integration and policy checks before promotion.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative validation stage; no test result is claimed."
+      }
+    },
+    {
+      "id": "security-scan",
+      "label": "Security scan",
+      "kind": "process",
+      "icon": "lock",
+      "parent": "pipeline-boundary",
+      "description": "Checks the candidate for known policy and dependency issues.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative security gate; no scan has been run."
+      }
+    },
+    {
+      "id": "artifact-store",
+      "label": "Immutable release artifacts",
+      "kind": "store",
+      "icon": "package",
+      "parent": "pipeline-boundary",
+      "description": "Stores versioned artifacts that can be promoted or selected for rollback.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed artifact repository role; no release artifact is present."
+      }
+    },
+    {
+      "id": "delivery-boundary",
+      "label": "Deployment environments",
+      "kind": "group",
+      "description": "Separates staged deployment from the production runtime.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative environment boundary; no environment is reachable."
+      }
+    },
+    {
+      "id": "release-approval",
+      "label": "Production release approval",
+      "kind": "decision",
+      "icon": "decision",
+      "parent": "delivery-boundary",
+      "description": "A human or policy gate approves promotion beyond staging.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed production approval gate for the illustrative flow."
+      }
+    },
+    {
+      "id": "staging-environment",
+      "label": "Staging environment",
+      "kind": "environment",
+      "icon": "cloud",
+      "parent": "delivery-boundary",
+      "description": "Runs the candidate for pre-production checks.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative environment; no deployment occurs."
+      }
+    },
+    {
+      "id": "production-environment",
+      "label": "Production environment",
+      "kind": "environment",
+      "icon": "cloud",
+      "parent": "delivery-boundary",
+      "description": "Runs the currently promoted version for users.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative environment; no live production system is implied."
+      }
+    },
+    {
+      "id": "rollback-controller",
+      "label": "Rollback controller",
+      "kind": "process",
+      "icon": "gear",
+      "parent": "delivery-boundary",
+      "description": "Selects a known-good artifact and coordinates recovery after approval.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed human-authorized recovery process; not executable automation."
+      }
+    },
+    {
+      "id": "observability-boundary",
+      "label": "Observability and incident response",
+      "kind": "group",
+      "description": "Turns runtime signals into an incident and records recovery evidence.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative operations boundary; no telemetry is collected."
+      }
+    },
+    {
+      "id": "runtime-telemetry",
+      "label": "Metrics, logs and traces",
+      "kind": "telemetry",
+      "icon": "network",
+      "parent": "observability-boundary",
+      "description": "Collects deployment and runtime signals from each environment.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred observability relationship for the illustrative delivery model."
+      }
+    },
+    {
+      "id": "health-dashboard",
+      "label": "Release health dashboard",
+      "kind": "service",
+      "icon": "lab",
+      "parent": "observability-boundary",
+      "description": "Aggregates telemetry and deployment markers for operators.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed operational view; no live dashboard is linked."
+      }
+    },
+    {
+      "id": "incident-alert",
+      "label": "Incident detection alert",
+      "kind": "decision",
+      "icon": "clock",
+      "parent": "observability-boundary",
+      "description": "Flags an SLO regression or failed deployment signal.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred alerting outcome; no incident has been observed."
+      }
+    },
+    {
+      "id": "incident-lead",
+      "label": "Incident lead",
+      "kind": "actor",
+      "icon": "person",
+      "parent": "observability-boundary",
+      "description": "Coordinates diagnosis, approval and recovery.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed operational role for the illustrative incident path."
+      }
+    },
+    {
+      "id": "incident-record",
+      "label": "Incident record",
+      "kind": "record",
+      "icon": "document",
+      "parent": "observability-boundary",
+      "description": "Captures impact, decisions and evidence for the incident.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed incident record; no operational data is stored."
+      }
+    },
+    {
+      "id": "recovery-check",
+      "label": "Recovery verification",
+      "kind": "process",
+      "icon": "check",
+      "parent": "observability-boundary",
+      "description": "Checks health after rollback before closing the incident.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed recovery check; no health result is claimed."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "author-repository",
+      "source": "engineer",
+      "target": "source-repository",
+      "label": "Commit change",
+      "kind": "change",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative change journey."
+      }
+    },
+    {
+      "id": "repository-review",
+      "source": "source-repository",
+      "target": "change-request",
+      "label": "Open pull request",
+      "kind": "review"
+    },
+    {
+      "id": "review-build",
+      "source": "change-request",
+      "target": "build",
+      "label": "Approved change",
+      "kind": "approval"
+    },
+    {
+      "id": "build-checks",
+      "source": "build",
+      "target": "automated-checks",
+      "label": "Build candidate",
+      "kind": "validation"
+    },
+    {
+      "id": "checks-scan",
+      "source": "automated-checks",
+      "target": "security-scan",
+      "label": "Passing test results",
+      "kind": "validation"
+    },
+    {
+      "id": "scan-artifact",
+      "source": "security-scan",
+      "target": "artifact-store",
+      "label": "Publish immutable artifact",
+      "kind": "artifact"
+    },
+    {
+      "id": "artifact-approval",
+      "source": "artifact-store",
+      "target": "release-approval",
+      "label": "Request promotion",
+      "kind": "approval"
+    },
+    {
+      "id": "approval-staging",
+      "source": "release-approval",
+      "target": "staging-environment",
+      "label": "Deploy candidate",
+      "kind": "deployment"
+    },
+    {
+      "id": "staging-production",
+      "source": "staging-environment",
+      "target": "production-environment",
+      "label": "Promote after checks",
+      "kind": "deployment",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed promotion path; no environment is live."
+      }
+    },
+    {
+      "id": "staging-telemetry",
+      "source": "staging-environment",
+      "target": "runtime-telemetry",
+      "label": "Stage health signals",
+      "kind": "telemetry"
+    },
+    {
+      "id": "production-telemetry",
+      "source": "production-environment",
+      "target": "runtime-telemetry",
+      "label": "Runtime signals",
+      "kind": "telemetry"
+    },
+    {
+      "id": "telemetry-dashboard",
+      "source": "runtime-telemetry",
+      "target": "health-dashboard",
+      "label": "Metrics, logs and traces",
+      "kind": "telemetry"
+    },
+    {
+      "id": "dashboard-alert",
+      "source": "health-dashboard",
+      "target": "incident-alert",
+      "label": "SLO regression",
+      "kind": "detection",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred incident detection path; no threshold is observed."
+      }
+    },
+    {
+      "id": "alert-lead",
+      "source": "incident-alert",
+      "target": "incident-lead",
+      "label": "Page on-call",
+      "kind": "incident"
+    },
+    {
+      "id": "lead-record",
+      "source": "incident-lead",
+      "target": "incident-record",
+      "label": "Open incident",
+      "kind": "incident"
+    },
+    {
+      "id": "record-rollback",
+      "source": "incident-record",
+      "target": "rollback-controller",
+      "label": "Authorize rollback",
+      "kind": "approval",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed human-authorized rollback path."
+      }
+    },
+    {
+      "id": "rollback-artifact",
+      "source": "rollback-controller",
+      "target": "artifact-store",
+      "label": "Select known-good artifact",
+      "kind": "rollback"
+    },
+    {
+      "id": "artifact-rollback",
+      "source": "artifact-store",
+      "target": "rollback-controller",
+      "label": "Retrieve previous version",
+      "kind": "rollback"
+    },
+    {
+      "id": "rollback-production",
+      "source": "rollback-controller",
+      "target": "production-environment",
+      "label": "Deploy previous version",
+      "kind": "rollback",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed recovery deployment; no executable rollback is present."
+      }
+    },
+    {
+      "id": "production-recovery-check",
+      "source": "production-environment",
+      "target": "recovery-check",
+      "label": "Verify recovered health",
+      "kind": "recovery"
+    },
+    {
+      "id": "recovery-close",
+      "source": "recovery-check",
+      "target": "incident-record",
+      "label": "Close with evidence",
+      "kind": "recovery"
+    },
+    {
+      "id": "checks-revise",
+      "source": "automated-checks",
+      "target": "change-request",
+      "label": "Checks failed: revise",
+      "kind": "failure",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred CI failure path for the illustrative model."
+      }
+    },
+    {
+      "id": "scan-revise",
+      "source": "security-scan",
+      "target": "change-request",
+      "label": "Scan failed: remediate",
+      "kind": "failure"
+    },
+    {
+      "id": "approval-denied",
+      "source": "release-approval",
+      "target": "change-request",
+      "label": "Approval denied: revise",
+      "kind": "failure"
+    }
+  ],
+  "views": [
+    {
+      "id": "release-journey",
+      "label": "Release journey",
+      "nodeIds": [
+        "source-boundary",
+        "engineer",
+        "source-repository",
+        "change-request",
+        "pipeline-boundary",
+        "build",
+        "automated-checks",
+        "security-scan",
+        "artifact-store",
+        "delivery-boundary",
+        "release-approval",
+        "staging-environment",
+        "production-environment"
+      ],
+      "edgeKinds": [
+        "change",
+        "review",
+        "approval",
+        "validation",
+        "artifact",
+        "deployment",
+        "failure"
+      ]
+    },
+    {
+      "id": "incident-rollback",
+      "label": "Incident detection and rollback",
+      "nodeIds": [
+        "delivery-boundary",
+        "production-environment",
+        "rollback-controller",
+        "artifact-store",
+        "observability-boundary",
+        "runtime-telemetry",
+        "health-dashboard",
+        "incident-alert",
+        "incident-lead",
+        "incident-record",
+        "recovery-check"
+      ],
+      "edgeKinds": [
+        "telemetry",
+        "detection",
+        "incident",
+        "approval",
+        "rollback",
+        "recovery"
+      ]
+    },
+    {
+      "id": "approvals-and-telemetry",
+      "label": "Approvals and telemetry",
+      "nodeIds": [
+        "pipeline-boundary",
+        "automated-checks",
+        "security-scan",
+        "artifact-store",
+        "delivery-boundary",
+        "release-approval",
+        "staging-environment",
+        "production-environment",
+        "observability-boundary",
+        "runtime-telemetry",
+        "health-dashboard",
+        "incident-alert"
+      ],
+      "edgeKinds": [
+        "validation",
+        "artifact",
+        "approval",
+        "deployment",
+        "telemetry",
+        "detection"
+      ]
+    }
+  ],
+  "layout": {
+    "direction": "RIGHT",
+    "spacing": 68,
+    "layerSpacing": 105
+  }
+}

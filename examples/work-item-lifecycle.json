@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "title": "Work item lifecycle",
+  "description": "An authored state graph, not a time-scaled sequence diagram. Retry and waiting loops preserve their semantic direction.",
+  "nodes": [
+    {
+      "id": "new",
+      "label": "New",
+      "kind": "state",
+      "icon": "document"
+    },
+    {
+      "id": "active",
+      "label": "In progress",
+      "kind": "state",
+      "icon": "task"
+    },
+    {
+      "id": "waiting",
+      "label": "Waiting for input",
+      "kind": "state",
+      "icon": "clock"
+    },
+    {
+      "id": "review",
+      "label": "In review",
+      "kind": "gate",
+      "icon": "decision"
+    },
+    {
+      "id": "done",
+      "label": "Completed",
+      "kind": "terminal",
+      "icon": "check"
+    },
+    {
+      "id": "cancel",
+      "label": "Cancelled",
+      "kind": "terminal",
+      "icon": "folder"
+    }
+  ],
+  "edges": [
+    {
+      "id": "start",
+      "source": "new",
+      "target": "active",
+      "label": "Start",
+      "kind": "transition"
+    },
+    {
+      "id": "need",
+      "source": "active",
+      "target": "waiting",
+      "label": "Need input",
+      "kind": "transition"
+    },
+    {
+      "id": "resume",
+      "source": "waiting",
+      "target": "active",
+      "label": "Resume",
+      "kind": "transition"
+    },
+    {
+      "id": "submit",
+      "source": "active",
+      "target": "review",
+      "label": "Submit",
+      "kind": "transition"
+    },
+    {
+      "id": "rework",
+      "source": "review",
+      "target": "active",
+      "label": "Revise",
+      "kind": "transition"
+    },
+    {
+      "id": "accept",
+      "source": "review",
+      "target": "done",
+      "label": "Accept",
+      "kind": "transition"
+    },
+    {
+      "id": "cancel-new",
+      "source": "new",
+      "target": "cancel",
+      "label": "Cancel",
+      "kind": "transition"
+    },
+    {
+      "id": "poll",
+      "source": "waiting",
+      "target": "waiting",
+      "label": "Check again",
+      "kind": "transition"
+    }
+  ],
+  "layout": {
+    "direction": "RIGHT",
+    "spacing": 85,
+    "layerSpacing": 145
+  }
+}

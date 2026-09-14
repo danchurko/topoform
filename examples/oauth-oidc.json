@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 1,
+  "title": "Illustrative OAuth and OIDC authorization lifecycle",
+  "description": "Illustrative authorization-code flow with OIDC identity data, access tokens, trust boundaries and failures. It is provider-neutral, contains no live credentials or token values, and does not describe a deployed identity system.",
+  "metadata": {
+    "scope": "Customer-facing showcase",
+    "evidence": "Declared protocol walkthrough; not observed traffic or a security assessment."
+  },
+  "nodes": [
+    {
+      "id": "browser-boundary",
+      "label": "User device and browser",
+      "kind": "group",
+      "description": "The user-agent boundary where redirects and consent screens are visible.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative trust boundary; no browser session is observed."
+      }
+    },
+    {
+      "id": "end-user",
+      "label": "End user",
+      "kind": "actor",
+      "icon": "person",
+      "parent": "browser-boundary",
+      "description": "The person requesting access to the client application.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative actor; no identity or credential is represented."
+      }
+    },
+    {
+      "id": "user-agent",
+      "label": "Browser user agent",
+      "kind": "client",
+      "icon": "globe",
+      "parent": "browser-boundary",
+      "description": "Carries front-channel redirects and the authorization code.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative protocol participant."
+      }
+    },
+    {
+      "id": "client-boundary",
+      "label": "Relying-party application",
+      "kind": "group",
+      "description": "The OAuth client that requests tokens and calls the protected API.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative application trust boundary; no client registration is live."
+      }
+    },
+    {
+      "id": "client-app",
+      "label": "Web client application",
+      "kind": "client",
+      "icon": "service",
+      "parent": "client-boundary",
+      "description": "Uses a configured client identifier and PKCE; no client secret or token value is included.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative OAuth client behavior."
+      }
+    },
+    {
+      "id": "callback-endpoint",
+      "label": "Redirect callback",
+      "kind": "endpoint",
+      "icon": "network",
+      "parent": "client-boundary",
+      "description": "Receives the authorization code and returns it to the back channel.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative redirect URI endpoint; no live URL is configured."
+      }
+    },
+    {
+      "id": "identity-boundary",
+      "label": "Authorization server trust boundary",
+      "kind": "group",
+      "description": "Authenticates the user, grants authorization and signs tokens.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative authorization-server boundary; provider-neutral by design."
+      }
+    },
+    {
+      "id": "authorization-server",
+      "label": "Authorization server",
+      "kind": "service",
+      "icon": "lock",
+      "parent": "identity-boundary",
+      "description": "Authenticates the user, records consent and issues an authorization code.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative OAuth/OIDC role; no provider affiliation is implied."
+      }
+    },
+    {
+      "id": "identity-store",
+      "label": "Identity and consent store",
+      "kind": "store",
+      "icon": "database",
+      "parent": "identity-boundary",
+      "description": "Stores illustrative user and consent state behind the authorization server.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed logical store for the illustrative flow; no personal data is present."
+      }
+    },
+    {
+      "id": "token-endpoint",
+      "label": "Token endpoint",
+      "kind": "endpoint",
+      "icon": "lock",
+      "parent": "identity-boundary",
+      "description": "Exchanges a code or refresh token for signed token responses.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative OAuth token endpoint role."
+      }
+    },
+    {
+      "id": "jwks-endpoint",
+      "label": "JWKS signing-key endpoint",
+      "kind": "endpoint",
+      "icon": "document",
+      "parent": "identity-boundary",
+      "description": "Publishes public signing keys used to validate token signatures.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative OIDC key-discovery role; no key material is embedded."
+      }
+    },
+    {
+      "id": "resource-boundary",
+      "label": "Protected API trust boundary",
+      "kind": "group",
+      "description": "Validates bearer tokens before serving protected resource data.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative resource-server boundary; no API is reachable."
+      }
+    },
+    {
+      "id": "resource-server",
+      "label": "Resource server API",
+      "kind": "service",
+      "icon": "service",
+      "parent": "resource-boundary",
+      "description": "Protects an API and accepts access tokens with the required scope.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative OAuth resource-server role."
+      }
+    },
+    {
+      "id": "token-validation",
+      "label": "Token validation policy",
+      "kind": "decision",
+      "icon": "decision",
+      "parent": "resource-boundary",
+      "description": "Checks signature, issuer, audience, expiry and scope before access.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred validation responsibilities from the illustrative protocol flow."
+      }
+    },
+    {
+      "id": "protected-resource",
+      "label": "Protected resource data",
+      "kind": "store",
+      "icon": "database",
+      "parent": "resource-boundary",
+      "description": "Generic application data returned only after authorization checks.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed resource representation; no live data is included."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "user-starts-login",
+      "source": "end-user",
+      "target": "user-agent",
+      "label": "Open protected page",
+      "kind": "interaction",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative login journey."
+      }
+    },
+    {
+      "id": "browser-client-request",
+      "source": "user-agent",
+      "target": "client-app",
+      "label": "Request protected page",
+      "kind": "request"
+    },
+    {
+      "id": "client-login-redirect",
+      "source": "client-app",
+      "target": "user-agent",
+      "label": "Redirect to authorization",
+      "kind": "redirect"
+    },
+    {
+      "id": "authorization-request",
+      "source": "user-agent",
+      "target": "authorization-server",
+      "label": "Authorization request + PKCE",
+      "kind": "request",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative authorization-code request; nonce and state values are not real."
+      }
+    },
+    {
+      "id": "identity-check",
+      "source": "authorization-server",
+      "target": "identity-store",
+      "label": "Check identity and consent",
+      "kind": "data"
+    },
+    {
+      "id": "user-consent",
+      "source": "authorization-server",
+      "target": "end-user",
+      "label": "Authenticate and consent",
+      "kind": "interaction"
+    },
+    {
+      "id": "authorization-code",
+      "source": "authorization-server",
+      "target": "user-agent",
+      "label": "Redirect with code",
+      "kind": "redirect",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative short-lived authorization code; no secret value is embedded."
+      }
+    },
+    {
+      "id": "browser-callback",
+      "source": "user-agent",
+      "target": "callback-endpoint",
+      "label": "Return authorization code",
+      "kind": "redirect"
+    },
+    {
+      "id": "code-exchange",
+      "source": "callback-endpoint",
+      "target": "token-endpoint",
+      "label": "Back-channel code exchange",
+      "kind": "back-channel"
+    },
+    {
+      "id": "token-response",
+      "source": "token-endpoint",
+      "target": "client-app",
+      "label": "Access token + ID token",
+      "kind": "token",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative OIDC token response; token values are intentionally omitted."
+      }
+    },
+    {
+      "id": "protected-request",
+      "source": "client-app",
+      "target": "resource-server",
+      "label": "Bearer access token",
+      "kind": "request"
+    },
+    {
+      "id": "validate-token",
+      "source": "resource-server",
+      "target": "token-validation",
+      "label": "Validate access token",
+      "kind": "validation"
+    },
+    {
+      "id": "fetch-signing-keys",
+      "source": "token-validation",
+      "target": "jwks-endpoint",
+      "label": "Fetch signing keys",
+      "kind": "validation"
+    },
+    {
+      "id": "allow-protected-request",
+      "source": "token-validation",
+      "target": "protected-resource",
+      "label": "Permit valid scope",
+      "kind": "authorization"
+    },
+    {
+      "id": "resource-response",
+      "source": "protected-resource",
+      "target": "resource-server",
+      "label": "Return protected data",
+      "kind": "data"
+    },
+    {
+      "id": "refresh-grant",
+      "source": "client-app",
+      "target": "token-endpoint",
+      "label": "Refresh token grant",
+      "kind": "token",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative refresh lifecycle; the refresh token itself is not included."
+      }
+    },
+    {
+      "id": "refresh-response",
+      "source": "token-endpoint",
+      "target": "client-app",
+      "label": "New access token",
+      "kind": "token"
+    },
+    {
+      "id": "consent-denied",
+      "source": "authorization-server",
+      "target": "user-agent",
+      "label": "Denied: access_denied",
+      "kind": "failure",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed illustrative denial path for analysis; no live denial was observed."
+      }
+    },
+    {
+      "id": "expired-token",
+      "source": "token-validation",
+      "target": "client-app",
+      "label": "Reject expired token (401)",
+      "kind": "failure",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred failure outcome from the illustrative token policy."
+      }
+    },
+    {
+      "id": "invalid-token",
+      "source": "token-validation",
+      "target": "client-app",
+      "label": "Reject invalid token (401)",
+      "kind": "failure",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred signature or audience failure outcome; no token is present."
+      }
+    },
+    {
+      "id": "refresh-denied",
+      "source": "token-endpoint",
+      "target": "client-app",
+      "label": "Refresh rejected: invalid_grant",
+      "kind": "failure",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed illustrative refresh failure path."
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "authorization-code-flow",
+      "label": "Authorization-code login",
+      "nodeIds": [
+        "browser-boundary",
+        "end-user",
+        "user-agent",
+        "client-boundary",
+        "client-app",
+        "callback-endpoint",
+        "identity-boundary",
+        "authorization-server",
+        "identity-store",
+        "token-endpoint"
+      ],
+      "edgeKinds": [
+        "interaction",
+        "request",
+        "redirect",
+        "data",
+        "back-channel",
+        "token"
+      ]
+    },
+    {
+      "id": "token-lifecycle",
+      "label": "Token lifecycle and validation",
+      "nodeIds": [
+        "client-boundary",
+        "client-app",
+        "identity-boundary",
+        "token-endpoint",
+        "jwks-endpoint",
+        "resource-boundary",
+        "resource-server",
+        "token-validation",
+        "protected-resource"
+      ],
+      "edgeKinds": [
+        "token",
+        "request",
+        "validation",
+        "authorization",
+        "data"
+      ]
+    },
+    {
+      "id": "denials-and-expiry",
+      "label": "Denials and token failures",
+      "nodeIds": [
+        "browser-boundary",
+        "user-agent",
+        "identity-boundary",
+        "authorization-server",
+        "client-boundary",
+        "client-app",
+        "resource-boundary",
+        "token-validation",
+        "token-endpoint"
+      ],
+      "edgeKinds": [
+        "failure",
+        "redirect",
+        "validation",
+        "token"
+      ]
+    }
+  ],
+  "layout": {
+    "direction": "RIGHT",
+    "spacing": 65,
+    "layerSpacing": 105
+  }
+}

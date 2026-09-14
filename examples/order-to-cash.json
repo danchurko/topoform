@@ -1,0 +1,584 @@
+{
+  "schemaVersion": 1,
+  "title": "Illustrative order-to-cash journey",
+  "description": "Illustrative business process showing ownership, handoffs, decisions and exceptions from order capture through settlement. It is not executable BPMN, a live finance workflow, or a claim about any particular company.",
+  "metadata": {
+    "scope": "Customer-facing showcase",
+    "evidence": "Declared illustrative process; roles and handoffs are authored examples."
+  },
+  "nodes": [
+    {
+      "id": "customer-boundary",
+      "label": "Customer interaction",
+      "kind": "group",
+      "description": "The customer-facing order entry boundary.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative ownership boundary; no live customer process is observed."
+      }
+    },
+    {
+      "id": "customer",
+      "label": "Customer",
+      "kind": "actor",
+      "icon": "person",
+      "parent": "customer-boundary",
+      "description": "Requests goods and receives order and settlement updates.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative actor; no customer data is represented."
+      }
+    },
+    {
+      "id": "order-channel",
+      "label": "Sales channel",
+      "kind": "channel",
+      "icon": "store",
+      "parent": "customer-boundary",
+      "description": "Captures the customer's order request.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative entry channel."
+      }
+    },
+    {
+      "id": "sales-operations",
+      "label": "Sales operations",
+      "kind": "group",
+      "description": "Owns capture, validation and the commercial decision.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative organizational boundary; ownership is not observed."
+      }
+    },
+    {
+      "id": "order-capture",
+      "label": "Capture order",
+      "kind": "process",
+      "icon": "document",
+      "parent": "sales-operations",
+      "description": "Creates a draft order from the submitted request.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative order lifecycle stage."
+      }
+    },
+    {
+      "id": "order-validation",
+      "label": "Validate order",
+      "kind": "process",
+      "icon": "check",
+      "parent": "sales-operations",
+      "description": "Checks address, price and required order details.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred control step in this illustrative process."
+      }
+    },
+    {
+      "id": "credit-decision",
+      "label": "Credit or payment decision",
+      "kind": "decision",
+      "icon": "decision",
+      "parent": "sales-operations",
+      "description": "Determines whether the order can proceed to fulfilment.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative commercial decision; no credit bureau or payment account is queried."
+      }
+    },
+    {
+      "id": "order-confirmation",
+      "label": "Confirm order",
+      "kind": "output",
+      "icon": "package",
+      "parent": "sales-operations",
+      "description": "Confirms the accepted order and expected fulfilment.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed customer communication in the illustrative process."
+      }
+    },
+    {
+      "id": "order-cancelled",
+      "label": "Cancel or reject order",
+      "kind": "exception",
+      "icon": "folder",
+      "parent": "sales-operations",
+      "description": "Ends an order that fails validation or commercial approval.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed exception outcome; no live rejection reason is represented."
+      }
+    },
+    {
+      "id": "fulfilment-operations",
+      "label": "Fulfilment operations",
+      "kind": "group",
+      "description": "Owns reservation, warehouse handling and delivery handoff.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative operational boundary; no warehouse system is connected."
+      }
+    },
+    {
+      "id": "reserve-inventory",
+      "label": "Reserve inventory",
+      "kind": "process",
+      "icon": "database",
+      "parent": "fulfilment-operations",
+      "description": "Reserves available stock for the accepted order.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative fulfilment stage."
+      }
+    },
+    {
+      "id": "pick-pack",
+      "label": "Pick and pack",
+      "kind": "process",
+      "icon": "package",
+      "parent": "fulfilment-operations",
+      "description": "Prepares reserved items for shipment.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative warehouse handoff."
+      }
+    },
+    {
+      "id": "shipment",
+      "label": "Ship order",
+      "kind": "process",
+      "icon": "cloud",
+      "parent": "fulfilment-operations",
+      "description": "Hands the package to a delivery carrier.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative delivery stage."
+      }
+    },
+    {
+      "id": "delivery-confirmation",
+      "label": "Confirm delivery",
+      "kind": "process",
+      "icon": "check",
+      "parent": "fulfilment-operations",
+      "description": "Records delivery confirmation or a delivery exception.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred completion signal in this illustrative process."
+      }
+    },
+    {
+      "id": "finance-operations",
+      "label": "Finance operations",
+      "kind": "group",
+      "description": "Owns invoicing, settlement and financial reconciliation.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative finance boundary; no ledger is accessed."
+      }
+    },
+    {
+      "id": "invoice",
+      "label": "Issue invoice",
+      "kind": "process",
+      "icon": "document",
+      "parent": "finance-operations",
+      "description": "Creates the invoice after the fulfilment milestone.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative order-to-cash stage."
+      }
+    },
+    {
+      "id": "payment-settlement",
+      "label": "Settle payment",
+      "kind": "process",
+      "icon": "lock",
+      "parent": "finance-operations",
+      "description": "Applies payment or refund activity to the order.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative settlement stage; no payment details are present."
+      }
+    },
+    {
+      "id": "receivables-ledger",
+      "label": "Accounts receivable ledger",
+      "kind": "store",
+      "icon": "database",
+      "parent": "finance-operations",
+      "description": "Stores the illustrative receivable and settlement record.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed ledger representation; no financial records are observed."
+      }
+    },
+    {
+      "id": "reconciliation",
+      "label": "Reconcile settlement",
+      "kind": "process",
+      "icon": "check",
+      "parent": "finance-operations",
+      "description": "Matches settlement records and raises mismatches for review.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred finance control step in this illustrative process."
+      }
+    },
+    {
+      "id": "receipt",
+      "label": "Settlement receipt",
+      "kind": "output",
+      "icon": "document",
+      "parent": "finance-operations",
+      "description": "A customer-facing confirmation of settlement.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed output in the illustrative process."
+      }
+    },
+    {
+      "id": "exceptions-boundary",
+      "label": "Exception handling",
+      "kind": "group",
+      "description": "Coordinates short stock, returns, refunds and reconciliation mismatches.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative cross-functional exception boundary."
+      }
+    },
+    {
+      "id": "exception-desk",
+      "label": "Exception desk",
+      "kind": "process",
+      "icon": "team",
+      "parent": "exceptions-boundary",
+      "description": "Routes exceptions to the responsible team and records a decision.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed human handoff for the illustrative process."
+      }
+    },
+    {
+      "id": "backorder",
+      "label": "Backorder decision",
+      "kind": "decision",
+      "icon": "clock",
+      "parent": "exceptions-boundary",
+      "description": "Decides whether short stock can be delayed or cancelled.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed exception decision; inventory availability is not observed."
+      }
+    },
+    {
+      "id": "returns",
+      "label": "Handle return",
+      "kind": "process",
+      "icon": "folder",
+      "parent": "exceptions-boundary",
+      "description": "Assesses a returned or damaged delivery.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed exception path in the illustrative process."
+      }
+    },
+    {
+      "id": "refund",
+      "label": "Approve refund",
+      "kind": "decision",
+      "icon": "decision",
+      "parent": "exceptions-boundary",
+      "description": "Approves a refund after the return decision.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed refund control; no financial transaction is represented."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "customer-submit",
+      "source": "customer",
+      "target": "order-channel",
+      "label": "Place order",
+      "kind": "handoff",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative primary journey."
+      }
+    },
+    {
+      "id": "channel-capture",
+      "source": "order-channel",
+      "target": "order-capture",
+      "label": "Order submission",
+      "kind": "handoff"
+    },
+    {
+      "id": "capture-validation",
+      "source": "order-capture",
+      "target": "order-validation",
+      "label": "Order details",
+      "kind": "process"
+    },
+    {
+      "id": "validation-credit",
+      "source": "order-validation",
+      "target": "credit-decision",
+      "label": "Validated order",
+      "kind": "decision"
+    },
+    {
+      "id": "credit-reserve",
+      "source": "credit-decision",
+      "target": "reserve-inventory",
+      "label": "Approved: reserve stock",
+      "kind": "handoff"
+    },
+    {
+      "id": "credit-cancel",
+      "source": "credit-decision",
+      "target": "order-cancelled",
+      "label": "Declined: reject order",
+      "kind": "exception",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed commercial rejection path."
+      }
+    },
+    {
+      "id": "validation-cancel",
+      "source": "order-validation",
+      "target": "order-cancelled",
+      "label": "Invalid: request correction",
+      "kind": "exception"
+    },
+    {
+      "id": "reserve-pick",
+      "source": "reserve-inventory",
+      "target": "pick-pack",
+      "label": "Reserved items",
+      "kind": "handoff"
+    },
+    {
+      "id": "pick-ship",
+      "source": "pick-pack",
+      "target": "shipment",
+      "label": "Packed parcel",
+      "kind": "handoff"
+    },
+    {
+      "id": "ship-delivery",
+      "source": "shipment",
+      "target": "delivery-confirmation",
+      "label": "Delivery status",
+      "kind": "handoff"
+    },
+    {
+      "id": "delivery-invoice",
+      "source": "delivery-confirmation",
+      "target": "invoice",
+      "label": "Delivered order",
+      "kind": "handoff"
+    },
+    {
+      "id": "invoice-settlement",
+      "source": "invoice",
+      "target": "payment-settlement",
+      "label": "Invoice due",
+      "kind": "finance"
+    },
+    {
+      "id": "settlement-ledger",
+      "source": "payment-settlement",
+      "target": "receivables-ledger",
+      "label": "Post settlement",
+      "kind": "finance"
+    },
+    {
+      "id": "ledger-reconcile",
+      "source": "receivables-ledger",
+      "target": "reconciliation",
+      "label": "Settlement records",
+      "kind": "finance"
+    },
+    {
+      "id": "reconcile-receipt",
+      "source": "reconciliation",
+      "target": "receipt",
+      "label": "Matched: issue receipt",
+      "kind": "finance"
+    },
+    {
+      "id": "receipt-customer",
+      "source": "receipt",
+      "target": "customer",
+      "label": "Settlement confirmation",
+      "kind": "notification"
+    },
+    {
+      "id": "reserve-short-stock",
+      "source": "reserve-inventory",
+      "target": "backorder",
+      "label": "Short stock",
+      "kind": "exception",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed fulfilment exception path."
+      }
+    },
+    {
+      "id": "backorder-desk",
+      "source": "backorder",
+      "target": "exception-desk",
+      "label": "Route stock exception",
+      "kind": "handoff"
+    },
+    {
+      "id": "shipment-exception",
+      "source": "shipment",
+      "target": "exception-desk",
+      "label": "Delivery exception",
+      "kind": "exception"
+    },
+    {
+      "id": "desk-return",
+      "source": "exception-desk",
+      "target": "returns",
+      "label": "Authorize return review",
+      "kind": "handoff"
+    },
+    {
+      "id": "return-refund",
+      "source": "returns",
+      "target": "refund",
+      "label": "Return assessed",
+      "kind": "decision"
+    },
+    {
+      "id": "refund-settlement",
+      "source": "refund",
+      "target": "payment-settlement",
+      "label": "Issue approved refund",
+      "kind": "finance",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed refund handoff; no payment provider is connected."
+      }
+    },
+    {
+      "id": "reconcile-mismatch",
+      "source": "reconciliation",
+      "target": "exception-desk",
+      "label": "Mismatch: review",
+      "kind": "exception"
+    },
+    {
+      "id": "desk-retry",
+      "source": "exception-desk",
+      "target": "order-capture",
+      "label": "Correct and retry",
+      "kind": "recovery",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed controlled retry path."
+      }
+    },
+    {
+      "id": "delivery-exception",
+      "source": "delivery-confirmation",
+      "target": "exception-desk",
+      "label": "Delivery not confirmed",
+      "kind": "exception"
+    }
+  ],
+  "views": [
+    {
+      "id": "primary-order-journey",
+      "label": "Primary order journey",
+      "nodeIds": [
+        "customer-boundary",
+        "customer",
+        "order-channel",
+        "sales-operations",
+        "order-capture",
+        "order-validation",
+        "credit-decision",
+        "fulfilment-operations",
+        "reserve-inventory",
+        "pick-pack",
+        "shipment",
+        "delivery-confirmation",
+        "finance-operations",
+        "invoice",
+        "payment-settlement",
+        "receivables-ledger",
+        "reconciliation",
+        "receipt"
+      ],
+      "edgeKinds": [
+        "handoff",
+        "process",
+        "decision",
+        "finance",
+        "notification"
+      ]
+    },
+    {
+      "id": "exceptions-and-refunds",
+      "label": "Exceptions and refunds",
+      "nodeIds": [
+        "sales-operations",
+        "order-validation",
+        "credit-decision",
+        "order-cancelled",
+        "fulfilment-operations",
+        "reserve-inventory",
+        "shipment",
+        "delivery-confirmation",
+        "exceptions-boundary",
+        "exception-desk",
+        "backorder",
+        "returns",
+        "refund",
+        "finance-operations",
+        "payment-settlement"
+      ],
+      "edgeKinds": [
+        "exception",
+        "handoff",
+        "decision",
+        "finance",
+        "recovery"
+      ]
+    },
+    {
+      "id": "finance-and-reconciliation",
+      "label": "Finance and reconciliation",
+      "nodeIds": [
+        "finance-operations",
+        "invoice",
+        "payment-settlement",
+        "receivables-ledger",
+        "reconciliation",
+        "receipt",
+        "exceptions-boundary",
+        "exception-desk"
+      ],
+      "edgeKinds": [
+        "finance",
+        "notification",
+        "exception",
+        "handoff"
+      ]
+    }
+  ],
+  "layout": {
+    "direction": "RIGHT",
+    "spacing": 68,
+    "layerSpacing": 105
+  }
+}

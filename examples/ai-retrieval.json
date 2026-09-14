@@ -1,0 +1,599 @@
+{
+  "schemaVersion": 1,
+  "title": "Illustrative AI knowledge and retrieval",
+  "description": "Illustrative knowledge pipeline from source lineage through ingestion, indexing, retrieval, generation and human review. It uses no proprietary data or live model, and does not claim verified answer quality.",
+  "metadata": {
+    "scope": "Customer-facing showcase",
+    "evidence": "Declared illustrative pipeline with inferred stages and proposed storage and feedback paths."
+  },
+  "nodes": [
+    {
+      "id": "source-boundary",
+      "label": "Source systems",
+      "kind": "group",
+      "description": "Illustrative source categories whose lineage is retained during ingestion.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative source boundary; no proprietary repository is connected."
+      }
+    },
+    {
+      "id": "product-docs",
+      "label": "Product documentation",
+      "kind": "source",
+      "icon": "document",
+      "parent": "source-boundary",
+      "description": "Versioned documents used as an example knowledge source.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative source category; no document contents are included."
+      }
+    },
+    {
+      "id": "support-tickets",
+      "label": "Support tickets",
+      "kind": "source",
+      "icon": "folder",
+      "parent": "source-boundary",
+      "description": "Resolved support material used as an example source.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative source category; no customer records are included."
+      }
+    },
+    {
+      "id": "policy-repository",
+      "label": "Policy repository",
+      "kind": "source",
+      "icon": "store",
+      "parent": "source-boundary",
+      "description": "Controlled policy material used as an example source.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative source category; no policy content is observed."
+      }
+    },
+    {
+      "id": "ingestion-boundary",
+      "label": "Ingestion and preparation",
+      "kind": "group",
+      "description": "Asynchronous preparation stages that preserve source lineage and metadata.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred processing boundary for this illustrative pipeline."
+      }
+    },
+    {
+      "id": "source-connector",
+      "label": "Source connector",
+      "kind": "process",
+      "icon": "network",
+      "parent": "ingestion-boundary",
+      "description": "Collects source records and records their origin.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred ingestion stage; no source connection is active."
+      }
+    },
+    {
+      "id": "document-parser",
+      "label": "Parse and normalise",
+      "kind": "process",
+      "icon": "gear",
+      "parent": "ingestion-boundary",
+      "description": "Extracts text and normalises document structure.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred preparation stage for the illustrative pipeline."
+      }
+    },
+    {
+      "id": "chunker",
+      "label": "Chunk with lineage",
+      "kind": "process",
+      "icon": "task",
+      "parent": "ingestion-boundary",
+      "description": "Splits text into retrievable chunks while retaining source references.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred chunking stage; chunk policy is not measured here."
+      }
+    },
+    {
+      "id": "metadata-extractor",
+      "label": "Extract metadata",
+      "kind": "process",
+      "icon": "document",
+      "parent": "ingestion-boundary",
+      "description": "Adds document, access and freshness metadata to each chunk.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed metadata stage for the illustrative pipeline."
+      }
+    },
+    {
+      "id": "embedding-worker",
+      "label": "Embedding worker",
+      "kind": "process",
+      "icon": "lab",
+      "parent": "ingestion-boundary",
+      "description": "Computes vector representations for prepared chunks.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative embedding stage; model choice and quality are unverified."
+      }
+    },
+    {
+      "id": "corpus-store",
+      "label": "Source-aware corpus store",
+      "kind": "store",
+      "icon": "database",
+      "parent": "ingestion-boundary",
+      "description": "Stores chunk text and lineage metadata for citation and refresh.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed storage role; no corpus is populated."
+      }
+    },
+    {
+      "id": "retrieval-boundary",
+      "label": "Retrieval and generation",
+      "kind": "group",
+      "description": "Answers a question using indexed context and explicit evidence references.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative runtime boundary; no live model endpoint is connected."
+      }
+    },
+    {
+      "id": "knowledge-user",
+      "label": "Knowledge user",
+      "kind": "actor",
+      "icon": "person",
+      "parent": "retrieval-boundary",
+      "description": "Asks a question and receives an answer with caveats and citations.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative actor; no user query is retained."
+      }
+    },
+    {
+      "id": "query-endpoint",
+      "label": "Question endpoint",
+      "kind": "service",
+      "icon": "service",
+      "parent": "retrieval-boundary",
+      "description": "Accepts a question and applies the retrieval policy.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative query entry point."
+      }
+    },
+    {
+      "id": "retriever",
+      "label": "Retriever and ranker",
+      "kind": "process",
+      "icon": "network",
+      "parent": "retrieval-boundary",
+      "description": "Finds relevant chunks and returns source spans for citation.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred retrieval stage; relevance quality is not measured."
+      }
+    },
+    {
+      "id": "vector-index",
+      "label": "Vector index",
+      "kind": "store",
+      "icon": "database",
+      "parent": "retrieval-boundary",
+      "description": "Indexes embeddings for similarity retrieval.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed index role; no embeddings are stored."
+      }
+    },
+    {
+      "id": "prompt-builder",
+      "label": "Prompt and context builder",
+      "kind": "process",
+      "icon": "gear",
+      "parent": "retrieval-boundary",
+      "description": "Combines the question, ranked context and citation references.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred orchestration stage for the illustrative answer path."
+      }
+    },
+    {
+      "id": "generation-model",
+      "label": "Generative model",
+      "kind": "model",
+      "icon": "lab",
+      "parent": "retrieval-boundary",
+      "description": "Drafts an answer from the supplied context; hallucination risk remains.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative model role; provider, model and quality are not verified."
+      }
+    },
+    {
+      "id": "answer-service",
+      "label": "Answer with citations",
+      "kind": "output",
+      "icon": "document",
+      "parent": "retrieval-boundary",
+      "description": "Returns a draft answer, evidence references and uncertainty cues.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed output contract for the illustrative pipeline."
+      }
+    },
+    {
+      "id": "evidence-bundle",
+      "label": "Citation evidence bundle",
+      "kind": "evidence",
+      "icon": "document",
+      "parent": "retrieval-boundary",
+      "description": "Carries source spans and lineage references alongside the draft.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed evidence representation; no source spans are embedded."
+      }
+    },
+    {
+      "id": "review-boundary",
+      "label": "Human evaluation",
+      "kind": "group",
+      "description": "Reviews answer quality and feeds improvement work back into preparation.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative review boundary; no evaluation result is observed."
+      }
+    },
+    {
+      "id": "reviewer",
+      "label": "Subject-matter reviewer",
+      "kind": "actor",
+      "icon": "person",
+      "parent": "review-boundary",
+      "description": "Checks whether the answer is supported and useful.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative human role; no reviewer identity is represented."
+      }
+    },
+    {
+      "id": "evaluation",
+      "label": "Evaluate answer and evidence",
+      "kind": "decision",
+      "icon": "decision",
+      "parent": "review-boundary",
+      "description": "Records groundedness, citation coverage and a revise decision.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed evaluation step; model quality is not verified."
+      }
+    },
+    {
+      "id": "feedback-loop",
+      "label": "Feedback and refresh",
+      "kind": "process",
+      "icon": "task",
+      "parent": "review-boundary",
+      "description": "Routes review findings into controlled chunking or prompt updates.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed improvement path; no automatic retraining is implied."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "docs-connector",
+      "source": "product-docs",
+      "target": "source-connector",
+      "label": "Source records + lineage",
+      "kind": "lineage",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative source lineage relationship."
+      }
+    },
+    {
+      "id": "tickets-connector",
+      "source": "support-tickets",
+      "target": "source-connector",
+      "label": "Resolved ticket history",
+      "kind": "lineage"
+    },
+    {
+      "id": "policy-connector",
+      "source": "policy-repository",
+      "target": "source-connector",
+      "label": "Policy records",
+      "kind": "lineage"
+    },
+    {
+      "id": "connector-parser",
+      "source": "source-connector",
+      "target": "document-parser",
+      "label": "Raw source content",
+      "kind": "ingestion"
+    },
+    {
+      "id": "parser-chunker",
+      "source": "document-parser",
+      "target": "chunker",
+      "label": "Normalised text",
+      "kind": "ingestion"
+    },
+    {
+      "id": "parser-metadata",
+      "source": "document-parser",
+      "target": "metadata-extractor",
+      "label": "Document metadata",
+      "kind": "ingestion"
+    },
+    {
+      "id": "chunk-corpus",
+      "source": "chunker",
+      "target": "corpus-store",
+      "label": "Chunks + lineage",
+      "kind": "storage",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed source-aware storage relationship."
+      }
+    },
+    {
+      "id": "metadata-corpus",
+      "source": "metadata-extractor",
+      "target": "corpus-store",
+      "label": "Access and freshness data",
+      "kind": "storage"
+    },
+    {
+      "id": "chunk-embedding",
+      "source": "chunker",
+      "target": "embedding-worker",
+      "label": "Prepared chunks",
+      "kind": "processing"
+    },
+    {
+      "id": "embedding-index",
+      "source": "embedding-worker",
+      "target": "vector-index",
+      "label": "Chunk embeddings",
+      "kind": "indexing",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed indexing relationship; no vector data is stored."
+      }
+    },
+    {
+      "id": "user-question",
+      "source": "knowledge-user",
+      "target": "query-endpoint",
+      "label": "Ask a question",
+      "kind": "query",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative query journey."
+      }
+    },
+    {
+      "id": "query-retriever",
+      "source": "query-endpoint",
+      "target": "retriever",
+      "label": "Question + policy",
+      "kind": "query"
+    },
+    {
+      "id": "retriever-index",
+      "source": "retriever",
+      "target": "vector-index",
+      "label": "Semantic retrieval",
+      "kind": "retrieval"
+    },
+    {
+      "id": "index-retriever",
+      "source": "vector-index",
+      "target": "retriever",
+      "label": "Ranked chunks",
+      "kind": "retrieval"
+    },
+    {
+      "id": "retriever-evidence",
+      "source": "retriever",
+      "target": "evidence-bundle",
+      "label": "Source spans",
+      "kind": "evidence",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred citation relationship from the illustrative retrieval flow."
+      }
+    },
+    {
+      "id": "retriever-prompt",
+      "source": "retriever",
+      "target": "prompt-builder",
+      "label": "Ranked context",
+      "kind": "retrieval"
+    },
+    {
+      "id": "evidence-prompt",
+      "source": "evidence-bundle",
+      "target": "prompt-builder",
+      "label": "Citation references",
+      "kind": "evidence"
+    },
+    {
+      "id": "prompt-generation",
+      "source": "prompt-builder",
+      "target": "generation-model",
+      "label": "Question + context",
+      "kind": "generation"
+    },
+    {
+      "id": "generation-answer",
+      "source": "generation-model",
+      "target": "answer-service",
+      "label": "Draft grounded answer",
+      "kind": "generation",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative generation step; answer quality is not verified."
+      }
+    },
+    {
+      "id": "answer-citations",
+      "source": "answer-service",
+      "target": "evidence-bundle",
+      "label": "Attach citations",
+      "kind": "evidence"
+    },
+    {
+      "id": "answer-user",
+      "source": "answer-service",
+      "target": "knowledge-user",
+      "label": "Answer + caveats",
+      "kind": "response"
+    },
+    {
+      "id": "user-review",
+      "source": "knowledge-user",
+      "target": "reviewer",
+      "label": "Request human review",
+      "kind": "review",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed human review handoff."
+      }
+    },
+    {
+      "id": "review-evaluation",
+      "source": "reviewer",
+      "target": "evaluation",
+      "label": "Check answer and evidence",
+      "kind": "review"
+    },
+    {
+      "id": "evaluation-feedback",
+      "source": "evaluation",
+      "target": "feedback-loop",
+      "label": "Record quality feedback",
+      "kind": "feedback",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed evaluation feedback path; no score is claimed."
+      }
+    },
+    {
+      "id": "feedback-chunker",
+      "source": "feedback-loop",
+      "target": "chunker",
+      "label": "Improve chunking policy",
+      "kind": "feedback",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed controlled improvement path."
+      }
+    },
+    {
+      "id": "feedback-prompt",
+      "source": "feedback-loop",
+      "target": "prompt-builder",
+      "label": "Tune prompt policy",
+      "kind": "feedback",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed controlled improvement path; no automatic tuning is implied."
+      }
+    },
+    {
+      "id": "evaluation-answer",
+      "source": "evaluation",
+      "target": "answer-service",
+      "label": "Approve or request revision",
+      "kind": "review"
+    }
+  ],
+  "views": [
+    {
+      "id": "ingestion-lineage",
+      "label": "Source ingestion and lineage",
+      "nodeIds": [
+        "source-boundary",
+        "product-docs",
+        "support-tickets",
+        "policy-repository",
+        "ingestion-boundary",
+        "source-connector",
+        "document-parser",
+        "chunker",
+        "metadata-extractor",
+        "embedding-worker",
+        "corpus-store",
+        "retrieval-boundary",
+        "vector-index"
+      ],
+      "edgeKinds": [
+        "lineage",
+        "ingestion",
+        "storage",
+        "processing",
+        "indexing"
+      ]
+    },
+    {
+      "id": "question-answering",
+      "label": "Question, retrieval and answer",
+      "nodeIds": [
+        "retrieval-boundary",
+        "knowledge-user",
+        "query-endpoint",
+        "retriever",
+        "vector-index",
+        "prompt-builder",
+        "generation-model",
+        "answer-service",
+        "evidence-bundle"
+      ],
+      "edgeKinds": [
+        "query",
+        "retrieval",
+        "evidence",
+        "generation",
+        "response"
+      ]
+    },
+    {
+      "id": "evaluation-feedback",
+      "label": "Human evaluation and feedback",
+      "nodeIds": [
+        "retrieval-boundary",
+        "knowledge-user",
+        "answer-service",
+        "evidence-bundle",
+        "review-boundary",
+        "reviewer",
+        "evaluation",
+        "feedback-loop",
+        "ingestion-boundary",
+        "chunker",
+        "prompt-builder"
+      ],
+      "edgeKinds": [
+        "review",
+        "feedback",
+        "evidence"
+      ]
+    }
+  ],
+  "layout": {
+    "direction": "RIGHT",
+    "spacing": 65,
+    "layerSpacing": 100
+  }
+}

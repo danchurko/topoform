@@ -1,0 +1,1142 @@
+{
+  "check": {
+    "path": "check.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/circle-check.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "53c88568ca0669eb528307218d2eed64ec9d025142d5e0f84bb05724b9ec8c16"
+  },
+  "clock": {
+    "path": "clock.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/clock.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "341edeb1c537958b3091922121435d3c4478a238175d9cadf5042f9876f360cc"
+  },
+  "cloud": {
+    "path": "cloud.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/cloud.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "d4e5dbed4fda9f8bfeadaece6b71ed8b5d08298319f58f23b399dd1aac9e1c22"
+  },
+  "database": {
+    "path": "database.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/database.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "2a47fe26aa008162fd710769c5c0a5f1166740ded9888111363ec67a0d469a94"
+  },
+  "decision": {
+    "path": "decision.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/code-branch.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "8f0cc0cec733d05242c0003f6d7d219087388df12c03f33954569658a32e3290"
+  },
+  "device": {
+    "path": "device.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/microchip.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "09c36672ccea0492e807120efc677af1c7e2b304ff53ece106592e9f5846e3f6"
+  },
+  "document": {
+    "path": "document.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/file-lines.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "a15c664a22cfd0467ac8aa3e6607a3b399c2286b28a9d7323710d1898c6d5822"
+  },
+  "folder": {
+    "path": "folder.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/folder.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "78de362f6bffec46165fe926a3d0343f3baf3cd5a7b5d1642d9a0327e0badf5f"
+  },
+  "gear": {
+    "path": "gear.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/gear.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "f9c20cee337c359d701a7ece1104ec8941c359ba59a6715528abd8f0cb9bbcf8"
+  },
+  "globe": {
+    "path": "globe.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/globe.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "3f2342fee8173350ccfaf9541900eb4bfd7561b2512d04101cc493dd68cd62b6"
+  },
+  "lab": {
+    "path": "lab.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/flask.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "919c312aa1c61f508ea20f28d1041b5fd027f5cbc9de829a6bb834c0db759172"
+  },
+  "leaf": {
+    "path": "leaf.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/leaf.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "58c88d889965f51d371ac34fe5aeee225be46c44da9d22c50e4e2e16991c6683"
+  },
+  "lock": {
+    "path": "lock.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/lock.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "7ef282db7bc68011cf7a47964e1100619a237ee9e147fa182dcabf46b6c74980"
+  },
+  "lucide-bot": {
+    "path": "lucide-bot.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/bot.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "dd1bc01314308f265387cb6cb50778758b8e47e86001fa00be00600e52930d7b"
+  },
+  "lucide-brain-circuit": {
+    "path": "lucide-brain-circuit.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/brain-circuit.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "7493d5b9ab00a166efd5438fbebf7accc9f6c7372e52ef355b4463ae840897ba"
+  },
+  "lucide-building-2": {
+    "path": "lucide-building-2.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/building-2.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "61f19fb3f16e22498310ddd5256e6c699bc8573dee3f011c2c881e915ae195a8"
+  },
+  "lucide-cloud": {
+    "path": "lucide-cloud.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/cloud.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "eecb050f1477bdf51940122d823ddd18a1c885af59dc41ecbc84be673f10a195"
+  },
+  "lucide-credit-card": {
+    "path": "lucide-credit-card.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/credit-card.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "0cc3f84b54907a886e0207ecdb403849bb4eef6cd6f6f49d8d3df912a4d93ece"
+  },
+  "lucide-database": {
+    "path": "lucide-database.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/database.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "09e1ad357d257879d9c392bf877bdc5e92adec5eaf568ee100c2dfda44e0e4f0"
+  },
+  "lucide-git-branch": {
+    "path": "lucide-git-branch.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/git-branch.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "d67b7712284261148e74eb0dd4a9da7e72b3d082b2c1122d0289b939526c7a2e"
+  },
+  "lucide-globe-2": {
+    "path": "lucide-globe-2.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/globe-2.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "f7b80be621026a296d86af123533b4e547a4d0604ebdc7677fc1c8f75b810dec"
+  },
+  "lucide-key-round": {
+    "path": "lucide-key-round.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/key-round.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "e2d5bb56eff75ecd4eaa86d48122c3c77a1a558ede0707475e3a09a094175538"
+  },
+  "lucide-layers": {
+    "path": "lucide-layers.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/layers.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "8a70d6a90eafbf511be379bdab6da561d9ac7bdf4e48b350044b7c9148878bbf"
+  },
+  "lucide-lock-keyhole": {
+    "path": "lucide-lock-keyhole.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/lock-keyhole.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "532cfc5b10ee097544f733baef8250253bdb6c25791f495c4a1c814b1627d7ac"
+  },
+  "lucide-network": {
+    "path": "lucide-network.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/network.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "004a05a8ad9e009fe23cb48f97a3f6ec9a24b296beee566b445ededa171a703a"
+  },
+  "lucide-package-check": {
+    "path": "lucide-package-check.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/package-check.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "783b41cf33f7679024f5342b65a0fb5aa74c8b2155f80a28756b20e13f475c0b"
+  },
+  "lucide-receipt-text": {
+    "path": "lucide-receipt-text.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/receipt-text.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "140b1f419d88f2ecafacf48874d2994a9f917b326f7cff5a0eac42dba89b16d1"
+  },
+  "lucide-rotate-ccw": {
+    "path": "lucide-rotate-ccw.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/rotate-ccw.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "a64fa75f71397cce729ba6b82244aa9b2db5e71e2638a71050ca816ccc38b7ca"
+  },
+  "lucide-search-code": {
+    "path": "lucide-search-code.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/search-code.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "46e1e57261bc584cecfb1fefe4942de8a799532b9a6d3435b064f6857f4fa7a3"
+  },
+  "lucide-server": {
+    "path": "lucide-server.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/server.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "b9ecedf65ab45a7e318c42eb96a5af33b1e87a466b5ff7090885446e4661e800"
+  },
+  "lucide-settings": {
+    "path": "lucide-settings.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/settings.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "96957f2379b17995bcd0273706cd93168510d3c46e181634db0f6d7bc3e1b527"
+  },
+  "lucide-shopping-cart": {
+    "path": "lucide-shopping-cart.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/shopping-cart.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "879676e37f8cc7cd69792509b77219f4cadd178f82a06fab034daade64ccf409"
+  },
+  "lucide-triangle-alert": {
+    "path": "lucide-triangle-alert.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/triangle-alert.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "37e09c4ea265ae61dd29a2656d35e6aa118f792b629d4f7367c53fc5fc99d7a2"
+  },
+  "lucide-truck": {
+    "path": "lucide-truck.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/truck.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "8d20cfa265afc40d184c3a3304b50015b7e7128b49c24302a0754b56e72333ae"
+  },
+  "lucide-user-round": {
+    "path": "lucide-user-round.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/user-round.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "c24c05591152dcbbd4378b9a08edcbc2bf211459d0cc4ea1988f5fce0ed2037b"
+  },
+  "lucide-users-round": {
+    "path": "lucide-users-round.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/users-round.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "8b89829e7c76d6f6c144de835c9900d08f3714b9e29252cf3012531545d63dee"
+  },
+  "lucide-workflow": {
+    "path": "lucide-workflow.svg",
+    "pack": "Lucide",
+    "version": "0.544.0",
+    "source": "https://github.com/lucide-icons/lucide/blob/0.544.0/icons/workflow.svg",
+    "license": "ISC",
+    "attribution": "Lucide contributors; derived from Feather Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "134fe49287ebe47384fd0f6f175b82e5a49610a74ca04b54ec243e5f45dc57d3"
+  },
+  "mdi-account-group-outline": {
+    "path": "mdi-account-group-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/account-group-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "a7dedf0eef36ffdbb7c31a548c547d1f430c4ef606daf5de649b5f21cd907461"
+  },
+  "mdi-account-outline": {
+    "path": "mdi-account-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/account-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "e60978b020c9d9bbc4ee3d6bc4cb5242cdf8adc104da0c916ef50a99c3884f7c"
+  },
+  "mdi-alert-outline": {
+    "path": "mdi-alert-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/alert-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "0864ee3356a567ff92ff2e50b367086b95fe839a71f529e68aedb6f3ea7ca6d6"
+  },
+  "mdi-api": {
+    "path": "mdi-api.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/api.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "dde43f61f2416e98d74bdb9f068a43d9b9c9a8fdd87e912e416b32fdb606951f"
+  },
+  "mdi-backup-restore": {
+    "path": "mdi-backup-restore.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/backup-restore.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "5c79a230ea0b3dbfa3fbf235aadf47331b970e64e85d07f0354a52f89893f742"
+  },
+  "mdi-brain": {
+    "path": "mdi-brain.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/brain.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "94a9f07642634f4bad931fd37d2fb18043a60b4f3ffa2d973a82efc80d5101f1"
+  },
+  "mdi-cart-outline": {
+    "path": "mdi-cart-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/cart-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "3e6eee476b2956a6429d88bdd10017a74fdccd4c79238410abd19b8064aa38bb"
+  },
+  "mdi-cloud-outline": {
+    "path": "mdi-cloud-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/cloud-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "9b2df4be546448a98679b8a6761b064285f57705a78d419510f8115bf44d8ce2"
+  },
+  "mdi-cog-outline": {
+    "path": "mdi-cog-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/cog-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "8986561c8826cc72159b65b76eaa639d5d31b4c942df546ce5fc865f5932a372"
+  },
+  "mdi-credit-card-outline": {
+    "path": "mdi-credit-card-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/credit-card-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "a41255a933f4cb353b8cdf4dc55d0437be908bce67c5856c9ddae14577d4a6b0"
+  },
+  "mdi-database-outline": {
+    "path": "mdi-database-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/database-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "20778ebea851b3311a1de1681815c13c305b6696bcc1f73a3c92e57bf1813bad"
+  },
+  "mdi-database-search-outline": {
+    "path": "mdi-database-search-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/database-search-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "492120322f45842573c699f46820894d0d5573925b7ee3e25ae13124527493a5"
+  },
+  "mdi-earth": {
+    "path": "mdi-earth.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/earth.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "9a200eb6caaaca845b35a42f9f4cd161e6db84646873cac7b7f1cf60b6b62298"
+  },
+  "mdi-key-outline": {
+    "path": "mdi-key-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/key-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "61c396afe7230ddaa32a5f63c8525094607dfe6abc2f1649fff613cf06b787be"
+  },
+  "mdi-message-processing-outline": {
+    "path": "mdi-message-processing-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/message-processing-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "31c604c873c0cde870f36b738cfad171d2be62035c104e6e52dbfb15e19dcd39"
+  },
+  "mdi-office-building-outline": {
+    "path": "mdi-office-building-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/office-building-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "c4bd8e6191e3c41ee3241ef5eb2373594a5505993f39a608427334e621d4081a"
+  },
+  "mdi-package-variant-closed": {
+    "path": "mdi-package-variant-closed.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/package-variant-closed.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "ad6b0a34ba8f9b21bd9209ebbf7fccf92b0a40f218542dbf9a4d5aefb4ff7150"
+  },
+  "mdi-receipt-text-outline": {
+    "path": "mdi-receipt-text-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/receipt-text-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "073c31227dac15e7ab56c8fc3303d6e6e19a4deb9d5018abd3fdfd86447a9ce5"
+  },
+  "mdi-robot-outline": {
+    "path": "mdi-robot-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/robot-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "8b05649e63a6022a51f859daeaff3d20884b2a02b7ab40bc190bc48978157599"
+  },
+  "mdi-server": {
+    "path": "mdi-server.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/server.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "f22741af489b79c65c4cf7cc8f870f729d66193337be0c3dd4ef263dd1fb1802"
+  },
+  "mdi-shield-lock-outline": {
+    "path": "mdi-shield-lock-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/shield-lock-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "68fc38088cdab700e2aa761a65a473e16c9f99ed4b60577d45f71fab0ef8a9d1"
+  },
+  "mdi-source-branch": {
+    "path": "mdi-source-branch.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/source-branch.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "a77050472dddf498d067b3aaae0292d3c72518c066cf568f1988edf9d513686e"
+  },
+  "mdi-truck-delivery-outline": {
+    "path": "mdi-truck-delivery-outline.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/truck-delivery-outline.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "de50fb4998aecf64837e002a3479c792bea82bc553dd7c69c34f6e376237d6b6"
+  },
+  "mdi-webhook": {
+    "path": "mdi-webhook.svg",
+    "pack": "Material Design Icons",
+    "version": "7.4.47",
+    "source": "https://github.com/Templarian/MaterialDesign/blob/v7.4.47/svg/webhook.svg",
+    "license": "Apache-2.0",
+    "attribution": "Pictogrammers Material Design Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "358dacc8fcd8f448f41d30a0de92d04c9b2f6f7a0fcc67fc080b823cbf7754da"
+  },
+  "network": {
+    "path": "network.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/network-wired.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "be585e17ec52606c31a2fddb992c60d4031d01d547cce9cf20a3641b32928529"
+  },
+  "package": {
+    "path": "package.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/box.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "7dfda1400eff5ed199bab65b4ba2a0de6d394428458a578b03cffff29ebd6b47"
+  },
+  "person": {
+    "path": "person.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/user.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "30857ae42e2a9f0f2145c9abdcf172ba47b802b7253b34b4394a59d1953e7239"
+  },
+  "queue": {
+    "path": "queue.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/layer-group.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "990a23db13bdcf6272e648f4f39f5cdef5c74ca9762275608899ee67f1d75d29"
+  },
+  "service": {
+    "path": "service.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/server.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "142aae019e241fce64775e23480bfab80a9ad3cdd7941b76fb8597e654cbea8b"
+  },
+  "simple-anthropic": {
+    "path": "simple-anthropic.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/anthropic.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "3198636fd19a8d1175fcb5932cb5b72c440ff7bfb15b5fa97985d82aa5de049e"
+  },
+  "simple-apachekafka": {
+    "path": "simple-apachekafka.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/apachekafka.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "900b65884dbf7d8d29efda1c82e55809bbdc9a789226a7d4f1f7190775e398f4"
+  },
+  "simple-argo": {
+    "path": "simple-argo.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/argo.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "7693411c97a513a22b0bf9f5cd75220b67a98b9070be952e60d9d6344736a308"
+  },
+  "simple-auth0": {
+    "path": "simple-auth0.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/auth0.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "cfd2f0f7907d22177f02133562a5c1c40d89c5b6ffe1d61257902e365d409dea"
+  },
+  "simple-circleci": {
+    "path": "simple-circleci.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/circleci.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "b055d360206bb3561fcda6978ca13a5f50ca919d0e55c7b71bee0cb4e51d2f10"
+  },
+  "simple-cloudflare": {
+    "path": "simple-cloudflare.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/cloudflare.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "c1524b26d55594d70d40e00ba0d40e1e2f7cfddab031488e55160b993d8c2cc5"
+  },
+  "simple-datadog": {
+    "path": "simple-datadog.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/datadog.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "9feabc1910a1a6372035c1716c58217fc6d3ccf85943468203e2ede0e9b5e08e"
+  },
+  "simple-docker": {
+    "path": "simple-docker.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/docker.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "522cfb1813aba5aa4c0b6119977c35c617908022de344780b27eea646342621b"
+  },
+  "simple-elasticsearch": {
+    "path": "simple-elasticsearch.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/elasticsearch.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "900a2165162887ba55e70235626a4fa3dc14c0a9b723cf017841cd04acb35d0d"
+  },
+  "simple-github": {
+    "path": "simple-github.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/github.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "0bf582b8fe1ca8cdebbb575a93d25837a701248333a69465222e33d2339191da"
+  },
+  "simple-githubactions": {
+    "path": "simple-githubactions.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/githubactions.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "2d70162bfed7c8eeca85fa41825257f5ea90dba10946a71d2a5a55cf4d4eef70"
+  },
+  "simple-gitlab": {
+    "path": "simple-gitlab.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/gitlab.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "932a5f51af64f51d47fdac33a93e7e209af848caa9b33f44d81dd4fcbc92dc6f"
+  },
+  "simple-grafana": {
+    "path": "simple-grafana.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/grafana.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "477761833b240c5dcac8a131bb012c79d0a98edc0eeedeaa05bea1719fbac104"
+  },
+  "simple-jenkins": {
+    "path": "simple-jenkins.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/jenkins.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "f4e1d322279a61e638a31fb298e9ade852319fa6e2d12e420aec409b69daee8f"
+  },
+  "simple-kubernetes": {
+    "path": "simple-kubernetes.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/kubernetes.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "d17c24d250d9e5f6277e6bd07003614f42cb34767540e4e12b68f62f076ec8a4"
+  },
+  "simple-openai": {
+    "path": "simple-openai.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/openai.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "8490c199480b69683462d14b87f319279a9b31f59132658d4cdf150d78a85714"
+  },
+  "simple-postgresql": {
+    "path": "simple-postgresql.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/postgresql.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "777efe2d32caa6d239827f5c36bcd9b2076c5cdcfd78e39941232ffd4b1c560f"
+  },
+  "simple-prometheus": {
+    "path": "simple-prometheus.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/prometheus.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "531acfb9d5d8eb6d946095434ba3110b499de97466e73becd38097304656c6df"
+  },
+  "simple-rabbitmq": {
+    "path": "simple-rabbitmq.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/rabbitmq.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "352e26f7384347e946d8b9a4f667dde9783dcec6e8279708c2de33bcb8d05f94"
+  },
+  "simple-redis": {
+    "path": "simple-redis.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/redis.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "a65c461dce3f9087af373faf83d6b363a4036f0f822f37c18971a84889a44047"
+  },
+  "simple-terraform": {
+    "path": "simple-terraform.svg",
+    "pack": "Simple Icons",
+    "version": "15.15.0",
+    "source": "https://github.com/simple-icons/simple-icons/blob/15.15.0/icons/terraform.svg",
+    "license": "CC0-1.0",
+    "attribution": "Simple Icons contributors; trademarks belong to their owners",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "a8d1194a0a332cb33bdbe8bf32730857c8b36c0c08331feae13ff6b935f64dbf"
+  },
+  "store": {
+    "path": "store.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/store.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "ccbd03ef117b718ac247d0fe596d4e4c01415746ff53e9f416c7b24daec36dcb"
+  },
+  "tabler-alert-triangle": {
+    "path": "tabler-alert-triangle.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/alert-triangle.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "a46b51c9e7d5c0c2bac31f71c3a6b98ec6d1c6a930b20d203861012991fce584"
+  },
+  "tabler-api": {
+    "path": "tabler-api.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/api.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "ab91d79085a91e9c71791187c8d4e4754c835438938e4d2c9861d4dbb9022595"
+  },
+  "tabler-brain": {
+    "path": "tabler-brain.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/brain.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "8ea993ca198da029240e2edf57586a19cd41a767513a48d8b78b9e1b2a51ceca"
+  },
+  "tabler-building": {
+    "path": "tabler-building.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/building.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "15a63e963814bb4627adb23fb38feb802d226cebd984398eb1d61e574788e1a8"
+  },
+  "tabler-cloud-computing": {
+    "path": "tabler-cloud-computing.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/cloud-computing.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "ce3eb43b8024ba54aba557709c8a7753ed6487771927cb6ecb8ac6e355f7da02"
+  },
+  "tabler-credit-card": {
+    "path": "tabler-credit-card.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/credit-card.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "55305fbd887f70450cd9c631ea850cf09e3cf0f451d10287777e436a60245144"
+  },
+  "tabler-database": {
+    "path": "tabler-database.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/database.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "cc8fceedd6e17dd826dbcd0b721356ec0fa68fdb0327382b574add253618c62e"
+  },
+  "tabler-git-branch": {
+    "path": "tabler-git-branch.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/git-branch.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "2681219e05909339cd2db60ea94dd5fba4454b4d2c7b2f41f65ffac1d9e4cc48"
+  },
+  "tabler-key": {
+    "path": "tabler-key.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/key.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "8a02b6ca84001e46bb7a31e6544566b04cad07356d402aec9fb5ff641f0cf789"
+  },
+  "tabler-message": {
+    "path": "tabler-message.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/message.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "bbd8aaeddadea50be4baaeb894b7b1d1c5cb55dd8fe2584defeae31cbe0340ec"
+  },
+  "tabler-package": {
+    "path": "tabler-package.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/package.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "98b7a43791d5d19ef4d21e6eddcc6a8073d3fb5efe6468e84e5f3f35925cc7f1"
+  },
+  "tabler-receipt": {
+    "path": "tabler-receipt.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/receipt.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "38962c06bc3ee01d302ef657f12fc2e7a8bc13ed5f6b140eef4a3c42583325a9"
+  },
+  "tabler-refresh": {
+    "path": "tabler-refresh.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/refresh.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "83470583289ca3a8f44b000ff2ea957ffbff627d4f7587b7e6137561d58f359f"
+  },
+  "tabler-robot": {
+    "path": "tabler-robot.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/robot.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "6a8363090fc82186108440edd64bb7790414ce28f9ea35bf8e92d811a8e86a58"
+  },
+  "tabler-server": {
+    "path": "tabler-server.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/server.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "dc8471eb7cefebd14f39681d1f70192ca304271a6d84e7f024fc446eb3c1ec09"
+  },
+  "tabler-settings": {
+    "path": "tabler-settings.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/settings.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "d6f2f58d4972292645e67f82ffacae6e2fd4804c4af287e214deb284e796c114"
+  },
+  "tabler-shield-lock": {
+    "path": "tabler-shield-lock.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/shield-lock.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "e9e2286acef7a14aca7fd3b35a77bc4242967ece8d81d84520cccbc338f2222e"
+  },
+  "tabler-shopping-cart": {
+    "path": "tabler-shopping-cart.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/shopping-cart.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "f1a2d4446b9f8e7ea6829218e9e56706a3cf8e32eba306958745e76f148a1933"
+  },
+  "tabler-truck-delivery": {
+    "path": "tabler-truck-delivery.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/truck-delivery.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "0ee1e422f7178c0cdb2dcce5bd1aa39d9d2cb80581de98f44b9ff2458a9257ff"
+  },
+  "tabler-user": {
+    "path": "tabler-user.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/user.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "f12647a019779ee08a61862ebb64fcfab1c53659e534e863c8c2992044b07f44"
+  },
+  "tabler-users": {
+    "path": "tabler-users.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/users.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "9f31964a9320c4bd416a3af0e3d7281dfbf750da99aee5de64b233c5b377ad03"
+  },
+  "tabler-vector": {
+    "path": "tabler-vector.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/vector.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "965f9311a0ad801b674da2f355d15b589950036162eaff24cc6da55ef1a75313"
+  },
+  "tabler-webhook": {
+    "path": "tabler-webhook.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/webhook.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "f19dcf5960f1d57b1dd6d3dcbae84215e6435b7ca7acfe30bcc4c3a368ce4027"
+  },
+  "tabler-world": {
+    "path": "tabler-world.svg",
+    "pack": "Tabler Icons",
+    "version": "3.35.0",
+    "source": "https://github.com/tabler/tabler-icons/blob/v3.35.0/icons/outline/world.svg",
+    "license": "MIT",
+    "attribution": "Tabler Icons",
+    "modifications": "Static allowlist normalisation; metadata attributes removed; currentColor resolved to #334155.",
+    "sha256": "3cd20cc4bd2112e0362a000552ff853cdc9a8183ec11ce1863acf9ca8016c4a4"
+  },
+  "task": {
+    "path": "task.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/list-check.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "bd5b15a0a91766c4a1a7fb12b374b4cbb0ce7190088bb3e85adf81d6b87af6cf"
+  },
+  "team": {
+    "path": "team.svg",
+    "pack": "Font Awesome Free Solid",
+    "version": "6.7.2",
+    "source": "https://github.com/FortAwesome/Font-Awesome/blob/6.7.2/svgs/solid/users.svg",
+    "license": "CC-BY-4.0",
+    "attribution": "Font Awesome Free 6.7.2 by Fonticons, Inc.",
+    "modifications": "Explicit fill and dimensions; no shape changes.",
+    "sha256": "45ac6865889c7992c000bd3f66026434ccbb023b5e9f1fe2c502e3abe6bb4a5f"
+  }
+}

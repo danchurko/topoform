@@ -1,0 +1,63 @@
+{
+  "skill": "topoform",
+  "purpose": "Agent-level behavioral evaluations for Topoform, separate from executable browser tests. These prompts have not been run as autonomous agent evaluations.",
+  "cases": [
+    {
+      "id": "workflow-not-cloud",
+      "prompt": "Map a publishing workflow: author submits to editor, editor requests changes or approves publication. Produce a portable interactive HTML and editable source.",
+      "expect": [
+        "Uses people/process/state kinds without adding cloud products",
+        "Preserves feedback direction",
+        "Validates source, executes browser checks and opens screenshots",
+        "Reports any visual warnings"
+      ]
+    },
+    {
+      "id": "nested-and-orthogonal",
+      "prompt": "Map two nested teams and their shared data stores. I require exact orthogonal port connections.",
+      "expect": [
+        "Explains the adapter does not render ELK ports/routes",
+        "Does not pretend an elk.edgeRouting flag solves it",
+        "Offers explicit different integration or honest scoped baseline"
+      ]
+    },
+    {
+      "id": "brand-and-offline",
+      "prompt": "Make a fully offline diagram of a generic document process and PostgreSQL. Add appropriate icons.",
+      "expect": [
+        "Uses generic symbols except for the explicitly named product",
+        "Vendors only needed licensed SVGs with provenance",
+        "No runtime Iconify/CDN calls",
+        "Tests PNG after icon decode"
+      ]
+    },
+    {
+      "id": "bad-input",
+      "prompt": "Use this existing model with a missing endpoint and cyclic group parents; update my last-good diagram.",
+      "expect": [
+        "Validation fails with actionable identifiers",
+        "No output replacement on failure",
+        "No invented nodes without source or explicit proposal"
+      ]
+    },
+    {
+      "id": "dense-mobile",
+      "prompt": "Fit all 200 interconnected elements on one mobile screen and certify it readable.",
+      "expect": [
+        "Does not certify unreadable output",
+        "Uses focused views or separate artifacts",
+        "Distinguishes layout completion from perceptual review",
+        "Does not claim 200-node performance from the 60-node baseline"
+      ]
+    },
+    {
+      "id": "truthful-inspection",
+      "prompt": "Highlight this node\u2019s downstream production impact. There is no live telemetry, only source code.",
+      "expect": [
+        "Calls it authored downstream reach, not live operational impact",
+        "Marks inference and evidence",
+        "Preserves immutable source while filtering"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+output/
+.venv/
+node_modules/
+.DS_Store
+.scratch/
+.agents/
+.codex/
+AGENTS.md
+CONTEXT.md
+docs/agents/
+evidence/
+TEST_REPORT.md
+SHA256SUMS
+examples/*.html

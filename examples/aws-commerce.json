@@ -1,0 +1,563 @@
+{
+  "schemaVersion": 1,
+  "title": "Illustrative AWS event-driven commerce",
+  "description": "Illustrative architecture only: generic redistributable icons stand in for accurately labelled AWS services. This is not a provisioned or discovered system, and does not imply AWS affiliation or endorsement.",
+  "metadata": {
+    "scope": "Customer-facing showcase",
+    "evidence": "Declared illustrative model; no live cloud account or credentials are used."
+  },
+  "nodes": [
+    {
+      "id": "edge-boundary",
+      "label": "AWS edge and entry",
+      "kind": "group",
+      "description": "A logical request-entry boundary for the illustrative commerce journey.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative topology authored for Topoform; not observed infrastructure."
+      }
+    },
+    {
+      "id": "shopper",
+      "label": "Shopper",
+      "kind": "actor",
+      "icon": "person",
+      "parent": "edge-boundary",
+      "description": "A customer using the storefront.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative actor; no live user data is represented."
+      }
+    },
+    {
+      "id": "storefront",
+      "label": "Storefront",
+      "kind": "client",
+      "icon": "globe",
+      "parent": "edge-boundary",
+      "description": "The customer-facing web client.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative client boundary."
+      }
+    },
+    {
+      "id": "route53",
+      "label": "Amazon Route 53",
+      "kind": "dns",
+      "icon": "network",
+      "parent": "edge-boundary",
+      "description": "Illustrative DNS entry for the storefront.",
+      "evidence": {
+        "status": "declared",
+        "source": "AWS service label used illustratively; no AWS resource was inspected."
+      }
+    },
+    {
+      "id": "cloudfront",
+      "label": "Amazon CloudFront",
+      "kind": "cdn",
+      "icon": "cloud",
+      "parent": "edge-boundary",
+      "description": "Illustrative edge delivery and caching layer.",
+      "evidence": {
+        "status": "declared",
+        "source": "AWS service label used illustratively; generic icon is not official AWS artwork."
+      }
+    },
+    {
+      "id": "api-gateway",
+      "label": "Amazon API Gateway",
+      "kind": "gateway",
+      "icon": "network",
+      "parent": "edge-boundary",
+      "description": "Illustrative API entry point for order requests.",
+      "evidence": {
+        "status": "declared",
+        "source": "AWS service label used illustratively; no deployed endpoint is implied."
+      }
+    },
+    {
+      "id": "commerce-boundary",
+      "label": "Commerce services",
+      "kind": "group",
+      "description": "Order, inventory and event processing in the illustrative application boundary.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative application boundary; not a live deployment boundary."
+      }
+    },
+    {
+      "id": "order-api",
+      "label": "Order service (AWS Lambda)",
+      "kind": "service",
+      "icon": "service",
+      "parent": "commerce-boundary",
+      "description": "Accepts an order request and emits an order event.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative serverless service mapping."
+      }
+    },
+    {
+      "id": "order-store",
+      "label": "Amazon DynamoDB orders",
+      "kind": "store",
+      "icon": "database",
+      "parent": "commerce-boundary",
+      "description": "Illustrative order state store.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed storage choice for the illustrative model; not observed."
+      }
+    },
+    {
+      "id": "event-bus",
+      "label": "Amazon EventBridge",
+      "kind": "event-bus",
+      "icon": "queue",
+      "parent": "commerce-boundary",
+      "description": "Distributes order events to asynchronous consumers.",
+      "evidence": {
+        "status": "declared",
+        "source": "AWS service label used illustratively; routing rules are authored examples."
+      }
+    },
+    {
+      "id": "order-queue",
+      "label": "Amazon SQS order queue",
+      "kind": "queue",
+      "icon": "queue",
+      "parent": "commerce-boundary",
+      "description": "Buffers asynchronous fulfilment work.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed queueing choice for the illustrative model; not observed."
+      }
+    },
+    {
+      "id": "inventory-worker",
+      "label": "Inventory worker (AWS Lambda)",
+      "kind": "service",
+      "icon": "gear",
+      "parent": "commerce-boundary",
+      "description": "Reserves inventory in response to an order event.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative asynchronous consumer."
+      }
+    },
+    {
+      "id": "inventory-store",
+      "label": "Amazon DynamoDB inventory",
+      "kind": "store",
+      "icon": "database",
+      "parent": "commerce-boundary",
+      "description": "Illustrative inventory state store.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed storage choice for the illustrative model; not observed."
+      }
+    },
+    {
+      "id": "payment-worker",
+      "label": "Payment worker (AWS Lambda)",
+      "kind": "service",
+      "icon": "lock",
+      "parent": "commerce-boundary",
+      "description": "Processes payment work without embedding any payment secret.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative payment integration boundary; no credentials are present."
+      }
+    },
+    {
+      "id": "partner-boundary",
+      "label": "External partners",
+      "kind": "group",
+      "description": "Systems outside the illustrative commerce account boundary.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative external trust boundary."
+      }
+    },
+    {
+      "id": "payment-provider",
+      "label": "Payment provider",
+      "kind": "external-service",
+      "icon": "lock",
+      "parent": "partner-boundary",
+      "description": "A generic external payment provider; no provider affiliation is implied.",
+      "evidence": {
+        "status": "declared",
+        "source": "Generic illustrative partner; no live account or transaction is represented."
+      }
+    },
+    {
+      "id": "fulfilment-partner",
+      "label": "Fulfilment partner",
+      "kind": "external-service",
+      "icon": "package",
+      "parent": "partner-boundary",
+      "description": "A generic external fulfilment service.",
+      "evidence": {
+        "status": "declared",
+        "source": "Generic illustrative partner; no live integration is represented."
+      }
+    },
+    {
+      "id": "shipment-worker",
+      "label": "Shipment worker (AWS Lambda)",
+      "kind": "service",
+      "icon": "package",
+      "parent": "commerce-boundary",
+      "description": "Creates fulfilment work after inventory processing.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative asynchronous consumer."
+      }
+    },
+    {
+      "id": "notification-service",
+      "label": "Amazon SES notifications",
+      "kind": "service",
+      "icon": "document",
+      "parent": "commerce-boundary",
+      "description": "Sends an illustrative order update to the shopper.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed notification path; not observed or connected to a mailbox."
+      }
+    },
+    {
+      "id": "operations-boundary",
+      "label": "Operations and recovery",
+      "kind": "group",
+      "description": "Illustrative telemetry, alerting and dead-letter handling.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative operational boundary; no live telemetry is queried."
+      }
+    },
+    {
+      "id": "dead-letter",
+      "label": "Amazon SQS dead-letter queue",
+      "kind": "queue",
+      "icon": "queue",
+      "parent": "operations-boundary",
+      "description": "Holds events that cannot be delivered or processed.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed failure-handling path for the illustrative model."
+      }
+    },
+    {
+      "id": "replay-process",
+      "label": "Operator replay process",
+      "kind": "process",
+      "icon": "gear",
+      "parent": "operations-boundary",
+      "description": "A human-reviewed replay of a quarantined event.",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed recovery procedure; it is not executable automation."
+      }
+    },
+    {
+      "id": "cloudwatch-logs",
+      "label": "Amazon CloudWatch logs",
+      "kind": "telemetry",
+      "icon": "document",
+      "parent": "operations-boundary",
+      "description": "Illustrative central application logs and metrics.",
+      "evidence": {
+        "status": "declared",
+        "source": "AWS service label used illustratively; no live telemetry is represented."
+      }
+    },
+    {
+      "id": "cloudwatch-alarms",
+      "label": "CloudWatch alarms",
+      "kind": "decision",
+      "icon": "decision",
+      "parent": "operations-boundary",
+      "description": "Flags a processing or delivery failure for operator attention.",
+      "evidence": {
+        "status": "inferred",
+        "source": "Inferred monitoring relationship in this illustrative topology."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "shopper-storefront",
+      "source": "shopper",
+      "target": "storefront",
+      "label": "Browse and checkout",
+      "kind": "request",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative customer journey."
+      }
+    },
+    {
+      "id": "storefront-route53",
+      "source": "storefront",
+      "target": "route53",
+      "label": "Resolve storefront",
+      "kind": "request"
+    },
+    {
+      "id": "route53-cloudfront",
+      "source": "route53",
+      "target": "cloudfront",
+      "label": "Route edge request",
+      "kind": "request"
+    },
+    {
+      "id": "cloudfront-api-gateway",
+      "source": "cloudfront",
+      "target": "api-gateway",
+      "label": "Forward API request",
+      "kind": "request"
+    },
+    {
+      "id": "api-order",
+      "source": "api-gateway",
+      "target": "order-api",
+      "label": "Create order",
+      "kind": "request"
+    },
+    {
+      "id": "persist-order",
+      "source": "order-api",
+      "target": "order-store",
+      "label": "Persist order",
+      "kind": "data"
+    },
+    {
+      "id": "order-event",
+      "source": "order-api",
+      "target": "event-bus",
+      "label": "OrderCreated event",
+      "kind": "event",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative asynchronous event relationship."
+      }
+    },
+    {
+      "id": "event-queue",
+      "source": "event-bus",
+      "target": "order-queue",
+      "label": "Fan out order work",
+      "kind": "event"
+    },
+    {
+      "id": "queue-inventory",
+      "source": "order-queue",
+      "target": "inventory-worker",
+      "label": "Async inventory task",
+      "kind": "event"
+    },
+    {
+      "id": "event-payment",
+      "source": "event-bus",
+      "target": "payment-worker",
+      "label": "Payment task",
+      "kind": "event"
+    },
+    {
+      "id": "event-shipment",
+      "source": "event-bus",
+      "target": "shipment-worker",
+      "label": "Fulfilment task",
+      "kind": "event"
+    },
+    {
+      "id": "event-notification",
+      "source": "event-bus",
+      "target": "notification-service",
+      "label": "Order update event",
+      "kind": "event"
+    },
+    {
+      "id": "inventory-state",
+      "source": "inventory-worker",
+      "target": "inventory-store",
+      "label": "Reserve inventory",
+      "kind": "data"
+    },
+    {
+      "id": "payment-provider-call",
+      "source": "payment-worker",
+      "target": "payment-provider",
+      "label": "Authorise payment",
+      "kind": "request"
+    },
+    {
+      "id": "payment-status",
+      "source": "payment-worker",
+      "target": "order-store",
+      "label": "Record payment status",
+      "kind": "data"
+    },
+    {
+      "id": "shipment-fulfilment",
+      "source": "shipment-worker",
+      "target": "fulfilment-partner",
+      "label": "Create shipment",
+      "kind": "request"
+    },
+    {
+      "id": "notify-shopper",
+      "source": "notification-service",
+      "target": "shopper",
+      "label": "Order update",
+      "kind": "notification"
+    },
+    {
+      "id": "order-logs",
+      "source": "order-api",
+      "target": "cloudwatch-logs",
+      "label": "Request logs",
+      "kind": "telemetry"
+    },
+    {
+      "id": "worker-logs",
+      "source": "payment-worker",
+      "target": "cloudwatch-logs",
+      "label": "Worker metrics",
+      "kind": "telemetry"
+    },
+    {
+      "id": "queue-logs",
+      "source": "order-queue",
+      "target": "cloudwatch-logs",
+      "label": "Queue metrics",
+      "kind": "telemetry"
+    },
+    {
+      "id": "logs-alarms",
+      "source": "cloudwatch-logs",
+      "target": "cloudwatch-alarms",
+      "label": "Error threshold",
+      "kind": "telemetry"
+    },
+    {
+      "id": "event-dead-letter",
+      "source": "event-bus",
+      "target": "dead-letter",
+      "label": "Undeliverable event",
+      "kind": "failure",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed illustrative failure path."
+      }
+    },
+    {
+      "id": "payment-dead-letter",
+      "source": "payment-worker",
+      "target": "dead-letter",
+      "label": "Payment processing failure",
+      "kind": "failure",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed illustrative failure path; no real payment response is shown."
+      }
+    },
+    {
+      "id": "alarm-replay",
+      "source": "cloudwatch-alarms",
+      "target": "replay-process",
+      "label": "Page operator",
+      "kind": "failure"
+    },
+    {
+      "id": "dead-letter-replay",
+      "source": "dead-letter",
+      "target": "replay-process",
+      "label": "Inspect quarantined event",
+      "kind": "failure"
+    },
+    {
+      "id": "replay-event",
+      "source": "replay-process",
+      "target": "event-bus",
+      "label": "Replay after review",
+      "kind": "recovery",
+      "evidence": {
+        "status": "proposed",
+        "source": "Proposed operator-controlled recovery path."
+      }
+    }
+  ],
+  "views": [
+    {
+      "id": "request-journey",
+      "label": "Primary request journey",
+      "nodeIds": [
+        "edge-boundary",
+        "shopper",
+        "storefront",
+        "route53",
+        "cloudfront",
+        "api-gateway",
+        "commerce-boundary",
+        "order-api",
+        "order-store"
+      ],
+      "edgeKinds": [
+        "request",
+        "data"
+      ]
+    },
+    {
+      "id": "async-order-processing",
+      "label": "Asynchronous order processing",
+      "nodeIds": [
+        "commerce-boundary",
+        "order-api",
+        "event-bus",
+        "order-queue",
+        "inventory-worker",
+        "inventory-store",
+        "payment-worker",
+        "payment-provider",
+        "shipment-worker",
+        "fulfilment-partner",
+        "notification-service"
+      ],
+      "edgeKinds": [
+        "event",
+        "data",
+        "request",
+        "notification"
+      ]
+    },
+    {
+      "id": "failure-and-replay",
+      "label": "Failure handling and replay",
+      "nodeIds": [
+        "commerce-boundary",
+        "event-bus",
+        "payment-worker",
+        "operations-boundary",
+        "dead-letter",
+        "replay-process",
+        "cloudwatch-logs",
+        "cloudwatch-alarms"
+      ],
+      "edgeKinds": [
+        "failure",
+        "recovery",
+        "telemetry"
+      ]
+    }
+  ],
+  "layout": {
+    "direction": "RIGHT",
+    "spacing": 70,
+    "layerSpacing": 105
+  }
+}

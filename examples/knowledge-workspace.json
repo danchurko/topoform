@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "title": "A shared knowledge workspace",
+  "description": "People, documents and a human review boundary\u2014not a cloud-service catalogue. Select an element to inspect it, or switch to a focused view.",
+  "nodes": [
+    {
+      "id": "interviews",
+      "label": "Team interviews",
+      "kind": "source",
+      "icon": "team",
+      "description": "Recorded insights from the people doing the work."
+    },
+    {
+      "id": "documents",
+      "label": "Working documents",
+      "kind": "source",
+      "icon": "document"
+    },
+    {
+      "id": "workspace",
+      "label": "Knowledge workspace",
+      "kind": "group"
+    },
+    {
+      "id": "curation",
+      "label": "Human curation",
+      "kind": "process",
+      "icon": "person",
+      "parent": "workspace",
+      "description": "A human resolves uncertainty, checks provenance and approves material."
+    },
+    {
+      "id": "knowledge",
+      "label": "Shared knowledge",
+      "kind": "store",
+      "icon": "database",
+      "parent": "workspace",
+      "metadata": {
+        "Owner": "Knowledge steward",
+        "Retention": "Defined by each project"
+      },
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative model; not a deployed system."
+      }
+    },
+    {
+      "id": "answers",
+      "label": "Team answers",
+      "kind": "output",
+      "icon": "service"
+    },
+    {
+      "id": "reports",
+      "label": "Project reports",
+      "kind": "output",
+      "icon": "document"
+    }
+  ],
+  "edges": [
+    {
+      "id": "interview-input",
+      "source": "interviews",
+      "target": "curation",
+      "label": "Insights",
+      "kind": "handoff"
+    },
+    {
+      "id": "document-input",
+      "source": "documents",
+      "target": "curation",
+      "label": "Evidence",
+      "kind": "handoff"
+    },
+    {
+      "id": "publish",
+      "source": "curation",
+      "target": "knowledge",
+      "label": "Approved content",
+      "kind": "data"
+    },
+    {
+      "id": "answer-source",
+      "source": "knowledge",
+      "target": "answers",
+      "label": "Relevant context",
+      "kind": "data"
+    },
+    {
+      "id": "report-source",
+      "source": "knowledge",
+      "target": "reports",
+      "label": "Cited findings",
+      "kind": "data"
+    }
+  ],
+  "views": [
+    {
+      "id": "capture",
+      "label": "Capture & review",
+      "nodeIds": [
+        "interviews",
+        "documents",
+        "curation"
+      ]
+    },
+    {
+      "id": "delivery",
+      "label": "Knowledge delivery",
+      "nodeIds": [
+        "knowledge",
+        "answers",
+        "reports"
+      ]
+    }
+  ],
+  "layout": {
+    "direction": "RIGHT",
+    "spacing": 75,
+    "layerSpacing": 70
+  }
+}

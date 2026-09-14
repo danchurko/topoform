@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "title": "Creative production system",
+  "description": "An illustrative, vendor-neutral map of people, collaboration and stored assets. Select a component to trace its authored relationships.",
+  "nodes": [
+    {
+      "id": "client",
+      "label": "Client",
+      "kind": "person",
+      "icon": "person",
+      "description": "Provides the creative brief and receives the approved deliverable.",
+      "evidence": {
+        "status": "declared",
+        "source": "Illustrative example; not a live system."
+      }
+    },
+    {
+      "id": "studio",
+      "label": "Studio workspace",
+      "kind": "group"
+    },
+    {
+      "id": "intake",
+      "label": "Project intake",
+      "kind": "process",
+      "icon": "document",
+      "parent": "studio",
+      "description": "Captures the brief, constraints and agreed scope."
+    },
+    {
+      "id": "production",
+      "label": "Production team",
+      "kind": "group",
+      "parent": "studio"
+    },
+    {
+      "id": "editor",
+      "label": "Editing workspace",
+      "kind": "process",
+      "icon": "task",
+      "parent": "production",
+      "description": "Turns approved inputs into a draft and stores working assets.",
+      "tags": [
+        "creative",
+        "draft"
+      ],
+      "metadata": {
+        "Owner": "Creative team",
+        "Evidence": "Declared example only"
+      }
+    },
+    {
+      "id": "review",
+      "label": "Creative review",
+      "kind": "decision",
+      "icon": "decision",
+      "parent": "production",
+      "description": "A human checks quality and approves delivery."
+    },
+    {
+      "id": "library",
+      "label": "Asset library",
+      "kind": "store",
+      "icon": "database",
+      "parent": "studio",
+      "description": "Stores project media and draft assets."
+    },
+    {
+      "id": "portal",
+      "label": "Delivery portal",
+      "kind": "service",
+      "icon": "package",
+      "description": "Shares approved work with the client."
+    }
+  ],
+  "edges": [
+    {
+      "id": "brief",
+      "source": "client",
+      "target": "intake",
+      "label": "Creative brief",
+      "kind": "handoff"
+    },
+    {
+      "id": "scope",
+      "source": "intake",
+      "target": "editor",
+      "label": "Agreed scope",
+      "kind": "handoff"
+    },
+    {
+      "id": "draft",
+      "source": "editor",
+      "target": "review",
+      "label": "Draft",
+      "kind": "handoff"
+    },
+    {
+      "id": "save",
+      "source": "editor",
+      "target": "library",
+      "label": "Save assets",
+      "kind": "data"
+    },
+    {
+      "id": "approved",
+      "source": "review",
+      "target": "portal",
+      "label": "Approved work",
+      "kind": "handoff"
+    }
+  ],
+  "views": [
+    {
+      "id": "creative",
+      "label": "Creative path",
+      "nodeIds": [
+        "client",
+        "intake",
+        "editor",
+        "review",
+        "portal"
+      ]
+    },
+    {
+      "id": "assets",
+      "label": "Asset storage",
+      "nodeIds": [
+        "editor",
+        "library"
+      ],
+      "edgeKinds": [
+        "data"
+      ]
+    }
+  ],
+  "layout": {
+    "direction": "RIGHT",
+    "spacing": 50,
+    "layerSpacing": 80
+  }
+}
